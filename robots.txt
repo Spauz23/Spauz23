@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /gestione/
+
+Sitemap: https://artebianca.be/sitemap.xml
