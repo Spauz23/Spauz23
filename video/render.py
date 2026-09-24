@@ -1,6 +1,10 @@
 """Render the seamless 25s cinematic loop from the five source stills.
 
-Usage: python3 video/render.py [WIDTH HEIGHT]   (default 854 480)
+Usage: python3 video/render.py [WIDTH HEIGHT [OUT_NAME]]   (default 1280 720)
+Portrait sizes (e.g. 720 1280) keep the same vertical framing as the
+16:9 cut, like object-fit: cover on a phone.
+Sources: src/ holds the reference stills (camera coordinates are in their
+pixels); src_hd/ holds 4x AI-upscaled versions used for rendering.
 Requires: numpy, opencv-python-headless, imageio-ffmpeg
 """
 import subprocess
@@ -12,7 +16,7 @@ import imageio_ffmpeg
 import numpy as np
 
 HERE = Path(__file__).parent
-W, H = (int(sys.argv[1]), int(sys.argv[2])) if len(sys.argv) > 2 else (854, 480)
+W, H = (int(sys.argv[1]), int(sys.argv[2])) if len(sys.argv) > 2 else (1280, 720)
 FPS = 24
 T = 25.0          # loop length (s)
 XF = 1.6          # dissolve length (s)
@@ -21,8 +25,15 @@ rng = np.random.default_rng(7)
 
 
 def load(name):
-    img = cv2.imread(str(HERE / "src" / f"{name}.png")).astype(np.float32) / 255.0
-    return img
+    ref = cv2.imread(str(HERE / "src" / f"{name}.png"))
+    hd_path = HERE / "src_hd" / f"{name}.jpg"
+    img = cv2.imread(str(hd_path)) if hd_path.exists() else ref
+    SCALE[name] = img.shape[1] / ref.shape[1]
+    REF_W[name] = ref.shape[1]
+    return img.astype(np.float32) / 255.0
+
+
+SCALE, REF_W = {}, {}
 
 
 def noise(h, w, cell, seed):
@@ -44,6 +55,7 @@ def ease(x):
 src = {k: load(k) for k in ["wheat", "olive", "basil", "matera", "tomato"]}
 
 # San Marzano: remove glyph-like specular artefacts, keep a soft gloss instead
+# (already baked into the HD source)
 tom = src["tomato"]
 t8 = (tom * 255).astype(np.uint8)
 hsv = cv2.cvtColor(t8, cv2.COLOR_BGR2HSV)
@@ -51,15 +63,16 @@ spec = ((hsv[..., 2] > 200) & (hsv[..., 1] < 150) & (t8[..., 2] > 200)).astype(n
 spec = cv2.dilate(spec, np.ones((3, 3), np.uint8))
 clean = cv2.inpaint(t8, spec, 4, cv2.INPAINT_TELEA).astype(np.float32) / 255.0
 gloss = cv2.GaussianBlur(spec.astype(np.float32) / 255.0, (0, 0), 3.0)[..., None]
-src["tomato"] = np.clip(clean + gloss * 0.22 * np.array([0.75, 0.85, 1.0], np.float32), 0, 1)
+if SCALE["tomato"] == 1:
+    src["tomato"] = np.clip(clean + gloss * 0.22 * np.array([0.75, 0.85, 1.0], np.float32), 0, 1)
 
 # Matera: warm window-light mask (lights fade in during blue hour)
 m8 = (src["matera"] * 255).astype(np.uint8)
 mhsv = cv2.cvtColor(m8, cv2.COLOR_BGR2HSV)
 lights = ((mhsv[..., 2] > 170) & (mhsv[..., 0] < 30) & (mhsv[..., 1] > 110)).astype(np.float32)
 lights[: int(lights.shape[0] * 0.28)] = 0  # ignore the sunset sky
-matera_lights = cv2.GaussianBlur(lights, (0, 0), 1.2)
-matera_glow = cv2.GaussianBlur(lights, (0, 0), 6.0)
+matera_lights = cv2.GaussianBlur(lights, (0, 0), 1.2 * SCALE["matera"])
+matera_glow = cv2.GaussianBlur(lights, (0, 0), 6.0 * SCALE["matera"])
 
 # Basil: sparkles on the sea glitter (bright pixels right of the plant)
 b8 = (src["basil"] * 255).astype(np.uint8)
@@ -77,7 +90,7 @@ leaf[:, int(bw * 0.6):] = 0
 basil_wind = cv2.GaussianBlur(cv2.dilate(leaf, np.ones((25, 25), np.uint8)), (0, 0), 12)
 
 # ---------------------------------------------------------------- scenes
-# Camera: (cx, cy, crop width) in source pixels, start -> end, eased.
+# Camera: (cx, cy, 16:9 crop width) in reference pixels, start -> end, eased.
 SCENES = [
     dict(name="wheat", start=-XF, dur=5.0 + XF,
          cam0=(250, 215, 540), cam1=(300, 250, 470), wind=(1.6, "bottom")),
@@ -116,10 +129,12 @@ def tex(name, ox, oy):
 def render_scene(sc, lt):
     """lt: local time in seconds since scene start."""
     img = src[sc["name"]]
-    sh, sw = img.shape[:2]
+    k = SCALE[sc["name"]]
+    sh, sw = img.shape[0] / k, img.shape[1] / k   # reference pixels
     p = ease(lt / sc["dur"])
     cx, cy, cw = [a + (b - a) * p for a, b in zip(sc["cam0"], sc["cam1"])]
-    ch = cw * H / W
+    ch = cw * 9 / 16
+    cw = ch * W / H                                 # narrower for portrait
     cx = np.clip(cx, cw / 2, sw - cw / 2)
     cy = np.clip(cy, ch / 2, sh - ch / 2)
     mx = cx + u * cw
@@ -132,19 +147,19 @@ def render_scene(sc, lt):
         elif zone == "top":
             a = smooth((0.1 - v) / 0.6)
         elif zone == "mask":
-            a = cv2.remap(basil_wind, mx.astype(np.float32), my.astype(np.float32), cv2.INTER_LINEAR)
+            a = cv2.remap(basil_wind, (mx * k).astype(np.float32), (my * k).astype(np.float32), cv2.INTER_LINEAR)
         else:
             a = np.ones_like(v)
         gust = 0.65 + 0.35 * np.sin(lt * 0.9) * np.sin(lt * 0.37 + 1.0)
-        q = sw / 554.0 if zone == "mask" else 1.0  # wavelength follows source resolution
+        q = REF_W[sc["name"]] / 554.0 if zone == "mask" else 1.0  # wavelength follows source resolution
         dx = (np.sin(2 * np.pi * (0.35 * lt + mx / (70.0 * q) + my / (140.0 * q)))
               + 0.5 * np.sin(2 * np.pi * (0.61 * lt + mx / (23.0 * q)))) * amp * a * gust
         dy = 0.35 * np.sin(2 * np.pi * (0.28 * lt + mx / (55.0 * q))) * amp * a * gust
         mx = mx + dx
         my = my + dy
 
-    mx = mx.astype(np.float32)
-    my = my.astype(np.float32)
+    mx = (mx * k).astype(np.float32)
+    my = (my * k).astype(np.float32)
     out = cv2.remap(img, mx, my, cv2.INTER_CUBIC, borderMode=cv2.BORDER_REFLECT)
     name = sc["name"]
 
@@ -229,7 +244,7 @@ def weight(sc, t):
 
 
 def main():
-    out_path = HERE / f"italia_loop_{H}p.mp4"
+    out_path = HERE / (sys.argv[3] if len(sys.argv) > 3 else f"italia_loop_{W}x{H}.mp4")
     ff = imageio_ffmpeg.get_ffmpeg_exe()
     cmd = [ff, "-y", "-f", "rawvideo", "-pix_fmt", "bgr24", "-s", f"{W}x{H}", "-r", str(FPS),
            "-i", "-", "-an", "-c:v", "libx264", "-preset", "slow", "-crf", "20" if H >= 1080 else "22",

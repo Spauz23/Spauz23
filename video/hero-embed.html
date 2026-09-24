@@ -1,9 +1,15 @@
-<!-- Hero video: seamless 25s loop, 854x480 -->
+<!-- Hero video: seamless 25s loop. Vertical file on phones, 720p elsewhere -->
 <section class="hero-video">
-  <video autoplay muted loop playsinline preload="auto" poster="video/poster.jpg">
-    <source src="video/italia_loop_480p.webm" type="video/webm">
-    <source src="video/italia_loop_480p.mp4" type="video/mp4">
-  </video>
+  <video id="heroVideo" autoplay muted loop playsinline preload="auto" poster="video/poster.jpg"></video>
+  <script>
+    (function () {
+      var v = document.getElementById('heroVideo');
+      var f = window.matchMedia('(max-aspect-ratio: 1/1)').matches ? 'mobile' : '720p';
+      v.innerHTML = '<source src="video/italia_loop_' + f + '.webm" type="video/webm">' +
+                    '<source src="video/italia_loop_' + f + '.mp4" type="video/mp4">';
+      v.load();
+    })();
+  </script>
 </section>
 <style>
   .hero-video { position: relative; height: 100vh; overflow: hidden; background: #1a0f08; }

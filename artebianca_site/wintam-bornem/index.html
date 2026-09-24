@@ -2369,10 +2369,17 @@
 <body class="notranslate">
     <!-- LANGUAGE SELECTION PAGE -->
     <div id="languagePage" class="language-page">
-        <video class="lang-video" id="langVideo" autoplay muted loop playsinline preload="auto" poster="/video/poster.jpg" aria-hidden="true">
-            <source src="/video/italia_loop_480p.webm" type="video/webm">
-            <source src="/video/italia_loop_480p.mp4" type="video/mp4">
-        </video>
+        <video class="lang-video" id="langVideo" autoplay muted loop playsinline preload="auto" poster="/video/poster.jpg" aria-hidden="true"></video>
+        <script>
+            // Video verticale su smartphone, 720p su desktop/tablet orizzontale
+            (function () {
+                var v = document.getElementById('langVideo');
+                var f = window.matchMedia('(max-aspect-ratio: 1/1)').matches ? 'mobile' : '720p';
+                v.innerHTML = '<source src="/video/italia_loop_' + f + '.webm" type="video/webm">' +
+                              '<source src="/video/italia_loop_' + f + '.mp4" type="video/mp4">';
+                v.load();
+            })();
+        </script>
         <div class="lang-overlay"></div>
         <div class="language-container">
           <div class="lang-tagline fade d1" aria-hidden="true">
