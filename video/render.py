@@ -70,7 +70,7 @@ sea[: int(bh * 0.2)] = 0
 sea[int(bh * 0.9):] = 0
 sea[:, : int(bw * 0.55)] = 0
 sea[:, int(bw * 0.86):] = 0
-basil_sea = cv2.GaussianBlur(sea, (0, 0), 3.0)
+basil_sea = cv2.GaussianBlur(cv2.dilate(sea, np.ones((9, 9), np.uint8)), (0, 0), 10.0)
 # wind only moves the leaves (green, left part of the frame)
 leaf = ((bhsv[..., 0] > 25) & (bhsv[..., 0] < 95) & (bhsv[..., 1] > 70)).astype(np.float32)
 leaf[:, int(bw * 0.6):] = 0
@@ -100,7 +100,7 @@ TEX = {
     "dapple": noise(H * 2, W * 2, max(8, W // 30), 11),
     "mist": noise(H * 2, W * 3, max(16, W // 8), 12),
     "shadow": noise(H * 2, W * 2, max(12, W // 18), 13),
-    "twinkle": noise(H * 2, W * 2, max(3, W // 240), 14),
+    "shimmer": noise(H * 2, W * 2, max(12, W // 40), 14),
     "flare": noise(H * 2, W * 2, max(20, W // 6), 15),
 }
 
@@ -167,9 +167,9 @@ def render_scene(sc, lt):
 
     elif name == "basil":
         sea_m = cv2.remap(basil_sea, mx, my, cv2.INTER_LINEAR)
-        tw_ = tex("twinkle", lt * W * 0.01, lt * W * 0.02)
-        sp = sea_m * smooth((tw_ - 0.55) / 0.35) * 0.55
-        out += cv2.GaussianBlur(sp, (0, 0), W / 480)[..., None] * np.array([0.8, 0.95, 1.0], np.float32)
+        # soft, slow shimmer on the sun glitter (no pixel-level sparkle)
+        sh = tex("shimmer", lt * W * 0.006, lt * W * 0.012)
+        out *= (1 + sea_m * (sh - 0.5) * 0.3)[..., None]
 
     elif name == "matera":
         lm = cv2.remap(matera_lights, mx, my, cv2.INTER_LINEAR)
@@ -216,7 +216,7 @@ def grade(img, fi):
     g = rng.normal(0, 1, (H // 2, W // 2)).astype(np.float32)
     g = cv2.resize(g, (W, H), interpolation=cv2.INTER_LINEAR)
     g += rng.normal(0, 0.6, (H, W)).astype(np.float32)
-    img = img + (g * 0.022 * (0.6 + 0.8 * lum[..., 0] * (1 - lum[..., 0]) * 2))[..., None]
+    img = img + (g * 0.016 * (0.6 + 0.8 * lum[..., 0] * (1 - lum[..., 0]) * 2))[..., None]
     return np.clip(img, 0, 1)
 
 
