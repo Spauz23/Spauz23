@@ -1,6 +1,6 @@
-"""Render the seamless 28s cinematic loop from the five source stills.
+"""Render the seamless 25s cinematic loop from the five source stills.
 
-Usage: python3 video/render.py [WIDTH HEIGHT]   (default 1920 1080)
+Usage: python3 video/render.py [WIDTH HEIGHT]   (default 854 480)
 Requires: numpy, opencv-python-headless, imageio-ffmpeg
 """
 import subprocess
@@ -12,9 +12,9 @@ import imageio_ffmpeg
 import numpy as np
 
 HERE = Path(__file__).parent
-W, H = (int(sys.argv[1]), int(sys.argv[2])) if len(sys.argv) > 2 else (1920, 1080)
+W, H = (int(sys.argv[1]), int(sys.argv[2])) if len(sys.argv) > 2 else (854, 480)
 FPS = 24
-T = 28.0          # loop length (s)
+T = 25.0          # loop length (s)
 XF = 1.6          # dissolve length (s)
 N = int(T * FPS)
 rng = np.random.default_rng(7)
@@ -71,16 +71,16 @@ lemon_sea = cv2.GaussianBlur(sea, (0, 0), 2.0)
 # ---------------------------------------------------------------- scenes
 # Camera: (cx, cy, crop width) in source pixels, start -> end, eased.
 SCENES = [
-    dict(name="wheat", start=-XF, dur=4.0 + 2 * XF,
+    dict(name="wheat", start=-XF, dur=5.0 + XF,
          cam0=(250, 215, 540), cam1=(300, 250, 470), wind=(1.6, "bottom")),
-    dict(name="olive", start=4.0, dur=5.5 + XF,
+    dict(name="olive", start=5.0 - XF, dur=5.0 + XF,
          cam0=(300, 250, 470), cam1=(265, 225, 520), wind=(0.9, "top")),
-    dict(name="lemon", start=4.0 + 5.5, dur=5.5 + XF,
+    dict(name="lemon", start=10.0 - XF, dur=5.0 + XF,
          cam0=(270, 250, 470), cam1=(300, 230, 420), wind=(1.2, "all")),
-    dict(name="matera", start=15.0, dur=6.0 + XF,
-         cam0=(430, 245, 800), cam1=(400, 235, 700), wind=(0.0, "all")),
-    dict(name="tomato", start=21.0, dur=5.5 + XF,
+    dict(name="tomato", start=15.0 - XF, dur=5.0 + XF,
          cam0=(380, 260, 700), cam1=(430, 235, 620), wind=(0.7, "bottom")),
+    dict(name="matera", start=20.0 - XF, dur=5.0 + XF,
+         cam0=(430, 245, 800), cam1=(400, 235, 700), wind=(0.0, "all")),
 ]
 
 yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
