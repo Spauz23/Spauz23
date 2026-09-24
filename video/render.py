@@ -41,7 +41,7 @@ def ease(x):
 
 
 # ---------------------------------------------------------------- sources
-src = {k: load(k) for k in ["wheat", "olive", "lemon", "matera", "tomato"]}
+src = {k: load(k) for k in ["wheat", "olive", "basil", "matera", "tomato"]}
 
 # San Marzano: remove glyph-like specular artefacts, keep a soft gloss instead
 tom = src["tomato"]
@@ -61,12 +61,20 @@ lights[: int(lights.shape[0] * 0.28)] = 0  # ignore the sunset sky
 matera_lights = cv2.GaussianBlur(lights, (0, 0), 1.2)
 matera_glow = cv2.GaussianBlur(lights, (0, 0), 6.0)
 
-# Lemon: sparkles on the sea (right side, bright pixels)
-l8 = (src["lemon"] * 255).astype(np.uint8)
-lhsv = cv2.cvtColor(l8, cv2.COLOR_BGR2HSV)
-sea = ((lhsv[..., 2] > 190) & (lhsv[..., 0] > 85) & (lhsv[..., 0] < 130)).astype(np.float32)
-sea[:, : int(sea.shape[1] * 0.55)] = 0
-lemon_sea = cv2.GaussianBlur(sea, (0, 0), 2.0)
+# Basil: sparkles on the sea glitter (bright pixels right of the plant)
+b8 = (src["basil"] * 255).astype(np.uint8)
+bhsv = cv2.cvtColor(b8, cv2.COLOR_BGR2HSV)
+sea = (bhsv[..., 2] > 205).astype(np.float32)
+bh, bw = sea.shape
+sea[: int(bh * 0.2)] = 0
+sea[int(bh * 0.9):] = 0
+sea[:, : int(bw * 0.55)] = 0
+sea[:, int(bw * 0.86):] = 0
+basil_sea = cv2.GaussianBlur(sea, (0, 0), 3.0)
+# wind only moves the leaves (green, left part of the frame)
+leaf = ((bhsv[..., 0] > 25) & (bhsv[..., 0] < 95) & (bhsv[..., 1] > 70)).astype(np.float32)
+leaf[:, int(bw * 0.6):] = 0
+basil_wind = cv2.GaussianBlur(cv2.dilate(leaf, np.ones((25, 25), np.uint8)), (0, 0), 12)
 
 # ---------------------------------------------------------------- scenes
 # Camera: (cx, cy, crop width) in source pixels, start -> end, eased.
@@ -77,8 +85,8 @@ SCENES = [
          cam0=(300, 250, 470), cam1=(265, 225, 520), wind=(0.9, "top")),
     dict(name="tomato", start=10.0 - XF, dur=5.0 + XF,
          cam0=(380, 260, 700), cam1=(430, 235, 620), wind=(0.7, "bottom")),
-    dict(name="lemon", start=15.0 - XF, dur=5.0 + XF,
-         cam0=(270, 250, 470), cam1=(300, 230, 420), wind=(1.2, "all")),
+    dict(name="basil", start=15.0 - XF, dur=5.0 + XF,
+         cam0=(820, 470, 1600), cam1=(770, 450, 1400), wind=(3.5, "mask")),
     dict(name="matera", start=20.0 - XF, dur=5.0 + XF,
          cam0=(430, 245, 800), cam1=(400, 235, 700), wind=(0.0, "all")),
 ]
@@ -123,12 +131,15 @@ def render_scene(sc, lt):
             a = smooth((v + 0.2) / 0.7)
         elif zone == "top":
             a = smooth((0.1 - v) / 0.6)
+        elif zone == "mask":
+            a = cv2.remap(basil_wind, mx.astype(np.float32), my.astype(np.float32), cv2.INTER_LINEAR)
         else:
             a = np.ones_like(v)
         gust = 0.65 + 0.35 * np.sin(lt * 0.9) * np.sin(lt * 0.37 + 1.0)
-        dx = (np.sin(2 * np.pi * (0.35 * lt + mx / 70.0 + my / 140.0))
-              + 0.5 * np.sin(2 * np.pi * (0.61 * lt + mx / 23.0))) * amp * a * gust
-        dy = 0.35 * np.sin(2 * np.pi * (0.28 * lt + mx / 55.0)) * amp * a * gust
+        q = sw / 554.0 if zone == "mask" else 1.0  # wavelength follows source resolution
+        dx = (np.sin(2 * np.pi * (0.35 * lt + mx / (70.0 * q) + my / (140.0 * q)))
+              + 0.5 * np.sin(2 * np.pi * (0.61 * lt + mx / (23.0 * q)))) * amp * a * gust
+        dy = 0.35 * np.sin(2 * np.pi * (0.28 * lt + mx / (55.0 * q))) * amp * a * gust
         mx = mx + dx
         my = my + dy
 
@@ -154,8 +165,8 @@ def render_scene(sc, lt):
         k = 0.22 * smooth((lum - 0.25) / 0.5)
         out *= (1 + k * (dap - 0.5) * 2)[..., None]
 
-    elif name == "lemon":
-        sea_m = cv2.remap(lemon_sea, mx, my, cv2.INTER_LINEAR)
+    elif name == "basil":
+        sea_m = cv2.remap(basil_sea, mx, my, cv2.INTER_LINEAR)
         tw_ = tex("twinkle", lt * W * 0.01, lt * W * 0.02)
         sp = sea_m * smooth((tw_ - 0.55) / 0.35) * 0.55
         out += cv2.GaussianBlur(sp, (0, 0), W / 480)[..., None] * np.array([0.8, 0.95, 1.0], np.float32)
