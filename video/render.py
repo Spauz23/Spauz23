@@ -75,10 +75,10 @@ SCENES = [
          cam0=(250, 215, 540), cam1=(300, 250, 470), wind=(1.6, "bottom")),
     dict(name="olive", start=5.0 - XF, dur=5.0 + XF,
          cam0=(300, 250, 470), cam1=(265, 225, 520), wind=(0.9, "top")),
-    dict(name="lemon", start=10.0 - XF, dur=5.0 + XF,
-         cam0=(270, 250, 470), cam1=(300, 230, 420), wind=(1.2, "all")),
-    dict(name="tomato", start=15.0 - XF, dur=5.0 + XF,
+    dict(name="tomato", start=10.0 - XF, dur=5.0 + XF,
          cam0=(380, 260, 700), cam1=(430, 235, 620), wind=(0.7, "bottom")),
+    dict(name="lemon", start=15.0 - XF, dur=5.0 + XF,
+         cam0=(270, 250, 470), cam1=(300, 230, 420), wind=(1.2, "all")),
     dict(name="matera", start=20.0 - XF, dur=5.0 + XF,
          cam0=(430, 245, 800), cam1=(400, 235, 700), wind=(0.0, "all")),
 ]
