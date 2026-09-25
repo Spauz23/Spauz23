@@ -188,6 +188,11 @@ function t(k) {
 }
 
 function linguaPreferita() {
+    const p = new URLSearchParams(location.search).get('lang');
+    if (p && TRAD[p]) return p;
+    let s = null;   // lingua scelta in precedenza sul sito
+    try { s = localStorage.getItem('abLang'); } catch (e) {}
+    if (s && TRAD[s]) return s;
     const nav = ((navigator.language || 'nl').slice(0, 2)).toLowerCase();
     return TRAD[nav] ? nav : 'nl';
 }

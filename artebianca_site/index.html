@@ -3211,11 +3211,15 @@
 
         function setLanguage(lang) {
             currentLanguage = lang;
+            // la lingua scelta vale anche passando da una pagina all'altra
+            try { localStorage.setItem('abLang', lang); } catch (e) {}
             document.getElementById('languagePage').classList.add('hidden');
             document.getElementById('mainSite').classList.remove('hidden');
             applyTranslations();
             renderNavigation();
             renderHome();
+            // su una pagina di sede si resta nella sede anche dopo aver cambiato lingua
+            if (SEDE_FISSA) selectLocation(SEDE_FISSA);
         }
 
         function resetLanguage() {
@@ -3518,7 +3522,7 @@
         function renderHome() {
             const homeHtml = `
                 <div class="split-screen">
-                    <div class="split-section" style="background-image:url('${PHOTOS.tisseltExt}');" onclick="location.href=SEDE_URL.tisselt">
+                    <div class="split-section" style="background-image:url('${PHOTOS.tisseltExt}');" onclick="vaiSede('tisselt')">
                         <div class="split-content">
                             <img class="split-ico" src="${ICO_PIZZA}" alt="">
                             <h2 class="split-title">${t('pizzeria')}</h2>
@@ -3531,10 +3535,10 @@
                                 <a href="tel:+${locData.tisselt.tel}">📞 ${t('call')}</a>
                                 <a href="${locData.tisselt.maps}" target="_blank" rel="noopener noreferrer">📍 Maps</a>
                             </div>
-                            <button class="btn" onclick="event.stopPropagation(); location.href=SEDE_URL.tisselt;">${t('discover')}</button>
+                            <button class="btn" onclick="event.stopPropagation(); vaiSede('tisselt');">${t('discover')}</button>
                         </div>
                     </div>
-                    <div class="split-section" style="background-image:url('${PHOTOS.wintamExt}');" onclick="location.href=SEDE_URL.wintam">
+                    <div class="split-section" style="background-image:url('${PHOTOS.wintamExt}');" onclick="vaiSede('wintam')">
                         <div class="split-content">
                             <img class="split-ico" src="${ICO_FORK}" alt="">
                             <div class="soon-badge">${t('comingSoon')}</div>
@@ -3548,7 +3552,7 @@
                                 <a href="tel:+${locData.wintam.tel}">📞 ${t('call')}</a>
                                 <a href="${locData.wintam.maps}" target="_blank" rel="noopener noreferrer">📍 Maps</a>
                             </div>
-                            <button class="btn" onclick="event.stopPropagation(); location.href=SEDE_URL.wintam;">${t('discover')}</button>
+                            <button class="btn" onclick="event.stopPropagation(); vaiSede('wintam');">${t('discover')}</button>
                         </div>
                     </div>
                 </div>
@@ -3792,15 +3796,23 @@
         }
 
         function linguaPreferita() {
+            let salvata = null;
+            try { salvata = localStorage.getItem('abLang'); } catch (e) {}
+            if (salvata && translations[salvata]) return salvata;
             const nav = ((navigator.language || 'nl').slice(0, 2)).toLowerCase();
             return translations[nav] ? nav : 'nl';
         }
 
         // Bottone "CAMBIA SEDE": su una pagina di sede porta direttamente
         // alla pagina dell'altra sede; sull'ingresso generale torna alla scelta.
+        // Apre la pagina di una sede mantenendo la lingua scelta
+        function vaiSede(loc) {
+            location.href = SEDE_URL[loc] + (currentLanguage ? '?lang=' + currentLanguage : '');
+        }
+
         function cambiaSede(loc) {
             if (SEDE_FISSA) {
-                location.href = SEDE_URL[loc === 'tisselt' ? 'wintam' : 'tisselt'];
+                vaiSede(loc === 'tisselt' ? 'wintam' : 'tisselt');
             } else {
                 backToChoice();
             }

@@ -409,7 +409,13 @@ const LINGUE = {"it": "Italiano", "nl": "Nederlands", "fr": "Français", "en": "
 
 let currentLanguage = (function () {
     const p = new URLSearchParams(location.search).get('lang');
-    if (p && translations[p]) return p;
+    if (p && translations[p]) {
+        try { localStorage.setItem('abLang', p); } catch (e) {}
+        return p;
+    }
+    let s = null;   // lingua scelta in precedenza sul sito
+    try { s = localStorage.getItem('abLang'); } catch (e) {}
+    if (s && translations[s]) return s;
     const n = (navigator.language || 'it').slice(0, 2);
     return translations[n] ? n : 'it';
 })();
