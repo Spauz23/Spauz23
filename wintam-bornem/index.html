@@ -2495,7 +2495,7 @@
                         </div>
                         <div class="loc-pick" id="locPickWintam" onclick="openShop('wintam')">
                             <div class="lp-ico">🍽️</div>
-                            <h3>RISTORANTE WINTAM</h3>
+                            <h3 data-i18n="restoWintam">RISTORANTE WINTAM</h3>
                             <p class="lp-addr">Egied de Jonghstraat 165, Bornem 2880</p>
                             <p class="lp-hours" data-i18n="wintamHours">Lun, Mar: 17:00-22:00 | Mer: chiuso</p>
                             <p class="lp-tel">+32 494 06 95 71</p>
@@ -2560,7 +2560,7 @@
                         <div style="margin-bottom:15px;">
                             <label style="display:block;font-weight:bold;margin-bottom:5px;" data-i18n="pickupTime">Orario di ritiro desiderato *</label>
                             <select id="ordTime" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:4px;background:#fff;">
-                                <option value="">-- Scegli un orario --</option>
+                                <option value="" data-i18n="chooseTime">-- Scegli un orario --</option>
                             </select>
                             <div style="background:#fef3c7;border-left:4px solid #ca8a04;padding:12px;border-radius:6px;margin-top:10px;">
                                 <p style="color:#333;font-size:13px;margin:0;"><strong data-i18n="onlyToday">ℹ️ Le ordinazioni online sono possibili solo per il giorno corrente.</strong><br><span data-i18n="onlyTodayMore">Per prenotazioni di altri giorni scrivici su WhatsApp.</span></p>
@@ -2588,7 +2588,7 @@
                         <label style="display: block; font-weight: bold; margin-bottom: 5px;" data-i18n="resWhere">Dove vuoi prenotare?</label>
                         <select id="resLoc" required onchange="updateResSlots()" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:4px;background:#fff;">
                             <option value="tisselt">🍕 Pizzeria Tisselt</option>
-                            <option value="wintam">🍽️ Ristorante Wintam</option>
+                            <option value="wintam" data-i18n="resOptWintam">🍽️ Ristorante Wintam</option>
                         </select>
                     </div>
                     <div style="margin-bottom: 12px;">
@@ -2805,6 +2805,8 @@
                 resCaptchaMissing: 'Conferma di non essere un robot prima di inviare la prenotazione.',
                 resSubject: 'NUOVA RICHIESTA DI PRENOTAZIONE',
                 aboutMotto: 'Materia prima italiana, tecnica e tradizione.',
+                restoWintam: 'RISTORANTE WINTAM',
+                resOptWintam: '🍽️ Ristorante Wintam',
                 aboutLove: 'Dall\u2019Italia, con amore.',
                 contactAny: 'Per prenotazioni, asporto, catering, eventi privati o qualsiasi altra informazione, non esitare a contattarci!',
                 modalClosedTitle: 'Siamo chiusi',
@@ -2929,6 +2931,8 @@
                 resCaptchaMissing: 'Please confirm you are not a robot before sending the reservation.',
                 resSubject: 'NEW BOOKING REQUEST',
                 aboutMotto: 'Italian ingredients, technique and tradition.',
+                restoWintam: 'RESTAURANT WINTAM',
+                resOptWintam: '🍽️ Restaurant Wintam',
                 aboutLove: 'From Italy, with love.',
                 contactAny: 'For bookings, takeaway, catering, private events or any other information, do not hesitate to contact us!',
                 modalClosedTitle: 'We are closed',
@@ -2946,7 +2950,7 @@
             },
             fr: {
                 selectLanguage: 'Choisir la langue',
-                home: 'Accueil', menu: 'Carte', about: 'À Propos', gallery: 'Galerie', catering: 'À emporter',
+                home: 'Accueil', menu: 'Carte', about: 'À propos', gallery: 'Galerie', catering: 'À emporter',
                 reservation: 'Réserver', contact: 'Contact',
                 pizzeria: 'PIZZERIA', ristorante: 'RESTAURANT & PIZZERIA', call: 'Appeler',
                 tiseltTitle: 'Authentiques pizzas napolitaines au cœur de Tisselt',
@@ -2955,11 +2959,11 @@
                 wintamHours: 'Lun, Mar: 17:00-22:00\nMer: fermé\nJeu: 17:00-22:00\nVen, Sam: 17:00-22:30\nDim: 12:00-21:00',
                 discover: 'Découvrir', back: 'Retour',
                 address: 'Adresse', phone: 'Téléphone', hours: 'Horaires',
-                changeLoc: 'CHANGER DE SITE', ctaMenu: 'CARTE', ctaOrder: 'COMMANDER', ctaBook: 'RÉSERVER',
+                changeLoc: "CHANGER D'ÉTABLISSEMENT", ctaMenu: 'CARTE', ctaOrder: 'COMMANDER', ctaBook: 'RÉSERVER',
                 menuTitle: 'CARTE', asportoTitle: 'À emporter',
                 menuTisselt: 'Carte Tisselt', menuWintam: 'Carte Wintam',
                 asportoChoose: 'Choisissez l\'établissement où vous souhaitez commander',
-                order: 'COMMANDER EN LIGNE', changeShop: '← CHANGER DE SITE',
+                order: 'COMMANDER EN LIGNE', changeShop: "← CHANGER D'ÉTABLISSEMENT",
                 cartLabel: 'Panier', cartEmpty: 'Votre panier est vide', total: 'TOTAL',
                 shop: "Boutique",
                 shopTitle: "Boutique",
@@ -2995,7 +2999,7 @@
                 pdCrusco: "Forentum Lab · Taralli au poivron crusco de Senise IGP, doux et croustillant, séché au soleil. La saveur la plus reconnaissable de la Basilicate. 300 g",
                 pdBiscotti: "Forentum Lab · Biscuits rustiques à tremper, pétris au lait et aux œufs. Parfaits au petit-déjeuner ou au goûter. 300 g",
                 pdTrecce: "Forentum Lab · Biscuits de pâte sablée tressés à la main, en double pâte : vanille et cacao amer. 300 g",
-                pdOlio1: "Masseria La Marchesa · Extra vierge 100% lucanien, d'olives récoltées et pressées à la propriété. Fruité moyen, excellent cru. 750 ml",
+                pdOlio1: "Masseria La Marchesa · Extra vierge 100% lucanien, d'olives récoltées et pressées au domaine. Fruité moyen, excellent cru. 750 ml",
                 pdOlio2: "Elena Fucci · Extra vierge haut de gamme du domaine viticole du Vulture. Élégant et persistant, à réserver aux plats importants. 500 ml",
                 without: 'sans',
                 customize: 'Personnaliser',
@@ -3034,7 +3038,7 @@
                 resThanks: 'Merci pour votre réservation ! Nous vous contacterons bientôt pour confirmer.',
                 galleryTitle: 'Galerie', gallerySub: 'Découvrez les espaces et les créations d\'Arte Bianca', galleryVisit: '📷 Voir la Galerie →',
                 galleryPh1: 'Pizzeria Tisselt', galleryPh2: 'Intérieur du restaurant', galleryPh3: 'Plats signature',
-                aboutTitle: 'À Propos',
+                aboutTitle: 'À propos',
                 aboutP1: 'Arte Bianca apporte en Belgique la cuisine italienne dans sa forme la plus authentique, enracinée dans la tradition culinaire de Lavello, en Basilicate.',
                 aboutP2: 'Tout part de la qualité de la matière première, sélectionnée avec soin et d\'origine italienne. La pâte bénéficie d\'une longue maturation, pour une pizza napolitaine légère et digeste.',
                 aboutP3: 'En cuisine, nous travaillons avec passion et respect du produit, en suivant les recettes de la tradition italienne, préparées chaque jour selon les méthodes classiques, sans raccourcis. Après la Pizzeria de Tisselt, ouverte en juin 2025, nous ouvrirons très prochainement le Restaurant & Pizzeria de Wintam : deux adresses, une seule idée de la cuisine.',
@@ -3053,6 +3057,8 @@
                 resCaptchaMissing: 'Merci de confirmer que vous n\'êtes pas un robot avant d\'envoyer la réservation.',
                 resSubject: 'NOUVELLE DEMANDE DE RÉSERVATION',
                 aboutMotto: 'Produits italiens, technique et tradition.',
+                restoWintam: 'RESTAURANT WINTAM',
+                resOptWintam: '🍽️ Restaurant Wintam',
                 aboutLove: 'D\u2019Italie, avec amour.',
                 contactAny: 'Pour vos réservations, commandes à emporter, traiteur, événements privés ou toute autre information, n\'hésitez pas à nous contacter !',
                 modalClosedTitle: 'Nous sommes fermés',
@@ -3075,8 +3081,8 @@
                 pizzeria: 'PIZZERIA', ristorante: 'RESTAURANT & PIZZERIA', call: 'Bellen',
                 tiseltTitle: 'Authentieke Napolitaanse pizza\'s in het hart van Tisselt',
                 wintamTitle: 'Italiaanse gerechten en pizza in een elegant kader',
-                tiseltHours: 'Maa - Din: 17:00 - 21:00\nWoe: gesloten\nDon - Zon: 17:00 - 21:00',
-                wintamHours: 'Maa, Din: 17:00-22:00\nWoe: gesloten\nDon: 17:00-22:00\nVrij, Zat: 17:00-22:30\nZon: 12:00-21:00',
+                tiseltHours: 'Ma - Di: 17:00 - 21:00\nWo: gesloten\nDo - Zo: 17:00 - 21:00',
+                wintamHours: 'Ma, Di: 17:00-22:00\nWo: gesloten\nDo: 17:00-22:00\nVr, Za: 17:00-22:30\nZo: 12:00-21:00',
                 discover: 'Ontdek', back: 'Terug',
                 address: 'Adres', phone: 'Telefoon', hours: 'Openingsuren',
                 changeLoc: 'ANDERE ZAAK', ctaMenu: 'MENU', ctaOrder: 'BESTELLEN', ctaBook: 'RESERVEREN',
@@ -3112,7 +3118,7 @@
                 shopSub: "Onze typische producten uit Basilicata, te koop in onze zaken",
                 shopNote: "Geselecteerde ambachtelijke producten uit Basilicata. Verkrijgbaar in onze zaken: vraag het aan ons personeel of stuur ons een bericht op WhatsApp.",
                 shopAsk: "💬 Vraag informatie via WhatsApp",
-                shopVisit: "🛍️ Bekijk de Shop →",
+                shopVisit: "🛍️ Bekijk de winkel →",
                 shopMsg: "Goedendag, ik zou graag informatie krijgen over de producten die u verkoopt.",
                 pdScald: "Forentum Lab · Handgevlochten taralli uit Basilicata met venkelolie en witte wijn. Knapperig, ideaal bij charcuterie en kaas of als aperitiefhapje. 300 g",
                 pdRape: "Forentum Lab · Taralli gekneed met gedroogde raapstelen, kruidig en uitgesproken van smaak. Een klassieker uit de boerentraditie van Basilicata. 300 g",
@@ -3142,11 +3148,11 @@
                 infoText: 'Online bestellen opent vanaf 15:00 en geldt enkel voor vandaag. Voor andere dagen of speciale wensen, stuur ons een bericht op WhatsApp.',
                 cateringTitle: '✨ Catering & Privé-evenementen (enkel Wintam)',
                 cateringText: 'Huwelijken, bedrijfsdiners, speciale vieringen met menu op maat. Bel ons op +32 494 06 95 71 voor een offerte!',
-                groupsTitle: '✨ Wij zijn op bestelling beschikbaar voor groepen, afhaal, catering en meer.',
+                groupsTitle: '✨ Wij zijn op bestelling beschikbaar voor groepen, afhaalmaaltijden, catering en meer.',
                 groupsText: 'Menu\'s op maat voor feesten, bedrijfsdiners, huwelijken en vieringen. Stuur ons een bericht op WhatsApp of bel',
-                onOrder: 'Op bestelling:', onOrderText: 'groepen, afhaal, catering en evenementen. Contacteer ons voor een menu op maat!',
-                onOrderTextT: 'afhaal, bedrijfsdiners en evenementen. Contacteer ons voor een menu op maat!',
-                onOrderTextW: 'groepen, afhaal, catering en evenementen. Contacteer ons voor een menu op maat!',
+                onOrder: 'Op bestelling:', onOrderText: 'groepen, afhaalmaaltijden, catering en evenementen. Contacteer ons voor een menu op maat!',
+                onOrderTextT: 'afhaalmaaltijden, bedrijfsdiners en evenementen. Contacteer ons voor een menu op maat!',
+                onOrderTextW: 'groepen, afhaalmaaltijden, catering en evenementen. Contacteer ons voor een menu op maat!',
                 statusOpen: '🟢 Bestellingen open — u kunt uw bestelling nu versturen!',
                 statusClosed: '🔴 Bestellingen momenteel gesloten. U kunt uw mandje wel klaarmaken: bestellen kan vanaf 15:00.',
                 statusOpenShort: '🟢 Bestellingen open', statusClosedShort: '🔴 Bestellingen momenteel gesloten',
@@ -3154,31 +3160,33 @@
                 closedToday: 'Vandaag zijn wij gesloten', noSlots: 'Geen uren beschikbaar vandaag',
                 reservationTitle: 'Reserveer een tafel', name: 'Naam', email: 'E-mail',
                 date: 'Datum', time: 'Uur', persons: 'Aantal personen',
-                confirmRes: 'Reservering bevestigen',
-                resThanks: 'Bedankt voor uw reservering! Wij nemen spoedig contact op ter bevestiging.',
+                confirmRes: 'Reservatie bevestigen',
+                resThanks: 'Bedankt voor uw reservatie! Wij nemen spoedig contact op ter bevestiging.',
                 galleryTitle: 'Galerij', gallerySub: 'Ontdek de ruimtes en creaties van Arte Bianca', galleryVisit: '📷 Bekijk de Galerij →',
                 galleryPh1: 'Pizzeria Tisselt', galleryPh2: 'Interieur restaurant', galleryPh3: 'Signatuurgerechten',
                 aboutTitle: 'Over Ons',
                 aboutP1: 'Arte Bianca brengt de Italiaanse keuken in haar meest authentieke vorm naar België, geworteld in de culinaire traditie van Lavello, in Basilicata.',
                 aboutP2: 'Alles begint bij de kwaliteit van de grondstoffen, zorgvuldig geselecteerd en van Italiaanse herkomst. Het deeg rijpt lang, voor een lichte en goed verteerbare Napolitaanse pizza.',
-                aboutP3: 'In de keuken werken we met passie en respect voor het product, volgens traditionele Italiaanse recepten, elke dag vers bereid volgens klassieke methodes en zonder shortcuts. Na de Pizzeria in Tisselt, geopend in juni 2025, openen we binnenkort het Restaurant & Pizzeria in Wintam: twee zaken, één keukenfilosofie.',
+                aboutP3: 'In de keuken werken we met passie en respect voor het product, volgens traditionele Italiaanse recepten, elke dag vers bereid volgens klassieke methodes en zonder de makkelijke weg te kiezen. Na de Pizzeria in Tisselt, geopend in juni 2025, openen we binnenkort het Restaurant & Pizzeria in Wintam: twee zaken, één keukenfilosofie.',
                 contactTitle: 'Contact',
                 resWhere: 'Waar wilt u reserveren?',
                 openMaps: "Openen in Google Maps ↗",
                 capPizza: "Pizza Margherita",
                 capSala: "Onze zaal",
                 capFinestre: "Zaal met ramen",
-                capOblo: "De tafel bij het rond raam",
+                capOblo: "De tafel bij het ronde raam",
                 capWintamExt: "Onze zaak in Wintam",
                 capTisseltExt: "Onze zaak in Tisselt",
                 photosSoon: "Nieuwe foto's binnenkort — volg ons op Instagram!",
                 resNote: 'Uw aanvraag wordt via WhatsApp verzonden. U ontvangt een bevestiging van de zaak.',
                 resFill: 'Vul naam, telefoon, datum, uur en aantal personen in.',
                 resCaptchaMissing: 'Bevestig dat u geen robot bent voordat u de reservatie verstuurt.',
-                resSubject: 'NIEUWE RESERVERINGSAANVRAAG',
+                resSubject: 'NIEUWE RESERVATIEAANVRAAG',
                 aboutMotto: 'Italiaanse grondstoffen, techniek en traditie.',
+                restoWintam: 'RESTAURANT WINTAM',
+                resOptWintam: '🍽️ Restaurant Wintam',
                 aboutLove: 'Uit Itali\u00eb, met liefde.',
-                contactAny: 'Voor reserveringen, afhaal, catering, privé-evenementen of andere informatie, aarzel niet om ons te contacteren!',
+                contactAny: 'Voor reservaties, afhaalmaaltijden, catering, privé-evenementen of andere informatie, aarzel niet om ons te contacteren!',
                 modalClosedTitle: 'Wij zijn gesloten',
                 modalClosedMsg: 'De bestellingen zijn nog niet open. Probeer het later opnieuw!',
                 modalCartSaved: 'Uw winkelmandje blijft bewaard: u kunt uw bestelling versturen zodra wij heropenen.',
@@ -3520,7 +3528,7 @@
                             <div class="split-social" onclick="event.stopPropagation();">
                                 <a href="${locData.tisselt.ig}" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
                                 <a href="${locData.tisselt.fb}" target="_blank" rel="noopener noreferrer">📘 Facebook</a>
-                                <a href="tel:+${locData.tisselt.tel}">📞 Chiama</a>
+                                <a href="tel:+${locData.tisselt.tel}">📞 ${t('call')}</a>
                                 <a href="${locData.tisselt.maps}" target="_blank" rel="noopener noreferrer">📍 Maps</a>
                             </div>
                             <button class="btn" onclick="event.stopPropagation(); location.href=SEDE_URL.tisselt;">${t('discover')}</button>
@@ -3537,7 +3545,7 @@
                             <div class="split-social" onclick="event.stopPropagation();">
                                 <a href="${locData.wintam.ig}" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
                                 <a href="${locData.wintam.fb}" target="_blank" rel="noopener noreferrer">📘 Facebook</a>
-                                <a href="tel:+${locData.wintam.tel}">📞 Chiama</a>
+                                <a href="tel:+${locData.wintam.tel}">📞 ${t('call')}</a>
                                 <a href="${locData.wintam.maps}" target="_blank" rel="noopener noreferrer">📍 Maps</a>
                             </div>
                             <button class="btn" onclick="event.stopPropagation(); location.href=SEDE_URL.wintam;">${t('discover')}</button>
@@ -3842,7 +3850,7 @@
 
             document.getElementById('locBanner').innerHTML =
                 '<img class="loc-banner-ico" src="' + (loc === 'tisselt' ? ICO_PIZZA : ICO_FORK) + '" alt="">' +
-                '<span class="loc-banner-txt">' + d.name +
+                '<span class="loc-banner-txt">' + (loc === 'wintam' ? t('ristorante') : d.name) +
                     (d.name2 ? '<span class="loc-banner-name2">' + d.name2 + '</span>' : '') +
                     (d.sub ? '<span class="loc-banner-sub">' + d.sub + '</span>' : '') +
                 '</span>' +
@@ -4003,7 +4011,12 @@
                     5: [[17, 0, 21, 0]],
                     6: [[17, 0, 21, 0]]
                 },
-                text: 'Lun, Mar: 17:00 - 21:00\nMer: chiuso\nGio - Dom: 17:00 - 21:00\n\nOrdinazioni online: dalle 15:00\nRitiro: dalle 17:00 alle 21:00'
+                text: {
+                    it: 'Lun, Mar: 17:00 - 21:00\nMer: chiuso\nGio - Dom: 17:00 - 21:00\n\nOrdinazioni online: dalle 15:00\nRitiro: dalle 17:00 alle 21:00',
+                    en: 'Mon, Tue: 17:00 - 21:00\nWed: closed\nThu - Sun: 17:00 - 21:00\n\nOnline orders: from 15:00\nPickup: 17:00 to 21:00',
+                    fr: 'Lun, Mar : 17:00 - 21:00\nMer : fermé\nJeu - Dim : 17:00 - 21:00\n\nCommandes en ligne : dès 15:00\nRetrait : de 17:00 à 21:00',
+                    nl: 'Ma, Di: 17:00 - 21:00\nWo: gesloten\nDo - Zo: 17:00 - 21:00\n\nOnline bestellen: vanaf 15:00\nAfhalen: van 17:00 tot 21:00'
+                }
             },
             wintam: {
                 days: {
@@ -4014,7 +4027,12 @@
                     5: [[17, 0, 22, 30]],
                     6: [[17, 0, 22, 30]]
                 },
-                text: 'Lun, Mar: 17:00 - 22:00\nMer: chiuso\nGio: 17:00 - 22:00\nVen, Sab: 17:00 - 22:30\nDom: 12:00 - 21:00\n\nOrdinazioni online: dalle 15:00'
+                text: {
+                    it: 'Lun, Mar: 17:00 - 22:00\nMer: chiuso\nGio: 17:00 - 22:00\nVen, Sab: 17:00 - 22:30\nDom: 12:00 - 21:00\n\nOrdinazioni online: dalle 15:00',
+                    en: 'Mon, Tue: 17:00 - 22:00\nWed: closed\nThu: 17:00 - 22:00\nFri, Sat: 17:00 - 22:30\nSun: 12:00 - 21:00\n\nOnline orders: from 15:00',
+                    fr: 'Lun, Mar : 17:00 - 22:00\nMer : fermé\nJeu : 17:00 - 22:00\nVen, Sam : 17:00 - 22:30\nDim : 12:00 - 21:00\n\nCommandes en ligne : dès 15:00',
+                    nl: 'Ma, Di: 17:00 - 22:00\nWo: gesloten\nDo: 17:00 - 22:00\nVr, Za: 17:00 - 22:30\nZo: 12:00 - 21:00\n\nOnline bestellen: vanaf 15:00'
+                }
             }
         };
 
@@ -4063,7 +4081,7 @@
         }
 
         function showClosedModal() {
-            document.getElementById('modalHours').textContent = shopHours[currentShop].text;
+            document.getElementById('modalHours').textContent = shopHours[currentShop].text[currentLanguage] || shopHours[currentShop].text.it;
             document.getElementById('closedModal').classList.add('show');
         }
 
@@ -4357,7 +4375,7 @@
             if (menuSec) menuSec.classList.add('hidden');
             const tt = document.getElementById('toTopBtn');
             if (tt) tt.classList.add('hide-mobile');
-            document.getElementById('shopTitle').textContent = shopMenus[loc].title;
+            document.getElementById('shopTitle').textContent = loc === 'wintam' ? '🍽️ ' + t('restoWintam') : shopMenus[loc].title;
             document.getElementById('shopInfo').textContent = shopMenus[loc].info;
             renderShopItems();
             renderCart();
