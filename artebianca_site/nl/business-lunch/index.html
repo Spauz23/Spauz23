@@ -186,6 +186,8 @@ main { max-width: 640px; margin: 0 auto; padding: 30px 18px 20px; }
 footer { text-align: center; padding: 30px 18px 40px; color: #999; font-size: 12.5px; }
 footer a { color: #7c2d12; text-decoration: none; }
 footer a:hover { text-decoration: underline; }
+.foot-home { margin-bottom: 8px; }
+.foot-home a { display: inline-block; border: 1px solid #e6ddd0; border-radius: 20px; padding: 5px 16px; font-size: 13px; background: #fff; }
 .lang-row-top { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; padding: 12px 16px; background: #fff; border-bottom: 1px solid #eee; }
 .lang-row-top a { padding: 4px 12px; border: 1px solid #e6ddd0; border-radius: 20px; font-size: 12px; color: #776f5e; text-decoration: none; }
 .lang-row-top a.on { background: #7c2d12; color: #fff; border-color: #7c2d12; font-weight: bold; }
@@ -381,7 +383,7 @@ footer a:hover { text-decoration: underline; }
             <div class="field-err" id="err_blEmail"></div>
         </div>
         <div class="field">
-            <label for="blIndirizzo" data-i18n="lblStreet">Leveringsadres (straat en nummer) *</label>
+            <label for="blIndirizzo" data-i18n="lblStreet">Bedrijfsadres (straat en nummer) *</label>
             <input type="text" id="blIndirizzo" required autocomplete="address-line1" maxlength="100">
             <div class="field-err" id="err_blIndirizzo"></div>
         </div>
@@ -412,6 +414,7 @@ footer a:hover { text-decoration: underline; }
 </main>
 
 <footer>
+    <p class="foot-home"><a id="footHome" href="https://artebianca.be/" data-i18n="footHome">🏠 Home</a></p>
     <p><a href="https://artebianca.be/nl/tisselt-willebroek/">Pizzeria Tisselt</a> &middot; <a href="https://artebianca.be/nl/wintam-bornem/">Ristorante Wintam</a></p>
     <p style="margin-top:6px;">&copy; 2026 Arte Bianca</p>
 </footer>
@@ -524,7 +527,8 @@ const TRAD = {
         setPersons: 'Indica prima il numero totale di persone.',
         noDelivery: 'Il {g} non facciamo consegne. Scegli lunedì, martedì, giovedì, venerdì o sabato.',
         errCaptcha: 'Conferma di non essere un robot prima di inviare la richiesta.',
-        lblVat: 'Partita IVA (facoltativa)', lblStreet: 'Indirizzo di consegna (via e numero) *', lblZip: 'CAP *', lblCity: 'Comune *',
+        footHome: '🏠 Home',
+        lblVat: 'Partita IVA (facoltativa)', lblStreet: 'Indirizzo azienda (via e numero) *', lblZip: 'CAP *', lblCity: 'Comune *',
         vCompany: 'Inserisci il nome reale dell\'azienda (almeno 2 lettere).',
         vContact: 'Inserisci nome e cognome (solo lettere).',
         vPhone: 'Numero non valido. Esempio: +32 470 12 34 56 oppure 0470 12 34 56.',
@@ -605,7 +609,8 @@ const TRAD = {
         setPersons: 'First enter the total number of people.',
         noDelivery: 'We do not deliver on {g}. Please choose Monday, Tuesday, Thursday, Friday or Saturday.',
         errCaptcha: 'Please confirm you are not a robot before sending the request.',
-        lblVat: 'VAT number (optional)', lblStreet: 'Delivery address (street and number) *', lblZip: 'Postcode *', lblCity: 'Town *',
+        footHome: '🏠 Home',
+        lblVat: 'VAT number (optional)', lblStreet: 'Company address (street and number) *', lblZip: 'Postcode *', lblCity: 'Town *',
         vCompany: 'Enter the real company name (at least 2 letters).',
         vContact: 'Enter first and last name (letters only).',
         vPhone: 'Invalid number. Example: +32 470 12 34 56 or 0470 12 34 56.',
@@ -686,7 +691,8 @@ const TRAD = {
         setPersons: 'Indiquez d\'abord le nombre total de personnes.',
         noDelivery: 'Nous ne livrons pas le {g}. Choisissez lundi, mardi, jeudi, vendredi ou samedi.',
         errCaptcha: 'Merci de confirmer que vous n\'êtes pas un robot avant d\'envoyer la demande.',
-        lblVat: 'Numéro de TVA (facultatif)', lblStreet: 'Adresse de livraison (rue et numéro) *', lblZip: 'Code postal *', lblCity: 'Commune *',
+        footHome: '🏠 Accueil',
+        lblVat: 'Numéro de TVA (facultatif)', lblStreet: 'Adresse de l\'entreprise (rue et numéro) *', lblZip: 'Code postal *', lblCity: 'Commune *',
         vCompany: 'Indiquez le vrai nom de l\'entreprise (au moins 2 lettres).',
         vContact: 'Indiquez le prénom et le nom (lettres uniquement).',
         vPhone: 'Numéro non valide. Exemple : +32 470 12 34 56 ou 0470 12 34 56.',
@@ -767,7 +773,8 @@ const TRAD = {
         setPersons: 'Vul eerst het totaal aantal personen in.',
         noDelivery: 'Op {g} leveren wij niet. Kies maandag, dinsdag, donderdag, vrijdag of zaterdag.',
         errCaptcha: 'Bevestig dat u geen robot bent voordat u de aanvraag verstuurt.',
-        lblVat: 'Btw-nummer (optioneel)', lblStreet: 'Leveringsadres (straat en nummer) *', lblZip: 'Postcode *', lblCity: 'Gemeente *',
+        footHome: '🏠 Home',
+        lblVat: 'Btw-nummer (optioneel)', lblStreet: 'Bedrijfsadres (straat en nummer) *', lblZip: 'Postcode *', lblCity: 'Gemeente *',
         vCompany: 'Vul de echte bedrijfsnaam in (minstens 2 letters).',
         vContact: 'Vul voornaam en achternaam in (enkel letters).',
         vPhone: 'Ongeldig nummer. Voorbeeld: +32 470 12 34 56 of 0470 12 34 56.',
@@ -824,6 +831,8 @@ function applyTranslations() {
     document.getElementById('customWa').href = WA_INFO + encodeURIComponent(t('customWaMsg'));
     const home = document.getElementById('homeLink');
     if (home) { home.title = t('backSite'); home.href = 'https://artebianca.be/?lang=' + currentLanguage; }
+    const footHome = document.getElementById('footHome');
+    if (footHome) footHome.href = (PAGE_LANG === 'nl' ? '/nl/' : '/') + '?lang=' + currentLanguage;
     document.querySelectorAll('.field.invalid input').forEach(function (el) { if (VALIDATORI[el.id]) validaCampo(el.id); });
     document.getElementById('langRow').innerHTML = Object.keys(LINGUE).map(function (l) {
         return '<a href="?lang=' + l + '"' + (l === currentLanguage ? ' class="on"' : '') + '>' + LINGUE[l] + '</a>';
@@ -1130,7 +1139,7 @@ function handleCatering(event) {
     msg += 'Telefono: ' + telefono + '\n';
     msg += 'Email: ' + email + '\n';
     if (piva) msg += 'P.IVA: ' + piva.toUpperCase() + '\n';
-    msg += 'Indirizzo di consegna: ' + indirizzo + ', ' + cap + ' ' + comune + '\n';
+    msg += 'Indirizzo azienda: ' + indirizzo + ', ' + cap + ' ' + comune + '\n';
     msg += 'Lingua cliente: ' + currentLanguage.toUpperCase();
 
     logToSheet({
