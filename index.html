@@ -3551,6 +3551,7 @@
                                 <a href="${locData.wintam.fb}" target="_blank" rel="noopener noreferrer">📘 Facebook</a>
                                 <a href="tel:+${locData.wintam.tel}">📞 ${t('call')}</a>
                                 <a href="${locData.wintam.maps}" target="_blank" rel="noopener noreferrer">📍 Maps</a>
+                                <a href="/business-lunch/?lang=${currentLanguage}">💼 Business Lunch</a>
                             </div>
                             <button class="btn" onclick="event.stopPropagation(); vaiSede('wintam');">${t('discover')}</button>
                         </div>
@@ -3885,6 +3886,7 @@
                     '<a href="' + d.fb + '" target="_blank" rel="noopener noreferrer">📘 Facebook</a>' +
                     '<a href="tel:+' + d.tel + '">📞 ' + t('call') + '</a>' +
                     '<a href="' + d.maps + '" target="_blank" rel="noopener noreferrer">📍 Maps</a>' +
+                    (loc === 'wintam' ? '<a href="/business-lunch/?lang=' + currentLanguage + '">💼 Business Lunch</a>' : '') +
                 '</div>';
 
             // nota "su ordinazione", diversa per sede
