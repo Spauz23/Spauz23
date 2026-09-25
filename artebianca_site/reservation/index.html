@@ -1898,6 +1898,26 @@
             margin-top: 28px;
         }
 
+        /* Sezione Business Lunch (solo sulla sede di Wintam) */
+        .bl-only:not(.show-bl) { display: none !important; }
+        .bl-sub { text-align: center; color: #666; font-size: 16px; max-width: 560px; margin: 0 auto 24px; }
+        .bl-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 620px; margin: 0 auto; }
+        .bl-card { background: #fff; border: 1px solid #eadfc6; border-radius: 12px; padding: 20px 18px; text-align: center; box-shadow: 0 6px 18px rgba(0,0,0,.05); }
+        .bl-card.dark { background: #1f1a14; border-color: #1f1a14; color: #fff; }
+        .bl-card-lbl { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: #ca8a04; }
+        .bl-card h3 { font-size: 24px; margin: 2px 0 4px; }
+        .bl-price { font-size: 26px; font-weight: 800; color: #ca8a04; }
+        .bl-price small { display: block; font-size: 12px; font-weight: 400; color: inherit; opacity: .7; }
+        .bl-card.dark .bl-price small { color: #fff; }
+        .bl-card p { font-size: 14px; margin-top: 10px; opacity: .85; line-height: 1.5; }
+        .bl-facts { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; max-width: 620px; margin: 18px auto 0; padding: 0; }
+        .bl-facts li { background: #fdf8ec; border-radius: 10px; padding: 10px 6px; text-align: center; font-size: 13px; }
+        .bl-facts b { display: block; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #a9700a; }
+        @media (max-width: 600px) {
+            .bl-cards { grid-template-columns: 1fr; }
+            .bl-facts { grid-template-columns: 1fr 1fr; }
+        }
+
         .btn-shop-primary {
             display: inline-flex;
             align-items: center;
@@ -2578,6 +2598,38 @@
             </div>
         </section>
 
+        <!-- BUSINESS LUNCH (solo Wintam) -->
+        <div class="sec-divider bl-only"></div>
+            <section id="businesslunch" class="page-sec sec-anchor bl-only">
+            <div class="section-content">
+                <h1 class="section-title">Business Lunch</h1>
+                <p class="bl-sub" data-i18n="blSub">Pranzo italiano in ufficio: pizze e specialità della casa, consegnate calde nella vostra azienda.</p>
+                <div class="bl-cards">
+                    <div class="bl-card">
+                        <div class="bl-card-lbl">Menu</div>
+                        <h3>Pizza</h3>
+                        <div class="bl-price">€16 <small data-i18n="blPerPerson">a persona · IVA incl.</small></div>
+                        <p data-i18n="blPizzaDesc">Pizza intera a scelta + dolce + bevanda</p>
+                    </div>
+                    <div class="bl-card dark">
+                        <div class="bl-card-lbl">Menu</div>
+                        <h3 data-i18n="blRistName">Ristorante</h3>
+                        <div class="bl-price">€20 <small data-i18n="blPerPerson">a persona · IVA incl.</small></div>
+                        <p data-i18n="blRistDesc">Specialità della casa con pane + dolce + bevanda</p>
+                    </div>
+                </div>
+                <ul class="bl-facts">
+                    <li><b data-i18n="blDaysLbl">Giorni</b><span data-i18n="blDays">Lun · Mar · Gio · Ven · Sab</span></li>
+                    <li><b data-i18n="blDelLbl">Consegna</b><span>11:30 – 13:00</span></li>
+                    <li><b data-i18n="blMinLbl">Minimo</b><span data-i18n="blMin">10 persone</span></li>
+                    <li><b data-i18n="blBookLbl">Prenota</b><span data-i18n="blBook">24–48 ore prima</span></li>
+                </ul>
+                <div class="shop-cta" style="margin-top:22px;">
+                    <a id="blLink" href="/business-lunch/" class="btn-shop-primary" data-i18n="blCta">💼 Richiedi il tuo Business Lunch →</a>
+                </div>
+            </div>
+        </section>
+
         <!-- RESERVATION -->
         <div class="sec-divider"></div>
             <section id="reservation" class="page-sec sec-anchor">
@@ -2808,6 +2860,11 @@
                 restoWintam: 'RISTORANTE WINTAM',
                 resOptWintam: '🍽️ Ristorante Wintam',
                 aboutLove: 'Dall\u2019Italia, con amore.',
+                blSub: 'Pranzo italiano in ufficio: pizze e specialità della casa, consegnate calde nella vostra azienda.',
+                blPerPerson: 'a persona · IVA incl.', blRistName: 'Ristorante',
+                blPizzaDesc: 'Pizza intera a scelta + dolce + bevanda', blRistDesc: 'Specialità della casa con pane + dolce + bevanda',
+                blDaysLbl: 'Giorni', blDays: 'Lun · Mar · Gio · Ven · Sab', blDelLbl: 'Consegna', blMinLbl: 'Minimo', blMin: '10 persone',
+                blBookLbl: 'Prenota', blBook: '24–48 ore prima', blCta: '💼 Richiedi il tuo Business Lunch →',
                 contactAny: 'Per prenotazioni, asporto, catering, eventi privati o qualsiasi altra informazione, non esitare a contattarci!',
                 modalClosedTitle: 'Siamo chiusi',
                 modalClosedMsg: 'Le ordinazioni non sono ancora aperte. Riprova più tardi!',
@@ -2934,6 +2991,11 @@
                 restoWintam: 'RESTAURANT WINTAM',
                 resOptWintam: '🍽️ Restaurant Wintam',
                 aboutLove: 'From Italy, with love.',
+                blSub: 'Italian lunch at the office: pizzas and house specialities, delivered hot to your company.',
+                blPerPerson: 'per person · VAT incl.', blRistName: 'Restaurant',
+                blPizzaDesc: 'Whole pizza of your choice + dessert + drink', blRistDesc: 'House speciality with bread + dessert + drink',
+                blDaysLbl: 'Days', blDays: 'Mon · Tue · Thu · Fri · Sat', blDelLbl: 'Delivery', blMinLbl: 'Minimum', blMin: '10 people',
+                blBookLbl: 'Book', blBook: '24–48 hours ahead', blCta: '💼 Request your Business Lunch →',
                 contactAny: 'For bookings, takeaway, catering, private events or any other information, do not hesitate to contact us!',
                 modalClosedTitle: 'We are closed',
                 modalClosedMsg: 'Ordering is not open yet. Please try again later!',
@@ -3060,6 +3122,11 @@
                 restoWintam: 'RESTAURANT WINTAM',
                 resOptWintam: '🍽️ Restaurant Wintam',
                 aboutLove: 'D\u2019Italie, avec amour.',
+                blSub: 'Déjeuner italien au bureau : pizzas et spécialités de la maison, livrées chaudes dans votre entreprise.',
+                blPerPerson: 'par personne · TVA incl.', blRistName: 'Restaurant',
+                blPizzaDesc: 'Pizza entière au choix + dessert + boisson', blRistDesc: 'Spécialité de la maison avec pain + dessert + boisson',
+                blDaysLbl: 'Jours', blDays: 'Lun · Mar · Jeu · Ven · Sam', blDelLbl: 'Livraison', blMinLbl: 'Minimum', blMin: '10 personnes',
+                blBookLbl: 'Réserver', blBook: '24 à 48 h à l\'avance', blCta: '💼 Demandez votre Business Lunch →',
                 contactAny: 'Pour vos réservations, commandes à emporter, traiteur, événements privés ou toute autre information, n\'hésitez pas à nous contacter !',
                 modalClosedTitle: 'Nous sommes fermés',
                 modalClosedMsg: 'Les commandes ne sont pas encore ouvertes. Réessayez plus tard !',
@@ -3186,6 +3253,11 @@
                 restoWintam: 'RESTAURANT WINTAM',
                 resOptWintam: '🍽️ Restaurant Wintam',
                 aboutLove: 'Uit Itali\u00eb, met liefde.',
+                blSub: 'Italiaanse lunch op kantoor: pizza\'s en huisspecialiteiten, warm geleverd bij u op het bedrijf.',
+                blPerPerson: 'per persoon · btw incl.', blRistName: 'Restaurant',
+                blPizzaDesc: 'Hele pizza naar keuze + dessert + drank', blRistDesc: 'Huisspecialiteit met brood + dessert + drank',
+                blDaysLbl: 'Dagen', blDays: 'Ma · Di · Do · Vr · Za', blDelLbl: 'Levering', blMinLbl: 'Minimum', blMin: '10 personen',
+                blBookLbl: 'Reserveren', blBook: '24–48 uur vooraf', blCta: '💼 Vraag uw Business Lunch aan →',
                 contactAny: 'Voor reservaties, afhaalmaaltijden, catering, privé-evenementen of andere informatie, aarzel niet om ons te contacteren!',
                 modalClosedTitle: 'Wij zijn gesloten',
                 modalClosedMsg: 'De bestellingen zijn nog niet open. Probeer het later opnieuw!',
@@ -3296,6 +3368,7 @@
                 { id: 'home', label: t('home') },
                 { id: 'menu', label: t('menu') },
                 { id: 'catering', label: t('catering') },
+                ...(activeLocation === 'wintam' ? [{ id: 'businesslunch', label: 'Business Lunch' }] : []),
                 { id: 'reservation', label: t('reservation') },
                 { id: 'shop', label: t('shop') },
                 { id: 'about', label: t('about') },
@@ -3856,6 +3929,11 @@
 
         function selectLocation(loc) {
             activeLocation = loc;
+            // sezione e voce di menu Business Lunch solo per Wintam
+            document.querySelectorAll('.bl-only').forEach(function (el) { el.classList.toggle('show-bl', loc === 'wintam'); });
+            const blLink = document.getElementById('blLink');
+            if (blLink) blLink.href = '/business-lunch/?lang=' + (currentLanguage || 'it');
+            renderNavigation();
             const d = locData[loc];
 
             document.getElementById('splitHero').style.display = 'none';
