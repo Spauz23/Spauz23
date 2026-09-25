@@ -163,6 +163,10 @@ footer a:hover { text-decoration: underline; }
 .lang-row-top a.on { background: #7c2d12; color: #fff; border-color: #7c2d12; font-weight: bold; }
 .persons-field input { font-size: 18px; font-weight: 700; color: #7c2d12; max-width: 160px; }
 .persons-field .pick-help { margin-top: 6px; }
+.field-err { display: none; color: #dc2626; font-size: 12.5px; margin-top: 4px; }
+.field-err.show { display: block; }
+.field.invalid input { border-color: #dc2626; background: #fef2f2; }
+.field.valid input { border-color: #16a34a; }
 .form-subtitle { font-size: 16px; color: #7c2d12; margin: 26px 0 12px; padding-top: 18px; border-top: 1px solid #e6ddd0; }
 </style>
 </head>
@@ -256,7 +260,7 @@ footer a:hover { text-decoration: underline; }
     <h2 class="section-title" data-i18n="formTitle">Richiedi il tuo Business Lunch</h2>
     <p class="page-sub" data-i18n="formSub">Compila il modulo, ricevi conferma e fattura direttamente dal locale.</p>
 
-    <form onsubmit="return handleCatering(event)">
+    <form novalidate onsubmit="return handleCatering(event)">
         <div class="row2">
             <div class="field">
                 <label data-i18n="lblDate">Data di consegna *</label>
@@ -313,22 +317,48 @@ footer a:hover { text-decoration: underline; }
 
         <h3 class="form-subtitle" data-i18n="clientTitle">Dati dell'azienda</h3>
         <div class="field">
-            <label data-i18n="lblCompany">Nome azienda *</label>
-            <input type="text" id="blAzienda" required>
+            <label for="blAzienda" data-i18n="lblCompany">Nome azienda *</label>
+            <input type="text" id="blAzienda" required autocomplete="organization" maxlength="80">
+            <div class="field-err" id="err_blAzienda"></div>
+        </div>
+        <div class="field">
+            <label for="blPiva" data-i18n="lblVat">Partita IVA (facoltativa)</label>
+            <input type="text" id="blPiva" placeholder="BE0123.456.749" maxlength="20">
+            <div class="field-err" id="err_blPiva"></div>
         </div>
         <div class="row2">
             <div class="field">
-                <label data-i18n="lblContact">Persona di riferimento *</label>
-                <input type="text" id="blReferente" required>
+                <label for="blReferente" data-i18n="lblContact">Persona di riferimento *</label>
+                <input type="text" id="blReferente" required autocomplete="name" maxlength="60">
+                <div class="field-err" id="err_blReferente"></div>
             </div>
             <div class="field">
-                <label data-i18n="lblPhone">Telefono *</label>
-                <input type="tel" id="blTelefono" required>
+                <label for="blTelefono" data-i18n="lblPhone">Telefono *</label>
+                <input type="tel" id="blTelefono" required autocomplete="tel" placeholder="+32 470 12 34 56" maxlength="22">
+                <div class="field-err" id="err_blTelefono"></div>
             </div>
         </div>
         <div class="field">
-            <label>Email *</label>
-            <input type="email" id="blEmail" required>
+            <label for="blEmail">Email *</label>
+            <input type="email" id="blEmail" required autocomplete="email" placeholder="nome@azienda.be" maxlength="80">
+            <div class="field-err" id="err_blEmail"></div>
+        </div>
+        <div class="field">
+            <label for="blIndirizzo" data-i18n="lblStreet">Indirizzo di consegna (via e numero) *</label>
+            <input type="text" id="blIndirizzo" required autocomplete="address-line1" maxlength="100">
+            <div class="field-err" id="err_blIndirizzo"></div>
+        </div>
+        <div class="row2">
+            <div class="field">
+                <label for="blCap" data-i18n="lblZip">CAP *</label>
+                <input type="text" id="blCap" required inputmode="numeric" autocomplete="postal-code" maxlength="4" placeholder="2880">
+                <div class="field-err" id="err_blCap"></div>
+            </div>
+            <div class="field">
+                <label for="blComune" data-i18n="lblCity">Comune *</label>
+                <input type="text" id="blComune" required autocomplete="address-level2" maxlength="50" placeholder="Bornem">
+                <div class="field-err" id="err_blComune"></div>
+            </div>
         </div>
 
         <!-- Campo trappola per i robot: invisibile per le persone. -->
@@ -456,6 +486,17 @@ const TRAD = {
         setPersons: 'Indica prima il numero totale di persone.',
         noDelivery: 'Il {g} non facciamo consegne. Scegli lunedì, martedì, giovedì, venerdì o sabato.',
         errCaptcha: 'Conferma di non essere un robot prima di inviare la richiesta.',
+        lblVat: 'Partita IVA (facoltativa)', lblStreet: 'Indirizzo di consegna (via e numero) *', lblZip: 'CAP *', lblCity: 'Comune *',
+        vCompany: 'Inserisci il nome reale dell\'azienda (almeno 2 lettere).',
+        vContact: 'Inserisci nome e cognome (solo lettere).',
+        vPhone: 'Numero non valido. Esempio: +32 470 12 34 56 oppure 0470 12 34 56.',
+        vEmail: 'Indirizzo email non valido. Esempio: nome@azienda.be',
+        vEmailTemp: 'Usa un indirizzo email aziendale o personale reale, non temporaneo.',
+        vStreet: 'Inserisci via e numero civico.',
+        vZip: 'Il CAP belga ha 4 cifre (es. 2880).',
+        vCity: 'Inserisci il comune.',
+        vVat: 'Partita IVA belga non valida (es. BE0123.456.749).',
+        vFix: 'Controlla i campi evidenziati in rosso.',
         errRequired: 'Compila tutti i campi obbligatori.',
         errMin: 'L\'ordine minimo è di 10 persone.',
         errMains: 'Hai scelto {a} piatti principali per {n} persone: deve essere uno a persona.',
@@ -524,6 +565,17 @@ const TRAD = {
         setPersons: 'First enter the total number of people.',
         noDelivery: 'We do not deliver on {g}. Please choose Monday, Tuesday, Thursday, Friday or Saturday.',
         errCaptcha: 'Please confirm you are not a robot before sending the request.',
+        lblVat: 'VAT number (optional)', lblStreet: 'Delivery address (street and number) *', lblZip: 'Postcode *', lblCity: 'Town *',
+        vCompany: 'Enter the real company name (at least 2 letters).',
+        vContact: 'Enter first and last name (letters only).',
+        vPhone: 'Invalid number. Example: +32 470 12 34 56 or 0470 12 34 56.',
+        vEmail: 'Invalid email address. Example: name@company.be',
+        vEmailTemp: 'Please use a real business or personal email, not a temporary one.',
+        vStreet: 'Enter street and house number.',
+        vZip: 'Belgian postcodes have 4 digits (e.g. 2880).',
+        vCity: 'Enter the town.',
+        vVat: 'Invalid Belgian VAT number (e.g. BE0123.456.749).',
+        vFix: 'Please check the fields highlighted in red.',
         errRequired: 'Please fill in all required fields.',
         errMin: 'The minimum order is 10 people.',
         errMains: 'You chose {a} mains for {n} people: it must be one per person.',
@@ -592,6 +644,17 @@ const TRAD = {
         setPersons: 'Indiquez d\'abord le nombre total de personnes.',
         noDelivery: 'Nous ne livrons pas le {g}. Choisissez lundi, mardi, jeudi, vendredi ou samedi.',
         errCaptcha: 'Merci de confirmer que vous n\'êtes pas un robot avant d\'envoyer la demande.',
+        lblVat: 'Numéro de TVA (facultatif)', lblStreet: 'Adresse de livraison (rue et numéro) *', lblZip: 'Code postal *', lblCity: 'Commune *',
+        vCompany: 'Indiquez le vrai nom de l\'entreprise (au moins 2 lettres).',
+        vContact: 'Indiquez le prénom et le nom (lettres uniquement).',
+        vPhone: 'Numéro non valide. Exemple : +32 470 12 34 56 ou 0470 12 34 56.',
+        vEmail: 'Adresse e-mail non valide. Exemple : nom@entreprise.be',
+        vEmailTemp: 'Utilisez une adresse e-mail réelle, professionnelle ou personnelle, pas une adresse temporaire.',
+        vStreet: 'Indiquez la rue et le numéro.',
+        vZip: 'Le code postal belge comporte 4 chiffres (ex. 2880).',
+        vCity: 'Indiquez la commune.',
+        vVat: 'Numéro de TVA belge non valide (ex. BE0123.456.749).',
+        vFix: 'Vérifiez les champs indiqués en rouge.',
         errRequired: 'Veuillez remplir tous les champs obligatoires.',
         errMin: 'La commande minimum est de 10 personnes.',
         errMains: 'Vous avez choisi {a} plats pour {n} personnes : il en faut un par personne.',
@@ -660,6 +723,17 @@ const TRAD = {
         setPersons: 'Vul eerst het totaal aantal personen in.',
         noDelivery: 'Op {g} leveren wij niet. Kies maandag, dinsdag, donderdag, vrijdag of zaterdag.',
         errCaptcha: 'Bevestig dat u geen robot bent voordat u de aanvraag verstuurt.',
+        lblVat: 'Btw-nummer (optioneel)', lblStreet: 'Leveringsadres (straat en nummer) *', lblZip: 'Postcode *', lblCity: 'Gemeente *',
+        vCompany: 'Vul de echte bedrijfsnaam in (minstens 2 letters).',
+        vContact: 'Vul voornaam en achternaam in (enkel letters).',
+        vPhone: 'Ongeldig nummer. Voorbeeld: +32 470 12 34 56 of 0470 12 34 56.',
+        vEmail: 'Ongeldig e-mailadres. Voorbeeld: naam@bedrijf.be',
+        vEmailTemp: 'Gebruik een echt zakelijk of persoonlijk e-mailadres, geen tijdelijk adres.',
+        vStreet: 'Vul straat en huisnummer in.',
+        vZip: 'Een Belgische postcode heeft 4 cijfers (bv. 2880).',
+        vCity: 'Vul de gemeente in.',
+        vVat: 'Ongeldig Belgisch btw-nummer (bv. BE0123.456.749).',
+        vFix: 'Controleer de rood gemarkeerde velden.',
         errRequired: 'Vul alle verplichte velden in.',
         errMin: 'De minimale bestelling is 10 personen.',
         errMains: 'U koos {a} hoofdgerechten voor {n} personen: het moet er één per persoon zijn.',
@@ -701,6 +775,7 @@ function applyTranslations() {
     document.getElementById('notOpenWa').href = waLink;
     const home = document.getElementById('homeLink');
     if (home) { home.title = t('backSite'); home.href = 'https://artebianca.be/?lang=' + currentLanguage; }
+    document.querySelectorAll('.field.invalid input').forEach(function (el) { if (VALIDATORI[el.id]) validaCampo(el.id); });
     document.getElementById('langRow').innerHTML = Object.keys(LINGUE).map(function (l) {
         return '<a href="?lang=' + l + '"' + (l === currentLanguage ? ' class="on"' : '') + '>' + LINGUE[l] + '</a>';
     }).join('');
@@ -849,6 +924,97 @@ function dettaglioGruppo(g) {
         .map(function (it) { return qty[it.id] + 'x ' + it.nome; }).join(', ');
 }
 
+
+// ===== CONTROLLO DATI CLIENTE =====
+// Controlli sul formato: non garantiscono che i dati esistano, ma bloccano
+// quelli palesemente falsi o incompleti prima dell'invio su WhatsApp.
+const EMAIL_TEMP = /(^|\.)(example|test|mailinator|yopmail|guerrillamail|10minutemail|tempmail|temp-mail|trashmail|sharklasers|getnada|dispostable|maildrop|fakeinbox|throwawaymail)\./i;
+
+function soloSpazi(v) { return v.replace(/\s+/g, ' ').trim(); }
+function troppoRipetuto(v) { return /(.)\1{3,}/i.test(v.replace(/\s/g, '')); }
+
+function normTelefono(v) { return v.replace(/[\s.\/\-()]/g, ''); }
+
+function pivaValida(v) {
+    let n = v.toUpperCase().replace(/[\s.\-]/g, '').replace(/^BE/, '');
+    if (!/^\d{9,10}$/.test(n)) return false;
+    if (n.length === 9) n = '0' + n;
+    if (n[0] !== '0' && n[0] !== '1') return false;
+    return 97 - (parseInt(n.slice(0, 8), 10) % 97) === parseInt(n.slice(8), 10);
+}
+
+const VALIDATORI = {
+    blAzienda: function (v) {
+        v = soloSpazi(v);
+        return (v.length >= 2 && (v.match(/\p{L}/gu) || []).length >= 2 && !/^\d+$/.test(v) && !troppoRipetuto(v)) || 'vCompany';
+    },
+    blReferente: function (v) {
+        v = soloSpazi(v);
+        const parole = v.split(' ').filter(function (p) { return p.replace(/[^\p{L}]/gu, '').length >= 2; });
+        return (/^[\p{L}][\p{L}'’\-. ]*$/u.test(v) && parole.length >= 2 && !troppoRipetuto(v)) || 'vContact';
+    },
+    blTelefono: function (v) {
+        const n = normTelefono(v);
+        if (!/^(\+|00)?\d+$/.test(n)) return 'vPhone';
+        const cifre = n.replace(/^(\+|00)/, '');
+        if (/^(\d)\1+$/.test(cifre)) return 'vPhone';
+        let ok;
+        if (/^(\+|00)32/.test(n)) ok = /^32[1-9]\d{7,8}$/.test(cifre);          // Belgio internazionale
+        else if (/^(\+|00)/.test(n)) ok = cifre.length >= 8 && cifre.length <= 15; // altri paesi
+        else ok = /^0[1-9]\d{7,8}$/.test(n);                                      // Belgio nazionale
+        return ok || 'vPhone';
+    },
+    blEmail: function (v) {
+        v = v.trim();
+        if (!/^[A-Za-z0-9._%+\-]+@[A-Za-z0-9](?:[A-Za-z0-9\-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9\-]*[A-Za-z0-9])?)*\.[A-Za-z]{2,}$/.test(v) || /\.\./.test(v)) return 'vEmail';
+        return !EMAIL_TEMP.test(v.split('@')[1] + '.') || 'vEmailTemp';
+    },
+    blIndirizzo: function (v) {
+        v = soloSpazi(v);
+        return (v.length >= 5 && (v.match(/\p{L}/gu) || []).length >= 3 && /\d/.test(v)) || 'vStreet';
+    },
+    blCap: function (v) { return /^[1-9]\d{3}$/.test(v.trim()) || 'vZip'; },
+    blComune: function (v) {
+        v = soloSpazi(v);
+        return ((v.match(/\p{L}/gu) || []).length >= 2 && /^[\p{L}][\p{L}'’\-. ]*$/u.test(v)) || 'vCity';
+    },
+    blPiva: function (v) { return !v.trim() || pivaValida(v) || 'vVat'; }
+};
+
+function validaCampo(id) {
+    const el = document.getElementById(id);
+    const esito = VALIDATORI[id](el.value);
+    const field = el.closest('.field');
+    const err = document.getElementById('err_' + id);
+    const vuotoFacoltativo = id === 'blPiva' && !el.value.trim();
+    field.classList.toggle('invalid', esito !== true);
+    field.classList.toggle('valid', esito === true && !vuotoFacoltativo);
+    err.textContent = esito === true ? '' : t(esito);
+    err.classList.toggle('show', esito !== true);
+    return esito === true;
+}
+
+function validaTutti() {
+    let primo = null;
+    Object.keys(VALIDATORI).forEach(function (id) {
+        if (!validaCampo(id) && !primo) primo = id;
+    });
+    if (primo) {
+        const el = document.getElementById(primo);
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(function () { el.focus({ preventScroll: true }); }, 350);
+    }
+    return !primo;
+}
+
+Object.keys(VALIDATORI).forEach(function (id) {
+    const el = document.getElementById(id);
+    el.addEventListener('blur', function () { if (el.value.trim() || id !== 'blPiva') validaCampo(id); });
+    el.addEventListener('input', function () {
+        if (el.closest('.field').classList.contains('invalid')) validaCampo(id);
+    });
+});
+
 function handleCatering(event) {
     if (event) event.preventDefault();
 
@@ -873,9 +1039,13 @@ function handleCatering(event) {
     const data      = document.getElementById('blData').value;
     const fascia    = document.getElementById('blFascia').value;
     const note      = document.getElementById('blNote').value.trim();
+    const piva      = document.getElementById('blPiva').value.trim();
+    const indirizzo = soloSpazi(document.getElementById('blIndirizzo').value);
+    const cap       = document.getElementById('blCap').value.trim();
+    const comune    = soloSpazi(document.getElementById('blComune').value);
     const s         = statoOrdine();
 
-    if (!azienda || !referente || !telefono || !email || !data || !fascia || !s.persone) {
+    if (!data || !fascia || !s.persone) {
         alert(t('errRequired'));
         return false;
     }
@@ -888,6 +1058,7 @@ function handleCatering(event) {
     if (s.principali !== s.persone) { alert(t('errMains', { a: s.principali, n: s.persone })); return false; }
     if (s.dolci !== s.persone) { alert(t('errDesserts', { a: s.dolci, n: s.persone })); return false; }
     if (s.bevande !== s.persone) { alert(t('errDrinks', { a: s.bevande, n: s.persone })); return false; }
+    if (!validaTutti()) { alert(t('vFix')); return false; }
 
     // Il messaggio per il locale resta in italiano
     const dPizza = dettaglioGruppo('pizza');
@@ -909,6 +1080,8 @@ function handleCatering(event) {
     msg += 'Referente: ' + referente + '\n';
     msg += 'Telefono: ' + telefono + '\n';
     msg += 'Email: ' + email + '\n';
+    if (piva) msg += 'P.IVA: ' + piva.toUpperCase() + '\n';
+    msg += 'Indirizzo di consegna: ' + indirizzo + ', ' + cap + ' ' + comune + '\n';
     msg += 'Lingua cliente: ' + currentLanguage.toUpperCase();
 
     logToSheet({
@@ -916,7 +1089,7 @@ function handleCatering(event) {
         azienda: azienda, referente: referente, telefono: telefono, email: email,
         data: data, fascia: fascia, menuPizza: s.pizze, menuRistorante: s.piatti,
         persone: s.persone, totale: s.totale, note: dettaglio + (note ? '\nNote: ' + note : ''),
-        lingua: currentLanguage,
+        lingua: currentLanguage, piva: piva, indirizzo: indirizzo + ', ' + cap + ' ' + comune,
         recaptcha: RECAPTCHA_SITE_KEY && recaptchaWidgetId !== null ? grecaptcha.getResponse(recaptchaWidgetId) : ''
     });
 
@@ -931,8 +1104,11 @@ function handleCatering(event) {
         '<br>' + fmtPersone(s.persone) + ' · €' + s.totale;
     document.getElementById('processingModal').classList.add('show');
 
-    ['blAzienda','blReferente','blTelefono','blEmail','blNote','blPersone'].forEach(function (id) {
-        document.getElementById(id).value = '';
+    ['blAzienda','blReferente','blTelefono','blEmail','blNote','blPersone','blPiva','blIndirizzo','blCap','blComune'].forEach(function (id) {
+        const el = document.getElementById(id);
+        el.value = '';
+        const field = el.closest('.field');
+        if (field) field.classList.remove('valid', 'invalid');
     });
     Object.keys(qty).forEach(function (id) { qty[id] = 0; });
     renderPicker();
