@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://artebianca.be/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://artebianca.be/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://artebianca.be/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://artebianca.be/"/>
     <lastmod>2026-09-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://artebianca.be/tisselt-willebroek/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://artebianca.be/tisselt-willebroek/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://artebianca.be/nl/tisselt-willebroek/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://artebianca.be/tisselt-willebroek/"/>
     <lastmod>2026-09-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://artebianca.be/wintam-bornem/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://artebianca.be/wintam-bornem/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://artebianca.be/nl/wintam-bornem/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://artebianca.be/wintam-bornem/"/>
     <lastmod>2026-09-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -26,6 +35,9 @@
   </url>
   <url>
     <loc>https://artebianca.be/business-lunch/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://artebianca.be/business-lunch/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://artebianca.be/nl/business-lunch/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://artebianca.be/business-lunch/"/>
     <lastmod>2026-09-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -89,5 +101,41 @@
     <lastmod>2026-09-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://artebianca.be/nl/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://artebianca.be/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://artebianca.be/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://artebianca.be/"/>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://artebianca.be/nl/tisselt-willebroek/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://artebianca.be/tisselt-willebroek/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://artebianca.be/nl/tisselt-willebroek/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://artebianca.be/tisselt-willebroek/"/>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://artebianca.be/nl/wintam-bornem/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://artebianca.be/wintam-bornem/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://artebianca.be/nl/wintam-bornem/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://artebianca.be/wintam-bornem/"/>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://artebianca.be/nl/business-lunch/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://artebianca.be/business-lunch/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://artebianca.be/nl/business-lunch/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://artebianca.be/business-lunch/"/>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>
