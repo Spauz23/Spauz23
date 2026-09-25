@@ -3848,6 +3848,7 @@
         // (tisselt-willebroek/index.html e wintam-bornem/index.html) sono copie
         // di questo stesso file con questa costante impostata sulla propria sede:
         // saltano scelta e sede e mostrano subito il sito di quella sede.
+        const PAGE_LANG = 'it';
         const SEDE_FISSA = 'tisselt';
         const SEDE_URL = { tisselt: '/tisselt-willebroek/', wintam: '/wintam-bornem/' };
         // Su una pagina "di utilità" come /reservation/ (stessa idea di SEDE_FISSA:
@@ -3874,6 +3875,10 @@
         }
 
         function linguaPreferita() {
+            // pagine /nl/: la lingua è quella della pagina; i motori di ricerca
+            // leggono sempre la lingua della pagina (quella dichiarata in <html lang>)
+            if (PAGE_LANG !== 'it') return PAGE_LANG;
+            if (/bot|crawl|spider|slurp|lighthouse/i.test(navigator.userAgent)) return PAGE_LANG;
             let salvata = null;
             try { salvata = localStorage.getItem('abLang'); } catch (e) {}
             if (salvata && translations[salvata]) return salvata;
