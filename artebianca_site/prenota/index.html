@@ -3,8 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="google" content="notranslate">
+<!-- Google tag (gtag.js) - caricato solo dopo consenso cookie -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  window.loadGoogleAnalytics = function () {
+    if (window.gaLoaded) return;
+    window.gaLoaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-DTTDMJFXKT';
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', 'G-DTTDMJFXKT');
+  };
+</script>
 <meta name="google-site-verification" content="51fWcoKQ1t39dXkV-n5SsFrT-3MIp0PSMAEnVyAGzFk" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Arte Bianca">
+<meta property="og:title" content="Prenota un tavolo — Arte Bianca">
+<meta property="og:description" content="Prenota il tuo tavolo alla Pizzeria di Tisselt o al Ristorante di Wintam.">
+<meta property="og:url" content="https://artebianca.be/prenota/">
+<meta property="og:image" content="https://artebianca.be/img/anteprima.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://artebianca.be/img/anteprima.jpg">
 <meta name="description" content="Prenota un tavolo da Arte Bianca in un attimo: scegli la sede, Tisselt (Willebroek) o Wintam (Bornem), data, ora e numero di persone.">
 <meta name="theme-color" content="#ca8a04">
 <meta name="robots" content="index, follow">
@@ -435,5 +460,54 @@ applyTranslations();
 setMinDate();
 updateResSlots();
 </script>
+<!-- COOKIE BANNER -->
+<div id="cookieBanner" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#1a1a1a;color:#fff;padding:16px 20px;box-shadow:0 -3px 14px rgba(0,0,0,.25);font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">
+    <div style="max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:14px;justify-content:space-between;">
+        <p id="cookieText" style="margin:0;font-size:13px;line-height:1.5;flex:1;min-width:220px;color:#e5e5e5;"></p>
+        <div style="display:flex;gap:10px;flex-shrink:0;">
+            <button id="cookieReject" style="padding:9px 18px;border-radius:6px;border:1px solid #666;background:transparent;color:#fff;font-weight:600;cursor:pointer;font-size:13px;font-family:inherit;"></button>
+            <button id="cookieAccept" style="padding:9px 20px;border-radius:6px;border:none;background:#ca8a04;color:#fff;font-weight:600;cursor:pointer;font-size:13px;font-family:inherit;"></button>
+        </div>
+    </div>
+</div>
+<script>
+(function () {
+    var COOKIE_TXT = {
+        it: { text: "Utilizziamo cookie di analisi (Google Analytics) per migliorare il sito. Puoi accettarli o rifiutarli in qualsiasi momento.", accept: "Accetta", reject: "Rifiuta" },
+        en: { text: "We use analytics cookies (Google Analytics) to improve the site. You can accept or reject them at any time.", accept: "Accept", reject: "Reject" },
+        fr: { text: "Nous utilisons des cookies d'analyse (Google Analytics) pour améliorer le site. Vous pouvez les accepter ou les refuser à tout moment.", accept: "Accepter", reject: "Refuser" },
+        nl: { text: "We gebruiken analytische cookies (Google Analytics) om de site te verbeteren. U kunt ze op elk moment accepteren of weigeren.", accept: "Accepteren", reject: "Weigeren" }
+    };
+    var lang = (typeof currentLanguage !== 'undefined' && COOKIE_TXT[currentLanguage]) ? currentLanguage : ((navigator.language || 'it').slice(0, 2));
+    if (!COOKIE_TXT[lang]) lang = 'it';
+    var txt = COOKIE_TXT[lang];
+
+    var banner = document.getElementById('cookieBanner');
+    var textEl = document.getElementById('cookieText');
+    var acceptBtn = document.getElementById('cookieAccept');
+    var rejectBtn = document.getElementById('cookieReject');
+    if (textEl) textEl.textContent = txt.text;
+    if (acceptBtn) acceptBtn.textContent = txt.accept;
+    if (rejectBtn) rejectBtn.textContent = txt.reject;
+
+    var consent = localStorage.getItem('cookieConsent');
+    if (consent === 'accepted') {
+        if (window.loadGoogleAnalytics) window.loadGoogleAnalytics();
+    } else if (consent !== 'rejected') {
+        if (banner) banner.style.display = 'block';
+    }
+
+    if (acceptBtn) acceptBtn.addEventListener('click', function () {
+        localStorage.setItem('cookieConsent', 'accepted');
+        if (banner) banner.style.display = 'none';
+        if (window.loadGoogleAnalytics) window.loadGoogleAnalytics();
+    });
+    if (rejectBtn) rejectBtn.addEventListener('click', function () {
+        localStorage.setItem('cookieConsent', 'rejected');
+        if (banner) banner.style.display = 'none';
+    });
+})();
+</script>
+
 </body>
 </html>
