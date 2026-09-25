@@ -41,7 +41,7 @@ PAGES = {
     ),
     'business-lunch/': (
         'Business Lunch — Italiaanse lunch op kantoor | Arte Bianca Wintam',
-        'Italiaanse lunch op kantoor in Bornem en omgeving: Menu Pizza €16 of Menu Restaurant €21 per persoon, '
+        'Italiaanse lunch op kantoor in Bornem en omgeving: Menu Pizza €18 of Menu Restaurant €22 per persoon, '
         'warm geleverd in uw bedrijf. Vanaf 10 personen.',
         'Business Lunch — Italiaanse lunch op kantoor | Arte Bianca',
     ),

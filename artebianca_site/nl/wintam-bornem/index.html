@@ -2621,13 +2621,13 @@ Zo: 12:00-21:00</p>
                     <div class="bl-card">
                         <div class="bl-card-lbl">Menu</div>
                         <h3>Pizza</h3>
-                        <div class="bl-price">€16 <small data-i18n="blPerPerson">per persoon · btw incl.</small></div>
+                        <div class="bl-price">€18 <small data-i18n="blPerPerson">per persoon · btw incl.</small></div>
                         <p data-i18n="blPizzaDesc">Hele pizza naar keuze + dessert + drank</p>
                     </div>
                     <div class="bl-card dark">
                         <div class="bl-card-lbl">Menu</div>
                         <h3 data-i18n="blRistName">Restaurant</h3>
-                        <div class="bl-price">€21 <small data-i18n="blPerPerson">per persoon · btw incl.</small></div>
+                        <div class="bl-price">€22 <small data-i18n="blPerPerson">per persoon · btw incl.</small></div>
                         <p data-i18n="blRistDesc">Huisspecialiteit met brood + dessert + drank</p>
                     </div>
                 </div>
@@ -2639,6 +2639,8 @@ Zo: 12:00-21:00</p>
                 </ul>
                 <div class="shop-cta" style="margin-top:22px;">
                     <a id="blLink" href="/nl/business-lunch/" class="btn-shop-primary" data-i18n="blCta">💼 Vraag uw Business Lunch aan →</a>
+                    <br>
+                    <a id="blCustomWa" href="https://wa.me/32494069571" target="_blank" rel="noopener noreferrer" class="btn-shop-secondary" style="margin-top:14px;" data-i18n="blCustom">💬 Menu op maat? Stuur ons een bericht op WhatsApp</a>
                 </div>
             </div>
         </section>
@@ -2873,6 +2875,7 @@ Zo: 12:00-21:00</p>
                 restoWintam: 'RISTORANTE WINTAM',
                 resOptWintam: '🍽️ Ristorante Wintam',
                 aboutLove: 'Dall\u2019Italia, con amore.',
+                blCustom: '💬 Menu personalizzati? Scrivici su WhatsApp', blCustomMsg: 'Buongiorno, vorrei un menu personalizzato per il Business Lunch di Wintam.',
                 blSub: 'Pranzo italiano in ufficio: pizze e specialità della casa, consegnate calde nella vostra azienda.',
                 blPerPerson: 'a persona · IVA incl.', blRistName: 'Ristorante',
                 blPizzaDesc: 'Pizza intera a scelta + dolce + bevanda', blRistDesc: 'Specialità della casa con pane + dolce + bevanda',
@@ -3004,6 +3007,7 @@ Zo: 12:00-21:00</p>
                 restoWintam: 'RESTAURANT WINTAM',
                 resOptWintam: '🍽️ Restaurant Wintam',
                 aboutLove: 'From Italy, with love.',
+                blCustom: '💬 Custom menus? Message us on WhatsApp', blCustomMsg: 'Hello, I would like a custom menu for the Business Lunch in Wintam.',
                 blSub: 'Italian lunch at the office: pizzas and house specialities, delivered hot to your company.',
                 blPerPerson: 'per person · VAT incl.', blRistName: 'Restaurant',
                 blPizzaDesc: 'Whole pizza of your choice + dessert + drink', blRistDesc: 'House speciality with bread + dessert + drink',
@@ -3135,6 +3139,7 @@ Zo: 12:00-21:00</p>
                 restoWintam: 'RESTAURANT WINTAM',
                 resOptWintam: '🍽️ Restaurant Wintam',
                 aboutLove: 'D\u2019Italie, avec amour.',
+                blCustom: '💬 Menus personnalisés ? Écrivez-nous sur WhatsApp', blCustomMsg: 'Bonjour, je souhaiterais un menu personnalisé pour le Business Lunch de Wintam.',
                 blSub: 'Déjeuner italien au bureau : pizzas et spécialités de la maison, livrées chaudes dans votre entreprise.',
                 blPerPerson: 'par personne · TVA incl.', blRistName: 'Restaurant',
                 blPizzaDesc: 'Pizza entière au choix + dessert + boisson', blRistDesc: 'Spécialité de la maison avec pain + dessert + boisson',
@@ -3266,6 +3271,7 @@ Zo: 12:00-21:00</p>
                 restoWintam: 'RESTAURANT WINTAM',
                 resOptWintam: '🍽️ Restaurant Wintam',
                 aboutLove: 'Uit Itali\u00eb, met liefde.',
+                blCustom: '💬 Menu op maat? Stuur ons een bericht op WhatsApp', blCustomMsg: 'Goedendag, ik zou graag een menu op maat voor de Business Lunch in Wintam.',
                 blSub: 'Italiaanse lunch op kantoor: pizza\'s en huisspecialiteiten, warm geleverd bij u op het bedrijf.',
                 blPerPerson: 'per persoon · btw incl.', blRistName: 'Restaurant',
                 blPizzaDesc: 'Hele pizza naar keuze + dessert + drank', blRistDesc: 'Huisspecialiteit met brood + dessert + drank',
@@ -3951,6 +3957,8 @@ Zo: 12:00-21:00</p>
             document.querySelectorAll('.bl-only').forEach(function (el) { el.classList.toggle('show-bl', loc === 'wintam'); });
             const blLink = document.getElementById('blLink');
             if (blLink) blLink.href = '/nl/business-lunch/?lang=' + (currentLanguage || 'it');
+            const blWa = document.getElementById('blCustomWa');
+            if (blWa) blWa.href = 'https://wa.me/32494069571?text=' + encodeURIComponent(t('blCustomMsg'));
             renderNavigation();
             // il modulo di prenotazione parte dalla sede che si sta guardando
             const resLoc = document.getElementById('resLoc');
