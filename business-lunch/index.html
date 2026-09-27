@@ -23,14 +23,14 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Arte Bianca">
 <meta property="og:title" content="Business Lunch — Pranzo italiano in ufficio | Arte Bianca Wintam">
-<meta property="og:description" content="Menu Pizza €18 o Ristorante €22 a persona, consegnati caldi in azienda. Minimo 10 persone, Bornem e dintorni.">
+<meta property="og:description" content="Menu Pizza €18 o Ristorante €22 a persona, da ritirare caldi nel nostro ristorante di Wintam. Minimo 10 persone.">
 <meta property="og:url" content="https://artebianca.be/business-lunch/">
 <meta property="og:image" content="https://artebianca.be/img/anteprima.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://artebianca.be/img/anteprima.jpg">
-<meta name="description" content="Business lunch Arte Bianca a Wintam (Bornem): pranzo italiano in ufficio, menu pizza o ristorante consegnati caldi in azienda. Preventivo in 24-48 ore.">
+<meta name="description" content="Business lunch Arte Bianca a Wintam (Bornem): pranzo italiano per l'ufficio, menu pizza o ristorante da ritirare caldi nel nostro ristorante. Prenotazione 24-48 ore prima.">
 <meta name="theme-color" content="#7c2d12">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://artebianca.be/business-lunch/">
@@ -218,9 +218,9 @@ footer a:hover { text-decoration: underline; }
 </div>
 
 <div class="hero">
-    <div class="hero-eyebrow" data-i18n="heroEyebrow">Catering aziendale · Wintam</div>
+    <div class="hero-eyebrow" data-i18n="heroEyebrow">Pranzo aziendale da asporto · Wintam</div>
     <h1 data-i18n-html="heroTitle">Pranzo italiano <em>in ufficio.</em></h1>
-    <p data-i18n="heroText">Pizze artigianali e specialità della casa, preparate al momento e consegnate calde direttamente nella vostra azienda. Un'unica fattura, zero pensieri.</p>
+    <p data-i18n="heroText">Pizze artigianali e specialità della casa, preparate al momento e pronte da ritirare calde nel nostro ristorante di Wintam. Un'unica fattura, zero pensieri.</p>
 </div>
 
 <main>
@@ -302,11 +302,11 @@ footer a:hover { text-decoration: underline; }
     <form novalidate onsubmit="return handleCatering(event)">
         <div class="row2">
             <div class="field">
-                <label data-i18n="lblDate">Data di consegna *</label>
+                <label data-i18n="lblDate">Data di ritiro *</label>
                 <input type="date" id="blData" required onchange="controllaGiorno()">
             </div>
             <div class="field">
-                <label data-i18n="lblSlot">Fascia oraria *</label>
+                <label data-i18n="lblSlot">Orario di ritiro *</label>
                 <select id="blFascia" required>
                     <option value="" data-i18n="optChoose">-- Scegli --</option>
                     <option value="11:30-12:15">11:30 – 12:15</option>
@@ -351,7 +351,7 @@ footer a:hover { text-decoration: underline; }
 
         <div class="field">
             <label data-i18n="lblNotes">Note, allergie o richieste particolari</label>
-            <textarea id="blNote" rows="3" data-i18n-ph="phNotes" placeholder="Es. una persona celiaca, una intolleranza al lattosio, consegna al 2° piano..."></textarea>
+            <textarea id="blNote" rows="3" data-i18n-ph="phNotes" placeholder="Es. una persona celiaca, una intolleranza al lattosio, confezioni separate..."></textarea>
         </div>
 
         <h3 class="form-subtitle" data-i18n="clientTitle">Dati dell'azienda</h3>
@@ -473,9 +473,9 @@ const TRAD = {
         soonBadge: 'Stiamo arrivando',
         soonText: 'Il ristorante di Wintam non è ancora aperto: il servizio Business Lunch sarà attivo dall\'inaugurazione. Puoi già consultare menu e prezzi. Per informazioni o pre-accordi scrivici su <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a> al +32 494 06 95 71.',
         waInfoMsg: 'Buongiorno, vorrei informazioni sul servizio Business Lunch di Wintam.',
-        heroEyebrow: 'Catering aziendale · Wintam',
+        heroEyebrow: 'Pranzo aziendale da asporto · Wintam',
         heroTitle: 'Pranzo italiano <em>in ufficio.</em>',
-        heroText: 'Pizze artigianali e specialità della casa, preparate al momento e consegnate calde direttamente nella vostra azienda. Un\'unica fattura, zero pensieri.',
+        heroText: 'Pizze artigianali e specialità della casa, preparate al momento e pronte da ritirare calde nel nostro ristorante di Wintam. Un\'unica fattura, zero pensieri.',
         priceP: '<b>€18</b> a persona · IVA incl.',
         priceR: '<b>€22</b> a persona · IVA incl.',
         cardRist: 'Ristorante',
@@ -502,7 +502,7 @@ const TRAD = {
         cityAntwerp: 'Anversa', cityBrussels: 'Bruxelles',
         formTitle: 'Richiedi il tuo Business Lunch',
         formSub: 'Compila il modulo, ricevi conferma e fattura direttamente dal locale.',
-        lblDate: 'Data di consegna *', lblSlot: 'Fascia oraria *', optChoose: '-- Scegli --',
+        lblDate: 'Data di ritiro *', lblSlot: 'Orario di ritiro *', optChoose: '-- Scegli --',
         lblPersons: 'Numero totale di persone *',
         helpPersons: 'Minimo 10 persone. Poi scegli per ognuna un piatto principale, un dolce e una bevanda.',
         pick1: '1 · Piatto principale', pick2: '2 · Dolce', pick3: '3 · Bevanda',
@@ -511,7 +511,7 @@ const TRAD = {
         help3: 'Inclusa nel menu, una a persona.',
         grpRist: 'Menu Ristorante · €22',
         lblNotes: 'Note, allergie o richieste particolari',
-        phNotes: 'Es. una persona celiaca, una intolleranza al lattosio, consegna al 2° piano...',
+        phNotes: 'Es. una persona celiaca, una intolleranza al lattosio, confezioni separate...',
         clientTitle: 'Dati dell\'azienda',
         lblCompany: 'Nome azienda *', lblContact: 'Persona di riferimento *', lblPhone: 'Telefono *',
         submit: 'Invia Richiesta',
@@ -525,7 +525,7 @@ const TRAD = {
         person: 'persona', people: 'persone', min10: 'minimo 10',
         chkMains: 'Piatti principali {a} su {n}', chkDesserts: 'Dolci {a} su {n}', chkDrinks: 'Bevande {a} su {n}',
         setPersons: 'Indica prima il numero totale di persone.',
-        noDelivery: 'Il {g} non facciamo consegne. Scegli lunedì, martedì, giovedì, venerdì o sabato.',
+        noDelivery: 'Il {g} il servizio non è disponibile. Scegli lunedì, martedì, giovedì, venerdì o sabato.',
         errCaptcha: 'Conferma di non essere un robot prima di inviare la richiesta.',
         footHome: '🏠 Home',
         lblVat: 'Partita IVA (facoltativa)', lblStreet: 'Indirizzo azienda (via e numero) *', lblZip: 'CAP *', lblCity: 'Comune *',
@@ -555,9 +555,9 @@ const TRAD = {
         soonBadge: 'Coming soon',
         soonText: 'The Wintam restaurant is not open yet: the Business Lunch service will start at the opening. You can already browse the menus and prices. For information or to arrange in advance, message us on <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a> at +32 494 06 95 71.',
         waInfoMsg: 'Hello, I would like information about the Business Lunch service in Wintam.',
-        heroEyebrow: 'Corporate catering · Wintam',
+        heroEyebrow: 'Business lunch to take away · Wintam',
         heroTitle: 'Italian lunch <em>at the office.</em>',
-        heroText: 'Artisan pizzas and house specialities, freshly made and delivered hot straight to your company. One single invoice, no hassle.',
+        heroText: 'Artisan pizzas and house specialities, freshly made and ready to pick up hot at our restaurant in Wintam. One single invoice, no hassle.',
         priceP: '<b>€18</b> per person · VAT incl.',
         priceR: '<b>€22</b> per person · VAT incl.',
         cardRist: 'Restaurant',
@@ -584,7 +584,7 @@ const TRAD = {
         cityAntwerp: 'Antwerp', cityBrussels: 'Brussels',
         formTitle: 'Request your Business Lunch',
         formSub: 'Fill in the form and receive confirmation and invoice directly from the restaurant.',
-        lblDate: 'Delivery date *', lblSlot: 'Time slot *', optChoose: '-- Choose --',
+        lblDate: 'Pickup date *', lblSlot: 'Pickup time *', optChoose: '-- Choose --',
         lblPersons: 'Total number of people *',
         helpPersons: 'Minimum 10 people. Then choose a main course, a dessert and a drink for each person.',
         pick1: '1 · Main course', pick2: '2 · Dessert', pick3: '3 · Drink',
@@ -593,7 +593,7 @@ const TRAD = {
         help3: 'Included in the menu, one per person.',
         grpRist: 'Restaurant Menu · €22',
         lblNotes: 'Notes, allergies or special requests',
-        phNotes: 'E.g. one person is coeliac, one lactose intolerance, delivery to the 2nd floor...',
+        phNotes: 'E.g. one person is coeliac, one lactose intolerance, separate packaging...',
         clientTitle: 'Company details',
         lblCompany: 'Company name *', lblContact: 'Contact person *', lblPhone: 'Phone *',
         submit: 'Send request',
@@ -607,7 +607,7 @@ const TRAD = {
         person: 'person', people: 'people', min10: 'minimum 10',
         chkMains: 'Mains {a} of {n}', chkDesserts: 'Desserts {a} of {n}', chkDrinks: 'Drinks {a} of {n}',
         setPersons: 'First enter the total number of people.',
-        noDelivery: 'We do not deliver on {g}. Please choose Monday, Tuesday, Thursday, Friday or Saturday.',
+        noDelivery: 'The service is not available on {g}. Please choose Monday, Tuesday, Thursday, Friday or Saturday.',
         errCaptcha: 'Please confirm you are not a robot before sending the request.',
         footHome: '🏠 Home',
         lblVat: 'VAT number (optional)', lblStreet: 'Company address (street and number) *', lblZip: 'Postcode *', lblCity: 'Town *',
@@ -637,9 +637,9 @@ const TRAD = {
         soonBadge: 'Bientôt ouvert',
         soonText: 'Le restaurant de Wintam n\'est pas encore ouvert : le service Business Lunch démarrera à l\'inauguration. Vous pouvez déjà consulter les menus et les prix. Pour toute information ou pour convenir d\'une date, écrivez-nous sur <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a> au +32 494 06 95 71.',
         waInfoMsg: 'Bonjour, je souhaiterais des informations sur le service Business Lunch de Wintam.',
-        heroEyebrow: 'Traiteur d\'entreprise · Wintam',
+        heroEyebrow: 'Déjeuner d\'entreprise à emporter · Wintam',
         heroTitle: 'Déjeuner italien <em>au bureau.</em>',
-        heroText: 'Pizzas artisanales et spécialités de la maison, préparées à la minute et livrées chaudes directement dans votre entreprise. Une seule facture, zéro souci.',
+        heroText: 'Pizzas artisanales et spécialités de la maison, préparées à la minute et prêtes à être retirées chaudes dans notre restaurant de Wintam. Une seule facture, zéro souci.',
         priceP: '<b>18 €</b> par personne · TVA incl.',
         priceR: '<b>22 €</b> par personne · TVA incl.',
         cardRist: 'Restaurant',
@@ -666,7 +666,7 @@ const TRAD = {
         cityAntwerp: 'Anvers', cityBrussels: 'Bruxelles',
         formTitle: 'Demandez votre Business Lunch',
         formSub: 'Remplissez le formulaire et recevez la confirmation et la facture directement du restaurant.',
-        lblDate: 'Date de livraison *', lblSlot: 'Créneau horaire *', optChoose: '-- Choisir --',
+        lblDate: 'Date de retrait *', lblSlot: 'Heure de retrait *', optChoose: '-- Choisir --',
         lblPersons: 'Nombre total de personnes *',
         helpPersons: 'Minimum 10 personnes. Choisissez ensuite pour chacune un plat, un dessert et une boisson.',
         pick1: '1 · Plat principal', pick2: '2 · Dessert', pick3: '3 · Boisson',
@@ -675,7 +675,7 @@ const TRAD = {
         help3: 'Incluse dans le menu, une par personne.',
         grpRist: 'Menu Restaurant · 22 €',
         lblNotes: 'Remarques, allergies ou demandes particulières',
-        phNotes: 'Ex. une personne cœliaque, une intolérance au lactose, livraison au 2e étage...',
+        phNotes: 'Ex. une personne cœliaque, une intolérance au lactose, emballages séparés...',
         clientTitle: 'Coordonnées de l\'entreprise',
         lblCompany: 'Nom de l\'entreprise *', lblContact: 'Personne de contact *', lblPhone: 'Téléphone *',
         submit: 'Envoyer la demande',
@@ -689,7 +689,7 @@ const TRAD = {
         person: 'personne', people: 'personnes', min10: 'minimum 10',
         chkMains: 'Plats {a} sur {n}', chkDesserts: 'Desserts {a} sur {n}', chkDrinks: 'Boissons {a} sur {n}',
         setPersons: 'Indiquez d\'abord le nombre total de personnes.',
-        noDelivery: 'Nous ne livrons pas le {g}. Choisissez lundi, mardi, jeudi, vendredi ou samedi.',
+        noDelivery: 'Le service n\'est pas disponible le {g}. Choisissez lundi, mardi, jeudi, vendredi ou samedi.',
         errCaptcha: 'Merci de confirmer que vous n\'êtes pas un robot avant d\'envoyer la demande.',
         footHome: '🏠 Accueil',
         lblVat: 'Numéro de TVA (facultatif)', lblStreet: 'Adresse de l\'entreprise (rue et numéro) *', lblZip: 'Code postal *', lblCity: 'Commune *',
@@ -719,9 +719,9 @@ const TRAD = {
         soonBadge: 'Binnenkort open',
         soonText: 'Het restaurant in Wintam is nog niet open: de Business Lunch-service start bij de opening. U kunt de menu\'s en prijzen al bekijken. Voor informatie of om vooraf iets af te spreken, stuur ons een bericht op <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a>: +32 494 06 95 71.',
         waInfoMsg: 'Goedendag, ik zou graag informatie krijgen over de Business Lunch-service in Wintam.',
-        heroEyebrow: 'Bedrijfscatering · Wintam',
+        heroEyebrow: 'Bedrijfslunch om af te halen · Wintam',
         heroTitle: 'Italiaanse lunch <em>op kantoor.</em>',
-        heroText: 'Ambachtelijke pizza\'s en huisspecialiteiten, vers bereid en warm geleverd bij u op het bedrijf. Eén factuur, geen zorgen.',
+        heroText: 'Ambachtelijke pizza\'s en huisspecialiteiten, vers bereid en warm klaar om af te halen in ons restaurant in Wintam. Eén factuur, geen zorgen.',
         priceP: '<b>€18</b> per persoon · btw incl.',
         priceR: '<b>€22</b> per persoon · btw incl.',
         cardRist: 'Restaurant',
@@ -748,7 +748,7 @@ const TRAD = {
         cityAntwerp: 'Antwerpen', cityBrussels: 'Brussel',
         formTitle: 'Vraag uw Business Lunch aan',
         formSub: 'Vul het formulier in en ontvang bevestiging en factuur rechtstreeks van het restaurant.',
-        lblDate: 'Leveringsdatum *', lblSlot: 'Tijdslot *', optChoose: '-- Kies --',
+        lblDate: 'Afhaaldatum *', lblSlot: 'Afhaaluur *', optChoose: '-- Kies --',
         lblPersons: 'Totaal aantal personen *',
         helpPersons: 'Minimum 10 personen. Kies daarna voor elke persoon een hoofdgerecht, een dessert en een drank.',
         pick1: '1 · Hoofdgerecht', pick2: '2 · Dessert', pick3: '3 · Drank',
@@ -757,7 +757,7 @@ const TRAD = {
         help3: 'Inbegrepen in het menu, één per persoon.',
         grpRist: 'Menu Restaurant · €22',
         lblNotes: 'Opmerkingen, allergieën of speciale wensen',
-        phNotes: 'Bv. één persoon met coeliakie, een lactose-intolerantie, levering op de 2e verdieping...',
+        phNotes: 'Bv. één persoon met coeliakie, een lactose-intolerantie, aparte verpakking...',
         clientTitle: 'Bedrijfsgegevens',
         lblCompany: 'Bedrijfsnaam *', lblContact: 'Contactpersoon *', lblPhone: 'Telefoon *',
         submit: 'Aanvraag versturen',
@@ -771,7 +771,7 @@ const TRAD = {
         person: 'persoon', people: 'personen', min10: 'minimum 10',
         chkMains: 'Hoofdgerechten {a} van {n}', chkDesserts: 'Desserts {a} van {n}', chkDrinks: 'Dranken {a} van {n}',
         setPersons: 'Vul eerst het totaal aantal personen in.',
-        noDelivery: 'Op {g} leveren wij niet. Kies maandag, dinsdag, donderdag, vrijdag of zaterdag.',
+        noDelivery: 'Op {g} is de service niet beschikbaar. Kies maandag, dinsdag, donderdag, vrijdag of zaterdag.',
         errCaptcha: 'Bevestig dat u geen robot bent voordat u de aanvraag verstuurt.',
         footHome: '🏠 Home',
         lblVat: 'Btw-nummer (optioneel)', lblStreet: 'Bedrijfsadres (straat en nummer) *', lblZip: 'Postcode *', lblCity: 'Gemeente *',
@@ -852,7 +852,7 @@ function logToSheet(dati) {
     } catch (e) {}
 }
 
-// Giorni di consegna: Lun(1) Mar(2) Gio(4) Ven(5) Sab(6). Niente Mer(3) e Dom(0).
+// Giorni di ritiro: Lun(1) Mar(2) Gio(4) Ven(5) Sab(6). Niente Mer(3) e Dom(0).
 const GIORNI_OK = [1, 2, 4, 5, 6];
 const NOMI_GIORNI_IT = TRAD.it.days;
 
@@ -1128,8 +1128,8 @@ function handleCatering(event) {
     dettaglio += 'Bevande: ' + dettaglioGruppo('bevande');
 
     let msg = 'BUSINESS LUNCH — Arte Bianca Wintam\n\n';
-    msg += 'Data: ' + data + ' (' + NOMI_GIORNI_IT[giorno] + ')\n';
-    msg += 'Fascia: ' + fascia + '\n';
+    msg += 'Data ritiro: ' + data + ' (' + NOMI_GIORNI_IT[giorno] + ')\n';
+    msg += 'Orario ritiro: ' + fascia + '\n';
     msg += 'Totale persone: ' + s.persone + '\n';
     msg += '\n' + dettaglio + '\n\n';
     msg += 'Totale stimato: €' + s.totale + '\n';
