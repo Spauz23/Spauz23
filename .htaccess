@@ -1,0 +1,2 @@
+# Vecchio indirizzo della pagina di prenotazione
+RedirectMatch 301 ^/prenota/?$ /reservation/
