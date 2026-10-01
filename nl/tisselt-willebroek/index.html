@@ -2580,10 +2580,10 @@ Zo: 12:00-21:00</p>
                 onOrderTextW: 'gruppi, asporto, catering ed eventi. Contattaci per un menù su misura!',
                 statusOpen: '🟢 Ordinazioni aperte — puoi inviare il tuo ordine adesso!',
                 statusClosed: '🔴 Ordinazioni chiuse in questo momento. Puoi comunque preparare il carrello: si ordina dalle 15:00.',
-                statusOpenShort: '🟢 Ordinazioni aperte', statusClosedShort: '🔴 Ordinazioni chiuse in questo momento',
+                statusOpenShort: '🟢 Ordinazioni aperte', statusClosedShort: '🔴 Ordinazioni chiuse in questo momento: si aprono alle 15:00',
                 slotsToday: 'Gli orari mostrati sono quelli disponibili oggi.',
                 pickupDay: 'Giorno di ritiro *', today: 'Oggi', tomorrow: 'Domani', todayTomorrow: 'ℹ️ A Tisselt, dalle 15:00 alle 21:00, puoi ordinare online per oggi o per domani.', waPickupDay: 'Ritiro desiderato',
-                closedToday: 'Oggi siamo chiusi', noSlots: 'Nessun orario disponibile oggi',
+                closedToday: 'Oggi siamo chiusi', ordersFrom15: 'Ordinazioni aperte dalle 15:00', noSlots: 'Nessun orario disponibile oggi',
                 reservationTitle: 'Prenota un Tavolo', name: 'Nome', email: 'Email',
                 date: 'Data', time: 'Orario', persons: 'Numero Persone',
                 confirmRes: 'Conferma Prenotazione',
@@ -2713,10 +2713,10 @@ Zo: 12:00-21:00</p>
                 onOrderTextW: 'groups, takeaway, catering and events. Contact us for a tailor-made menu!',
                 statusOpen: '🟢 Ordering is open — you can send your order now!',
                 statusClosed: '🔴 Ordering is currently closed. You can still fill your cart: orders open at 15:00.',
-                statusOpenShort: '🟢 Ordering open', statusClosedShort: '🔴 Ordering currently closed',
+                statusOpenShort: '🟢 Ordering open', statusClosedShort: '🔴 Ordering currently closed: it opens at 15:00',
                 slotsToday: 'The times shown are those available today.',
                 pickupDay: 'Pickup day *', today: 'Today', tomorrow: 'Tomorrow', todayTomorrow: 'ℹ️ In Tisselt, from 15:00 to 21:00, you can order online for today or tomorrow.', waPickupDay: 'Preferred pickup',
-                closedToday: 'We are closed today', noSlots: 'No times available today',
+                closedToday: 'We are closed today', ordersFrom15: 'Ordering opens at 15:00', noSlots: 'No times available today',
                 reservationTitle: 'Book a Table', name: 'Name', email: 'Email',
                 date: 'Date', time: 'Time', persons: 'Number of people',
                 confirmRes: 'Confirm Booking',
@@ -2846,10 +2846,10 @@ Zo: 12:00-21:00</p>
                 onOrderTextW: 'groupes, à emporter, traiteur et événements. Contactez-nous pour un menu sur mesure !',
                 statusOpen: '🟢 Commandes ouvertes — vous pouvez envoyer votre commande maintenant !',
                 statusClosed: '🔴 Commandes fermées en ce moment. Vous pouvez préparer votre panier : les commandes ouvrent dès 15:00.',
-                statusOpenShort: '🟢 Commandes ouvertes', statusClosedShort: '🔴 Commandes fermées en ce moment',
+                statusOpenShort: '🟢 Commandes ouvertes', statusClosedShort: '🔴 Commandes fermées en ce moment : ouverture à 15:00',
                 slotsToday: 'Les horaires affichés sont ceux disponibles aujourd\'hui.',
                 pickupDay: 'Jour de retrait *', today: "Aujourd'hui", tomorrow: 'Demain', todayTomorrow: "ℹ️ À Tisselt, de 15:00 à 21:00, vous pouvez commander en ligne pour aujourd'hui ou pour demain.", waPickupDay: 'Retrait souhaité',
-                closedToday: 'Nous sommes fermés aujourd\'hui', noSlots: 'Aucun horaire disponible aujourd\'hui',
+                closedToday: 'Nous sommes fermés aujourd\'hui', ordersFrom15: 'Commandes ouvertes dès 15:00', noSlots: 'Aucun horaire disponible aujourd\'hui',
                 reservationTitle: 'Réserver une table', name: 'Nom', email: 'Email',
                 date: 'Date', time: 'Heure', persons: 'Nombre de personnes',
                 confirmRes: 'Confirmer la réservation',
@@ -2979,10 +2979,10 @@ Zo: 12:00-21:00</p>
                 onOrderTextW: 'groepen, afhaalmaaltijden, catering en evenementen. Contacteer ons voor een menu op maat!',
                 statusOpen: '🟢 Bestellingen open — u kunt uw bestelling nu versturen!',
                 statusClosed: '🔴 Bestellingen momenteel gesloten. U kunt uw mandje wel klaarmaken: bestellen kan vanaf 15:00.',
-                statusOpenShort: '🟢 Bestellingen open', statusClosedShort: '🔴 Bestellingen momenteel gesloten',
+                statusOpenShort: '🟢 Bestellingen open', statusClosedShort: '🔴 Bestellingen momenteel gesloten: open vanaf 15:00',
                 slotsToday: 'De getoonde uren zijn deze die vandaag beschikbaar zijn.',
                 pickupDay: 'Afhaaldag *', today: 'Vandaag', tomorrow: 'Morgen', todayTomorrow: 'ℹ️ In Tisselt kunt u van 15:00 tot 21:00 online bestellen voor vandaag of morgen.', waPickupDay: 'Gewenste afhaling',
-                closedToday: 'Vandaag zijn wij gesloten', noSlots: 'Geen uren beschikbaar vandaag',
+                closedToday: 'Vandaag zijn wij gesloten', ordersFrom15: 'Bestellen kan vanaf 15:00', noSlots: 'Geen uren beschikbaar vandaag',
                 reservationTitle: 'Reserveer een tafel', name: 'Naam', email: 'E-mail',
                 date: 'Datum', time: 'Uur', persons: 'Aantal personen',
                 confirmRes: 'Reservatie bevestigen',
@@ -4810,7 +4810,7 @@ Zo: 12:00-21:00</p>
                 if (prima !== '' && giorni.indexOf(+prima) !== -1) dsel.value = prima;
                 box.style.display = giorni.length ? '' : 'none';
                 if (!giorni.length) {
-                    sel.innerHTML = '<option value="">' + t('noSlots') + '</option>';
+                    sel.innerHTML = '<option value="">' + t(isShopOpen(currentShop) ? 'noSlots' : 'ordersFrom15') + '</option>';
                     return;
                 }
                 off = +dsel.value;
