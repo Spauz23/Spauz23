@@ -1,0 +1,4 @@
+data/raw/
+data/btcusd_1h.csv
+__pycache__/
+.env
