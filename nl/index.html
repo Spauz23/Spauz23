@@ -4923,6 +4923,7 @@ Zo: 12:00-21:00</p>
                 fetch(url, {
                     method: 'POST',
                     mode: 'no-cors',
+                    keepalive: true,   // sul telefono l'invio continua anche quando si apre WhatsApp
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(dati)
                 }).catch(function () { /* nessun disturbo per il cliente */ });
