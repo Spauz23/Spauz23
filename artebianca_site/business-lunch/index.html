@@ -446,8 +446,12 @@ function escHtml(s) {
 }
 
 // ===== STATO APERTURA / RECAPTCHA =====
-// Come sul sito principale: finché Wintam non apre, il modulo mostra solo l'avviso.
-const WINTAM_NON_APERTO = true;
+// Come sul sito principale: fino all'apertura di Wintam (8 ottobre 2026) il modulo mostra solo l'avviso.
+const WINTAM_NON_APERTO = (function () {
+    const n = new Date();
+    const oggi = n.getFullYear() + '-' + String(n.getMonth() + 1).padStart(2, '0') + '-' + String(n.getDate()).padStart(2, '0');
+    return oggi < '2026-10-08';
+})();
 const RECAPTCHA_SITE_KEY = '6Lf368UtAAAAAE29y7MD35wVbnn3ygFHNzM2WyMh';
 let recaptchaWidgetId = null;
 
