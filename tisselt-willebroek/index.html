@@ -3152,6 +3152,15 @@
         }
 
         // aggiorna la tendina degli orari in base a locale e data scelti
+        // Wintam apre l'8 ottobre 2026: prima di quel giorno niente asporto,
+        // e le prenotazioni si possono fare solo a partire dall'apertura
+        function wintamApertura() { return '2026-10-08'; }
+        function oggiIso() {
+            const n = new Date();
+            return n.getFullYear() + '-' + String(n.getMonth() + 1).padStart(2, '0') + '-' + String(n.getDate()).padStart(2, '0');
+        }
+        function wintamAperto() { return oggiIso() >= wintamApertura(); }
+
         function updateResSlots() {
             const selLoc = document.getElementById('resLoc');
             const selDate = document.getElementById('resDate');
@@ -3160,6 +3169,14 @@
             if (!selLoc || !selDate || !selTime) return;
 
             const loc = selLoc.value || 'tisselt';
+
+            // Wintam: si prenota solo dal giorno di apertura
+
+            const minimo = (loc === 'wintam' && !wintamAperto()) ? wintamApertura() : oggiIso();
+
+            selDate.min = minimo;
+
+            if (selDate.value && selDate.value < minimo) selDate.value = minimo;
             selTime.innerHTML = '<option value="">' + t('chooseTime') + '</option>';
             if (warn) { warn.classList.remove('show'); warn.textContent = ''; }
 
@@ -3213,6 +3230,7 @@
 
         // verifica che data e ora cadano davvero in orario di servizio
         function orarioValido(loc, dataStr, oraStr) {
+            if (loc === 'wintam' && dataStr < wintamApertura()) return { ok: false, motivo: 'ora' };
             const d = new Date(dataStr + 'T12:00:00');
             if (isNaN(d.getTime())) return { ok: false, motivo: 'data' };
 
@@ -3368,7 +3386,7 @@
                     <div class="split-section" style="background-image:url('${PHOTOS.wintamExt}');" onclick="vaiSede('wintam')">
                         <div class="split-content">
                             <img class="split-ico" src="${ICO_FORK}" alt="">
-                            <div class="soon-badge">${t('comingSoon')}</div>
+                            ${wintamAperto() ? '' : '<div class="soon-badge">' + t('comingSoon') + '</div>'}
                             <h2 class="split-title">${t('ristorante')}</h2>
                             <p class="split-addr">📍 ${locData.wintam.addr}</p>
                             <p class="split-subtitle">${t('wintamTitle')}</p>
@@ -4268,7 +4286,7 @@
             let html = '';
 
             // Wintam non ha ancora aperto: lo dico prima di ogni altra cosa
-            if (loc === 'wintam') {
+            if (loc === 'wintam' && !wintamAperto()) {
                 html += '<div style="background:#fee2e2;border-left:5px solid #dc2626;border-radius:8px;padding:14px 16px;margin-bottom:14px;">' +
                     '<strong style="color:#991b1b;font-size:15px;">🚧 ' + t('notOpenTitle') + '</strong><br>' +
                     '<span style="font-size:13.5px;color:#7f1d1d;line-height:1.5;">' + t('notOpenMsg') + '</span></div>';
@@ -4938,8 +4956,8 @@
             document.body.appendChild(s);
         }
 
-        // Wintam non ha ancora aperto: quando apre, basta mettere questo a false.
-        const WINTAM_NON_APERTO = true;
+        // Wintam: l'asporto si sblocca da solo dal giorno di apertura (wintamApertura).
+        const WINTAM_NON_APERTO = !wintamAperto();
 
         function sendWhatsApp() {
             if (currentShop === 'wintam' && WINTAM_NON_APERTO) {
