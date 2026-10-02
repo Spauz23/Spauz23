@@ -1,2 +1,15 @@
+RewriteEngine On
+
+# Un solo indirizzo per il sito: www.artebianca.be -> artebianca.be
+RewriteCond %{HTTP_HOST} ^www\.artebianca\.be$ [NC]
+RewriteRule ^(.*)$ https://artebianca.be/$1 [R=301,L]
+
+# /index.html (anche nelle sottocartelle) -> indirizzo della cartella
+RewriteCond %{THE_REQUEST} \s/+(\S*/)?index\.html[\s?] [NC]
+RewriteRule ^(.*/)?index\.html$ /$1 [R=301,L,NC]
+
+# Vecchie pagine per lingua (/it, /fr, /en): ora la lingua si sceglie nella home
+RedirectMatch 301 ^/(it|fr|en)(/.*)?$ /
+
 # Vecchio indirizzo della pagina di prenotazione
 RedirectMatch 301 ^/prenota/?$ /reservation/
