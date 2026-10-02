@@ -2123,7 +2123,6 @@
             display: none !important;
         }
     </style>
-<script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
 </head>
 <body class="notranslate">
     <!-- LANGUAGE SELECTION PAGE -->
@@ -3628,6 +3627,29 @@ Zo: 12:00-21:00</p>
             if (!box || typeof grecaptcha === 'undefined') return;
             recaptchaWidgetId = grecaptcha.render(box, { sitekey: RECAPTCHA_SITE_KEY });
         }
+
+        // reCAPTCHA è pesante: lo carico solo quando il modulo di prenotazione sta per comparire
+        (function caricaRecaptchaQuandoServe() {
+            if (!RECAPTCHA_SITE_KEY) return;
+            let caricato = false;
+            function carica() {
+                if (caricato) return;
+                caricato = true;
+                const s = document.createElement('script');
+                s.src = 'https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit';
+                s.async = true;
+                document.head.appendChild(s);
+            }
+            const box = document.getElementById('resCaptchaBox');
+            if (box && 'IntersectionObserver' in window) {
+                const io = new IntersectionObserver(function (voci) {
+                    if (voci.some(function (v) { return v.isIntersecting; })) { io.disconnect(); carica(); }
+                }, { rootMargin: '600px' });
+                io.observe(box);
+            } else {
+                carica();
+            }
+        })();
 
         function linguaPreferita() {
             // pagine /nl/: la lingua è quella della pagina; i motori di ricerca
