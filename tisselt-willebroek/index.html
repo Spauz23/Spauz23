@@ -769,10 +769,10 @@
         #scrollSite { display: none; }
         #scrollSite.show { display: block; }
 
-        .sec-anchor { scroll-margin-top: 118px; }
+        .sec-anchor { scroll-margin-top: calc(var(--sticky-h, 118px) + 10px); }
 
         @media (max-width: 768px) {
-            .sec-anchor { scroll-margin-top: 108px; }
+            .sec-anchor { scroll-margin-top: calc(var(--sticky-h, 108px) + 8px); }
         }
 
         .sec-divider {
@@ -814,6 +814,8 @@
             flex-wrap: wrap;
             gap: 9px;
         }
+        /* Barra della sede (con "Cambia sede") sempre visibile sotto l'intestazione */
+        .loc-banner { position: sticky; top: var(--hdr-h, 70px); z-index: 45; box-shadow: 0 4px 12px rgba(0,0,0,.18); }
         .loc-banner-ico {
             height: 21px;
             width: auto;
@@ -5046,6 +5048,26 @@
         }
 
         // ===== INIZIALIZZAZIONE =====
+
+        // altezza di intestazione + barra sede: serve alla barra fissa e agli ancoraggi delle sezioni
+        (function misuraBarreFisse() {
+            function aggiorna() {
+                const h = document.querySelector('header');
+                const b = document.getElementById('locBanner');
+                const hh = h ? h.offsetHeight : 70;
+                const bh = (b && b.offsetParent !== null) ? b.offsetHeight : 0;
+                document.documentElement.style.setProperty('--hdr-h', hh + 'px');
+                document.documentElement.style.setProperty('--sticky-h', (hh + bh) + 'px');
+            }
+            window.addEventListener('resize', aggiorna);
+            window.addEventListener('load', aggiorna);
+            if (window.ResizeObserver) {
+                const ro = new ResizeObserver(aggiorna);
+                const h = document.querySelector('header'); if (h) ro.observe(h);
+                const b = document.getElementById('locBanner'); if (b) ro.observe(b);
+            }
+            aggiorna();
+        })();
         (function initLangVideo() {
             // Il video gira solo quando la pagina lingue e' visibile
             const page = document.getElementById('languagePage');
