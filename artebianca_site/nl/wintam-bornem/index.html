@@ -2239,8 +2239,7 @@
                         <h1 id="welcomeTitle"></h1>
                         <p id="welcomeText"></p>
                         <div class="hero-cta">
-                            <button onclick="scrollToSection('menu')" data-i18n="ctaMenu">MENU</button>
-                            <button class="ghost" onclick="scrollToSection('catering')" data-i18n="ctaOrder">BESTELLEN</button>
+                            <button onclick="scrollToSection('catering')" data-i18n="ctaOrder">BESTELLEN</button>
                             <button class="ghost" onclick="scrollToSection('reservation')" data-i18n="ctaBook">RESERVEREN</button>
                         </div>
                     </div>
@@ -2256,7 +2255,8 @@
             <section id="menu" class="page-sec sec-anchor">
             <div class="section-content">
                 <h2 class="section-title" data-i18n="menuTitle">MENU</h2>
-                <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:30px;">
+                <!-- ogni sede mostra solo il proprio menù: schede nascoste -->
+                <div style="display:none;">
                     <button class="menu-tab" id="tabTisselt" onclick="setMenuTab('tisselt')">🍕 <span data-i18n="menuTisselt">Menu Tisselt</span></button>
                     <button class="menu-tab" id="tabWintam" onclick="setMenuTab('wintam')">🍽️ <span data-i18n="menuWintam">Menu Wintam</span></button>
                 </div>
