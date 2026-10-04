@@ -744,6 +744,30 @@
 
         #splitHero { display: block; }
 
+        /* Cornice che separa le due sedi nella home */
+        .split-screen { gap: 18px; padding: 18px; background: #14110c; }
+        .split-section {
+            border: 2px solid #ca8a04 !important;
+            border-radius: 16px;
+            box-shadow: 0 0 0 5px rgba(202,138,4,.18), 0 12px 30px rgba(0,0,0,.35);
+        }
+        .split-section::after {
+            content: '';
+            position: absolute;
+            inset: 9px;
+            border: 1px solid rgba(243,201,138,.55);
+            border-radius: 10px;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .split-section:nth-child(1):hover, .split-section:nth-child(2):hover { transform: translateY(-4px); }
+        @media (max-width: 768px) {
+            .split-screen { gap: 14px; padding: 12px; }
+            .split-section { border-radius: 14px; }
+        }
+        /* "Chi siamo" sotto le due sedi */
+        #homeAbout { background: #fff; padding: 46px 0 40px; }
+
         #scrollSite { display: none; }
         #scrollSite.show { display: block; }
 
@@ -2194,6 +2218,19 @@
         <!-- HOME -->
         <div id="splitHero">
             <div id="homeContent"></div>
+
+            <div id="homeAbout">
+            <section id="about" class="page-sec sec-anchor">
+            <div class="section-content">
+                <h2 class="section-title" data-i18n="aboutTitle">Over Ons</h2>
+                <p style="text-align:center;color:#666;font-size:16px;line-height:1.8;margin-bottom:18px;" data-i18n="aboutP1">Arte Bianca brengt de Italiaanse keuken in haar meest authentieke vorm naar België, geworteld in de culinaire traditie van Lavello, in Basilicata.</p>
+                <p style="text-align:center;color:#666;font-size:16px;line-height:1.8;margin-bottom:18px;" data-i18n="aboutP2">Alles begint bij de kwaliteit van de grondstoffen, zorgvuldig geselecteerd en van Italiaanse herkomst. Het deeg rijpt lang, voor een lichte en goed verteerbare Napolitaanse pizza.</p>
+                <p style="text-align:center;color:#666;font-size:16px;line-height:1.8;margin-bottom:25px;" data-i18n="aboutP3">In de keuken werken we met passie en respect voor het product, volgens traditionele Italiaanse recepten, elke dag vers bereid volgens klassieke methodes en zonder de makkelijke weg te kiezen. Na de Pizzeria in Tisselt, geopend in juni 2025, openen we op 8 oktober het Restaurant &amp; Pizzeria in Wintam: twee zaken, één keukenfilosofie.</p>
+                <p style="text-align:center;color:#ca8a04;font-size:17px;font-style:italic;font-weight:bold;" data-i18n="aboutMotto">Italiaanse grondstoffen, techniek en traditie.</p>
+                <p style="text-align:center;color:#ca8a04;font-family:Georgia,'Times New Roman',serif;font-size:26px;font-style:italic;line-height:1.3;margin-top:10px;" data-i18n="aboutLove">Uit Italië, met liefde.</p>
+            </div>
+        </section>
+            </div>
         </div>
 
         <div id="scrollSite">
@@ -2455,17 +2492,6 @@ Zo: 12:00-21:00</p>
             </div>
         </section>
 
-        <div class="sec-divider"></div>
-            <section id="about" class="page-sec sec-anchor">
-            <div class="section-content">
-                <h2 class="section-title" data-i18n="aboutTitle">Over Ons</h2>
-                <p style="text-align:center;color:#666;font-size:16px;line-height:1.8;margin-bottom:18px;" data-i18n="aboutP1">Arte Bianca brengt de Italiaanse keuken in haar meest authentieke vorm naar België, geworteld in de culinaire traditie van Lavello, in Basilicata.</p>
-                <p style="text-align:center;color:#666;font-size:16px;line-height:1.8;margin-bottom:18px;" data-i18n="aboutP2">Alles begint bij de kwaliteit van de grondstoffen, zorgvuldig geselecteerd en van Italiaanse herkomst. Het deeg rijpt lang, voor een lichte en goed verteerbare Napolitaanse pizza.</p>
-                <p style="text-align:center;color:#666;font-size:16px;line-height:1.8;margin-bottom:25px;" data-i18n="aboutP3">In de keuken werken we met passie en respect voor het product, volgens traditionele Italiaanse recepten, elke dag vers bereid volgens klassieke methodes en zonder de makkelijke weg te kiezen. Na de Pizzeria in Tisselt, geopend in juni 2025, openen we op 8 oktober het Restaurant &amp; Pizzeria in Wintam: twee zaken, één keukenfilosofie.</p>
-                <p style="text-align:center;color:#ca8a04;font-size:17px;font-style:italic;font-weight:bold;" data-i18n="aboutMotto">Italiaanse grondstoffen, techniek en traditie.</p>
-                <p style="text-align:center;color:#ca8a04;font-family:Georgia,'Times New Roman',serif;font-size:26px;font-style:italic;line-height:1.3;margin-top:10px;" data-i18n="aboutLove">Uit Italië, met liefde.</p>
-            </div>
-        </section>
 
         <!-- CONTACT -->
         <div class="sec-divider"></div>
@@ -3131,7 +3157,6 @@ Zo: 12:00-21:00</p>
                 ...(activeLocation === 'wintam' ? [{ id: 'businesslunch', label: 'Business Lunch' }] : []),
                 { id: 'reservation', label: t('reservation') },
                 { id: 'shop', label: t('shop') },
-                { id: 'about', label: t('about') },
                 { id: 'gallery', label: t('gallery') }
             ];
 
