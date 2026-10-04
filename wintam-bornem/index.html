@@ -406,7 +406,8 @@
             transition: background .25s ease, border-color .25s ease;
         }
         .split-social a:hover { background: #ca8a04; border-color: #ca8a04; }
-        .split-social a { width: 46px; height: 46px; padding: 0 !important; display: inline-flex !important; align-items: center; justify-content: center; font-size: 21px !important; line-height: 1; border-radius: 50%; }
+        .split-social a { width: 46px; height: 46px; padding: 0 !important; display: inline-flex !important; align-items: center; justify-content: center; font-size: 21px !important; line-height: 1; border-radius: 50%; transition: transform .18s ease, background .18s; -webkit-touch-callout: none; }
+        .split-social a:hover, .split-social a:active, .split-social a:focus-visible { transform: scale(1.3); }
 
         .split-emoji {
             font-size: 60px;
@@ -3392,10 +3393,10 @@
                             <p class="split-subtitle">${t('tiseltTitle')}</p>
                             <div class="split-hours">${t('tiseltHours')}</div>
                             <div class="split-social" onclick="event.stopPropagation();">
-                                <a href="${locData.tisselt.ig}" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">📸</a>
-                                <a href="${locData.tisselt.fb}" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook">📘</a>
-                                <a href="tel:+${locData.tisselt.tel}" title="${t('call')}" aria-label="${t('call')}">📞</a>
-                                <a href="${locData.tisselt.maps}" target="_blank" rel="noopener noreferrer" title="Google Maps" aria-label="Google Maps">📍</a>
+                                <a href="${locData.tisselt.ig}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">📸</a>
+                                <a href="${locData.tisselt.fb}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">📘</a>
+                                <a href="tel:+${locData.tisselt.tel}" aria-label="${t('call')}">📞</a>
+                                <a href="${locData.tisselt.maps}" target="_blank" rel="noopener noreferrer" aria-label="Google Maps">📍</a>
                             </div>
                             <button class="btn" onclick="event.stopPropagation(); vaiSede('tisselt');">${t('discover')}</button>
                         </div>
@@ -3409,11 +3410,11 @@
                             <p class="split-subtitle">${t('wintamTitle')}</p>
                             <div class="split-hours">${t('wintamHours')}</div>
                             <div class="split-social" onclick="event.stopPropagation();">
-                                <a href="${locData.wintam.ig}" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">📸</a>
-                                <a href="${locData.wintam.fb}" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook">📘</a>
-                                <a href="tel:+${locData.wintam.tel}" title="${t('call')}" aria-label="${t('call')}">📞</a>
-                                <a href="${locData.wintam.maps}" target="_blank" rel="noopener noreferrer" title="Google Maps" aria-label="Google Maps">📍</a>
-                                <a href="/business-lunch/?lang=${currentLanguage}" title="Business Lunch" aria-label="Business Lunch">💼</a>
+                                <a href="${locData.wintam.ig}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">📸</a>
+                                <a href="${locData.wintam.fb}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">📘</a>
+                                <a href="tel:+${locData.wintam.tel}" aria-label="${t('call')}">📞</a>
+                                <a href="${locData.wintam.maps}" target="_blank" rel="noopener noreferrer" aria-label="Google Maps">📍</a>
+                                <a href="/business-lunch/?lang=${currentLanguage}" aria-label="Business Lunch">💼</a>
                             </div>
                             <button class="btn" onclick="event.stopPropagation(); vaiSede('wintam');">${t('discover')}</button>
                         </div>
