@@ -2248,10 +2248,6 @@
                     <div class="scroll-hint">⌄</div>
                 </div>
 
-                <div class="section-content" style="text-align:center;padding-top:35px;">
-                    <div id="welcomeInfo" class="info-tiles"></div>
-                    <div id="welcomeNote"></div>
-                </div>
             </section>
             <div class="sec-divider"></div>
 
@@ -3789,7 +3785,9 @@
             document.getElementById('welcomeText').textContent =
                 loc === 'tisselt' ? t('tiseltTitle') : t('wintamTitle');
 
-            document.getElementById('welcomeInfo').innerHTML =
+            // orari e collegamenti tolti dalla pagina della sede: dopo la foto si va dritti al menù
+            const wi = document.getElementById('welcomeInfo');
+            if (wi) wi.innerHTML =
                 '<div class="info-tile wide hours-tile">' +
                     '<span class="it-ico">🕐</span><span>' +
                         '<h3>' + t('hours') + '</h3>' +
