@@ -208,3 +208,13 @@ html { background: var(--av-bg); }
 }
 
 .hero-cta button:hover { background: #F2E6CC; color: var(--av-ink); text-shadow: none; }
+
+/* iPhone: i campi data/ora non devono uscire dalla colonna */
+.row2 { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; }
+.row2 > *, .row2 input, .row2 select { min-width: 0; max-width: 100%; }
+input[type=date], input[type=time] {
+    -webkit-appearance: none; appearance: none;
+    min-width: 0; max-width: 100%; display: block;
+    min-height: 44px; line-height: 1.3; text-align: left;
+}
+input[type=date]::-webkit-date-and-time-value { text-align: left; }
