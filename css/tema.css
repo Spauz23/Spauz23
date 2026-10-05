@@ -235,9 +235,15 @@ input[type=date]::-webkit-date-and-time-value { text-align: left; }
 .gal-title-link a:hover, .gal-title-link a:active { color: var(--av-acc); }
 #shop .gal-title-link { margin-bottom: 46px; }
 
-/* Footer uguale su tutte le pagine (indirizzi con link a Google Maps) */
-.ab-footer { background: var(--av-ink) !important; color: #BDB2A6 !important; text-align: center; padding: 40px 20px !important; margin-top: 50px; font-size: 15px !important; }
-.ab-footer .footer-logo { display: block; width: 100%; max-width: 230px; height: auto; margin: 0 auto 6px; }
-.ab-footer .footer-text { color: #BDB2A6; margin: 4px 0; line-height: 1.6; font-size: 15px !important; }
+/* Footer uguale su tutte le pagine: sedi, Maps, telefoni e link, compatto */
+footer, .ab-footer { background: var(--av-ink) !important; color: #BDB2A6 !important; text-align: center; padding: 26px 16px 22px !important; margin-top: 40px !important; }
+.ab-footer .footer-logo { display: block; width: 100%; max-width: 200px; height: auto; margin: 0 auto 12px; }
+.ab-footer .footer-text { color: #BDB2A6; margin: 0 0 9px; line-height: 1.45; font-size: 13.5px !important; }
 .ab-footer a { color: #ca8a04 !important; text-decoration: none; }
 .ab-footer a:hover { text-decoration: underline; }
+.ab-footer a.fv { color: #F5F0EA !important; font-weight: 700; letter-spacing: .3px; }
+.ab-footer .footer-links { margin: 12px 0 8px; font-size: 11.5px; letter-spacing: 1.2px; line-height: 1.8; }
+.ab-footer .footer-links a { color: #E2B86A !important; }
+.ab-footer .footer-copy { margin: 0; font-size: 12px !important; opacity: .8; }
+.ab-footer .footer-text a { white-space: nowrap; }
+.ab-footer .nw { white-space: nowrap; }
