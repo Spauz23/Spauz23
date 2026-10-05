@@ -192,7 +192,7 @@ html { background: var(--av-bg); }
 .breadcrumb a, a.back-link, .shop-back a { color: var(--av-acc); }
 #backLink { color: var(--av-acc) !important; }
 
-/* Home: SCOPRI avorio, sopra i mini-collegamenti */
-.split-section .btn { background: var(--av-bg); color: var(--av-ink); margin: 6px 0 4px; }
-.split-section .btn:hover { background: #F6EEDF; color: var(--av-acc); }
+/* Home: SCOPRI crema burro al 50%, sopra i mini-collegamenti */
+.split-section .btn { background: rgba(242,230,204,.5); color: var(--av-ink); margin: 6px 0 4px; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.split-section .btn:hover { background: rgba(242,230,204,.8); color: var(--av-ink); }
 .split-section .split-social { margin-top: 14px !important; }
