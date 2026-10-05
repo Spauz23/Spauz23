@@ -113,6 +113,10 @@ function esegui(p) {
       });
       return { ordini: ultimeRighe(f, 'Ordini', 40) };
 
+    case 'prenotazioneElimina':
+      eliminaPrenotazione(f, Number(p.riga), p.cliente || '', p.data || '', p.ora || '');
+      return { prenotazioni: ultimeRighe(f, 'Prenotazioni', 40) };
+
     case 'prenotazioneAggiungi':
       scriviPrenotazione(f, {
         locale: '📞 Telefono',
@@ -197,7 +201,34 @@ function ultimeRighe(f, nome, quante) {
   var righe = s.getRange(da, 1, n, s.getLastColumn()).getDisplayValues();
   righe.reverse();
 
-  return { intestazioni: intest, righe: righe, totale: totale, primaRiga: da };
+  // numero di riga nel foglio di ogni elemento (serve per eliminare)
+  var numeri = [];
+  for (var r = s.getLastRow(); r >= da; r--) numeri.push(r);
+
+  return { intestazioni: intest, righe: righe, numeri: numeri, totale: totale, primaRiga: da };
+}
+
+
+/* ============ ELIMINA PRENOTAZIONE (cliente che disdice) ============ */
+
+// Per sicurezza controlla che la riga sia ancora quella vista nel pannello
+// (nome, data e ora uguali): se nel frattempo la lista è cambiata non tocca nulla.
+function eliminaPrenotazione(f, riga, cliente, data, ora) {
+  var lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    var s = f.getSheetByName('Prenotazioni');
+    if (!s || !(riga >= 2) || riga > s.getLastRow()) throw 'Prenotazione non trovata: aggiorna la pagina.';
+    var intest = s.getRange(1, 1, 1, s.getLastColumn()).getDisplayValues()[0];
+    var v = s.getRange(riga, 1, 1, s.getLastColumn()).getDisplayValues()[0];
+    var c = intest.indexOf('Cliente'), d = intest.indexOf('Data'), o = intest.indexOf('Ora');
+    if (c < 0 || d < 0 || o < 0 || v[c] !== cliente || v[d] !== data || v[o] !== ora) {
+      throw 'La lista è cambiata: aggiorna la pagina e riprova.';
+    }
+    s.deleteRow(riga);
+  } finally {
+    lock.releaseLock();
+  }
 }
 
 

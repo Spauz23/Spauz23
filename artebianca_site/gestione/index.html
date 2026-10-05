@@ -124,6 +124,12 @@ th {
 td { padding:9px 10px; border-bottom:1px solid #26231c; vertical-align:top; }
 tr:last-child td { border-bottom:none; }
 td.wrap { white-space:pre-line; min-width:180px; }
+td.azioni { width:1%; white-space:nowrap; }
+.btn-del {
+    background:none; border:1px solid #7f1d1d; color:#f87171; border-radius:6px;
+    padding:3px 8px; cursor:pointer; font-size:13px; line-height:1.2;
+}
+.btn-del:hover, .btn-del:active { background:#7f1d1d; color:#fff; }
 
 /* ---- bacheca ---- */
 .nota { border-bottom:1px solid #26231c; padding:11px 0; display:flex; gap:11px; align-items:flex-start; }
@@ -258,7 +264,7 @@ td.wrap { white-space:pre-line; min-width:180px; }
                     <input class="campo" id="mpCliente" placeholder="Nome cliente" data-tg-ph="phNomeCliente">
                     <input class="campo" id="mpTelefono" placeholder="Telefono" type="tel" data-tg-ph="phTelefono">
                     <input class="campo" id="mpData" type="date">
-                    <input class="campo" id="mpOra" placeholder="Ora (es. 20:00)" data-tg-ph="phOraEsempio">
+                    <input class="campo" id="mpOra" type="time" aria-label="Ora">
                     <input class="campo" id="mpPersone" placeholder="Persone" type="number" min="1" data-tg-ph="phPersone">
                     <input class="campo" id="mpEmail" placeholder="Email (facoltativa)" type="email" data-tg-ph="phEmailFacolt">
                 </div>
@@ -287,7 +293,7 @@ td.wrap { white-space:pre-line; min-width:180px; }
                 <div class="form-grid">
                     <input class="campo" id="moCliente" placeholder="Nome cliente" data-tg-ph="phNomeCliente">
                     <input class="campo" id="moTelefono" placeholder="Telefono" type="tel" data-tg-ph="phTelefono">
-                    <input class="campo" id="moRitiro" placeholder="Ritiro alle (es. 19:30)" data-tg-ph="phRitiroEsempio">
+                    <input class="campo" id="moRitiro" type="time" aria-label="Ritiro">
                     <input class="campo" id="moTotale" placeholder="Totale €" type="number" step="0.5" min="0" data-tg-ph="phTotale">
                 </div>
                 <textarea class="campo" id="moArticoli" rows="3" placeholder="Articoli, uno per riga (es. 2x Margherita)" data-tg-ph="phArticoliEsempio" style="resize:vertical;font-family:inherit;"></textarea>
@@ -348,7 +354,9 @@ const LANG = {
     phNoteFacolt: 'Note (facoltative)', btnAggiungiOrdine: 'AGGIUNGI ORDINE',
     erroreCampiOrd: 'Compila almeno nome, telefono, orario di ritiro e articoli.',
     salvataggio: 'Salvataggio…', parolaUltime: 'ultime', nessunDato: 'Nessun dato.',
-    titolarePrenotazioni: 'Prenotazioni', titolareOrdini: 'Ordini'
+    titolarePrenotazioni: 'Prenotazioni', titolareOrdini: 'Ordini',
+    btnElimina: 'Elimina prenotazione',
+    confermaElimina: 'Eliminare la prenotazione di {c} ({d} alle {o})? L\'operazione non si può annullare.'
   },
   en: {
     areaRiservata: 'Reserved area', phPassword: 'Password', phNome: 'Your name',
@@ -381,7 +389,9 @@ const LANG = {
     phNoteFacolt: 'Notes (optional)', btnAggiungiOrdine: 'ADD ORDER',
     erroreCampiOrd: 'Fill in at least name, phone, pickup time and items.',
     salvataggio: 'Saving…', parolaUltime: 'last', nessunDato: 'No data.',
-    titolarePrenotazioni: 'Reservations', titolareOrdini: 'Orders'
+    titolarePrenotazioni: 'Reservations', titolareOrdini: 'Orders',
+    btnElimina: 'Delete reservation',
+    confermaElimina: 'Delete the reservation of {c} ({d} at {o})? This cannot be undone.'
   },
   fr: {
     areaRiservata: 'Espace réservé', phPassword: 'Mot de passe', phNome: 'Votre nom',
@@ -414,7 +424,9 @@ const LANG = {
     phNoteFacolt: 'Notes (facultatif)', btnAggiungiOrdine: 'AJOUTER LA COMMANDE',
     erroreCampiOrd: 'Renseignez au moins nom, téléphone, heure de retrait et articles.',
     salvataggio: 'Enregistrement…', parolaUltime: 'dernières', nessunDato: 'Aucune donnée.',
-    titolarePrenotazioni: 'Réservations', titolareOrdini: 'Commandes'
+    titolarePrenotazioni: 'Réservations', titolareOrdini: 'Commandes',
+    btnElimina: 'Supprimer la réservation',
+    confermaElimina: 'Supprimer la réservation de {c} ({d} à {o}) ? Cette action est irréversible.'
   },
   nl: {
     areaRiservata: 'Beveiligde zone', phPassword: 'Wachtwoord', phNome: 'Uw naam',
@@ -447,7 +459,9 @@ const LANG = {
     phNoteFacolt: 'Notities (optioneel)', btnAggiungiOrdine: 'BESTELLING TOEVOEGEN',
     erroreCampiOrd: 'Vul minstens naam, telefoon, afhaaluur en artikelen in.',
     salvataggio: 'Opslaan…', parolaUltime: 'laatste', nessunDato: 'Geen gegevens.',
-    titolarePrenotazioni: 'Reservaties', titolareOrdini: 'Bestellingen'
+    titolarePrenotazioni: 'Reservaties', titolareOrdini: 'Bestellingen',
+    btnElimina: 'Reservatie verwijderen',
+    confermaElimina: 'De reservatie van {c} ({d} om {o}) verwijderen? Dit kan niet ongedaan worden gemaakt.'
   }
 };
 
@@ -537,7 +551,8 @@ function chiama(sede, parametri) {
             clearTimeout(timer);
             pulisci();
             if (!risposta || !risposta.ok) {
-                rifiuta(risposta && risposta.errore === 'password' ? tg('passwordErrata') : tg('erroreFoglio'));
+                rifiuta(risposta && risposta.errore === 'password' ? tg('passwordErrata')
+                    : tg('erroreFoglio') + (risposta && risposta.errore ? ': ' + risposta.errore : ''));
             } else {
                 risolvi(risposta.dati);
             }
@@ -810,21 +825,51 @@ function renderTabellaVista(idBox, idTitolo, etichetta, dati, vista, colonneData
         return;
     }
 
+    // solo le prenotazioni hanno il tasto per eliminarle (cliente che disdice)
+    const numeri = idBox === 'tabPren' ? numeriRighe(dati) : [];
+
     const risolto = risolviVista(vista);
     if (!risolto) {
-        renderTabella(idBox, dati);
+        renderTabella(idBox, dati, numeri);
         titolo.textContent = etichetta + ' — ' + tg('parolaUltime') + ' ' + dati.righe.length;
         return;
     }
 
     const col = trovaColonna(dati.intestazioni, colonneData);
-    const righeFiltrate = col === -1 ? dati.righe : dati.righe.filter(function (r) {
-        const v = String(r[col] || '');
+    const indici = dati.righe.map(function (r, i) { return i; }).filter(function (i) {
+        if (col === -1) return true;
+        const v = String(dati.righe[i][col] || '');
         return v.indexOf(risolto.iso) === 0 || v.indexOf(risolto.it) === 0;
     });
 
-    renderTabella(idBox, { intestazioni: dati.intestazioni, righe: righeFiltrate });
-    titolo.textContent = etichetta + ' (' + righeFiltrate.length + ')';
+    renderTabella(idBox, { intestazioni: dati.intestazioni, righe: indici.map(function (i) { return dati.righe[i]; }) },
+        numeri.length ? indici.map(function (i) { return numeri[i]; }) : []);
+    titolo.textContent = etichetta + ' (' + indici.length + ')';
+}
+
+// numero di riga nel foglio di ogni prenotazione mostrata (serve per eliminarla)
+function numeriRighe(dati) {
+    if (!dati || !dati.righe) return [];
+    if (dati.numeri && dati.numeri.length === dati.righe.length) return dati.numeri;
+    if (dati.primaRiga) return dati.righe.map(function (r, i) { return dati.primaRiga + dati.righe.length - 1 - i; });
+    return [];
+}
+
+function eliminaPrenotazione(numero) {
+    const d = DATI.prenotazioni;
+    const i = numeriRighe(d).indexOf(numero);
+    if (i === -1) return;
+    const r = d.righe[i];
+    const cliente = r[d.intestazioni.indexOf('Cliente')] || '';
+    const data = r[d.intestazioni.indexOf('Data')] || '';
+    const ora = r[d.intestazioni.indexOf('Ora')] || '';
+    if (!confirm(tg('confermaElimina').replace('{c}', cliente).replace('{d}', data).replace('{o}', ora))) return;
+    chiama(SEDE, { azione: 'prenotazioneElimina', riga: numero, cliente: cliente, data: data, ora: ora })
+        .then(function (res) {
+            DATI.prenotazioni = res.prenotazioni;
+            renderTabellaVista('tabPren', 'titPren', tg('titolarePrenotazioni'), DATI.prenotazioni, vistaPrenAttiva, ['Data', 'Ricevuta il']);
+        })
+        .catch(function (e) { alert(e); });
 }
 
 function apri(sez) {
@@ -911,17 +956,22 @@ function cambiaSlot(ora, chiudi) {
 }
 
 /* ---------- tabelle ---------- */
-function renderTabella(id, dati) {
+function renderTabella(id, dati, numeri) {
     const box = document.getElementById(id);
     if (!dati || !dati.righe || !dati.righe.length) {
         box.innerHTML = '<div class="vuoto">' + tg('nessunDato') + '</div>';
         return;
     }
-    let h = '<table><thead><tr>';
+    const conElimina = numeri && numeri.length === dati.righe.length;
+    let h = '<table><thead><tr>' + (conElimina ? '<th></th>' : '');
     dati.intestazioni.forEach(function (c) { h += '<th>' + esc(c) + '</th>'; });
     h += '</tr></thead><tbody>';
-    dati.righe.forEach(function (r) {
+    dati.righe.forEach(function (r, i) {
         h += '<tr>';
+        if (conElimina) {
+            h += '<td class="azioni"><button class="btn-del" title="' + esc(tg('btnElimina')) + '" aria-label="' + esc(tg('btnElimina')) +
+                 '" onclick="eliminaPrenotazione(' + Number(numeri[i]) + ')">🗑</button></td>';
+        }
         r.forEach(function (c) {
             const lungo = String(c).length > 30 || String(c).indexOf('\n') !== -1;
             h += '<td' + (lungo ? ' class="wrap"' : '') + '>' + esc(c) + '</td>';

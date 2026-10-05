@@ -249,7 +249,7 @@ main { padding: 18px 14px 10px; }
 
 <div class="soon-banner" id="soonBanner">
     <div class="soon-badge" data-i18n="soonBadge">Open vanaf 8 oktober</div>
-    <p data-i18n-html="soonText">Het restaurant in Wintam opent op 8 oktober: de Business Lunch-service start die dag. U kunt de menu's en prijzen al bekijken. Voor informatie of om vooraf iets af te spreken, stuur ons een bericht op <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a>: +32 494 06 95 71.</p>
+    <p data-i18n-html="soonText">Het restaurant in Wintam opent op 8 oktober: u kunt uw Business Lunch nu al aanvragen voor afhaling vanaf 9 oktober. Voor informatie kunt u ons een bericht sturen via <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a>: +32 494 06 95 71.</p>
 </div>
 
 <div class="hero">
@@ -299,7 +299,7 @@ main { padding: 18px 14px 10px; }
         <div><h3 data-i18n="igDays">Dagen</h3><p data-i18n="igDays1">Ma · Di · Do</p><p data-i18n="igDays2">Vr · Za</p></div>
         <div><h3 data-i18n="igDelivery">Afhalen</h3><p>11:30 – 12:15</p><p>12:15 – 13:00</p></div>
         <div><h3 data-i18n="igMin">Minimale bestelling</h3><p data-i18n="igMin1">10 personen</p><p data-i18n="igMin2">menu's combineerbaar</p></div>
-        <div><h3 data-i18n="igBook">Reservatie</h3><p data-i18n="igBook1">24–48 uur vooraf</p><p data-i18n="igBook2">e-mail of telefoon</p></div>
+        <div><h3 data-i18n="igBook">Reservatie</h3><p data-i18n="igBook1">Minstens 24 uur vooraf</p><p data-i18n="igBook2">e-mail of telefoon</p></div>
     </div>
 
     <div class="include-box">
@@ -482,7 +482,8 @@ function escHtml(s) {
 }
 
 // ===== STATO APERTURA / RECAPTCHA =====
-// Come sul sito principale: fino all'apertura di Wintam (8 ottobre 2026) il modulo mostra solo l'avviso.
+// Fino all'apertura di Wintam (8 ottobre 2026) resta visibile l'avviso; le richieste
+// si possono già inviare per i ritiri dal 9 ottobre (BL_PRIMO_RITIRO).
 const WINTAM_NON_APERTO = (function () {
     const n = new Date();
     const oggi = n.getFullYear() + '-' + String(n.getMonth() + 1).padStart(2, '0') + '-' + String(n.getDate()).padStart(2, '0');
@@ -500,7 +501,6 @@ function onRecaptchaLoad() {
 
 function applicaStatoApertura() {
     document.getElementById('soonBanner').style.display = WINTAM_NON_APERTO ? '' : 'none';
-    document.getElementById('blSubmit').classList.toggle('btn-soon', WINTAM_NON_APERTO);
 }
 
 // ===== LINGUE =====
@@ -513,7 +513,7 @@ const TRAD = {
         pageTitle: 'Business Lunch — Pranzo Italiano in Ufficio | Arte Bianca Wintam',
         backSite: 'Torna al sito',
         soonBadge: 'Apertura 8 ottobre',
-        soonText: 'Il ristorante di Wintam apre l\'8 ottobre: il servizio Business Lunch sarà attivo da quel giorno. Puoi già consultare menu e prezzi. Per informazioni o pre-accordi scrivici su <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a> al +32 494 06 95 71.',
+        soonText: 'Il ristorante di Wintam apre l\'8 ottobre: puoi già richiedere il tuo Business Lunch per i ritiri a partire dal 9 ottobre. Per informazioni scrivici su <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a> al +32 494 06 95 71.',
         waInfoMsg: 'Buongiorno, vorrei informazioni sul servizio Business Lunch di Wintam.',
         heroEyebrow: 'Pranzo aziendale da asporto · Wintam',
         heroTitle: 'Pranzo italiano <em>in ufficio.</em>',
@@ -531,7 +531,7 @@ const TRAD = {
         igDays: 'Giorni', igDays1: 'Lun · Mar · Gio', igDays2: 'Ven · Sab',
         igDelivery: 'Ritiro',
         igMin: 'Ordine minimo', igMin1: '10 persone', igMin2: 'menu combinabili',
-        igBook: 'Prenotazione', igBook1: '24–48 ore prima', igBook2: 'e-mail o telefono',
+        igBook: 'Prenotazione', igBook1: 'Almeno 24 ore prima', igBook2: 'e-mail o telefono',
         incTitle: 'Il servizio include',
         inc1: '<b>Packaging termico</b> riciclabile, temperatura mantenuta',
         inc2: '<b>Set eco-friendly</b> — piatti, posate e tovaglioli per tutti',
@@ -584,7 +584,8 @@ const TRAD = {
         customText: '✨ <b>Menu personalizzati:</b> altri piatti, opzioni vegetariane o senza glutine, buffet o eventi? Scrivici su WhatsApp e prepariamo una proposta su misura.',
         customCta: '💬 Richiedi un menu personalizzato', customWaMsg: 'Buongiorno, vorrei un menu personalizzato per il Business Lunch di Wintam.',
         errRequired: 'Compila tutti i campi obbligatori.',
-        errDate: 'Scegli una data di ritiro a partire da domani.',
+        errDate: 'Il primo ritiro possibile è {d}: scegli questa data o una successiva.',
+        errLead: 'Le richieste vanno inviate almeno 24 ore prima dell\'orario di ritiro: scegli un\'altra data o fascia oraria.',
         errMin: 'L\'ordine minimo è di 10 persone.',
         errMains: 'Hai scelto {a} piatti principali per {n} persone: deve essere uno a persona.',
         errDesserts: 'Hai scelto {a} dolci per {n} persone: deve essere uno a persona.',
@@ -596,7 +597,7 @@ const TRAD = {
         pageTitle: 'Business Lunch — Italian Lunch at the Office | Arte Bianca Wintam',
         backSite: 'Back to the site',
         soonBadge: 'Opening 8 October',
-        soonText: 'The Wintam restaurant opens on 8 October: the Business Lunch service will start that day. You can already browse the menus and prices. For information or to arrange in advance, message us on <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a> at +32 494 06 95 71.',
+        soonText: 'The Wintam restaurant opens on 8 October: you can already request your Business Lunch for pickups from 9 October. For information, message us on <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a> at +32 494 06 95 71.',
         waInfoMsg: 'Hello, I would like information about the Business Lunch service in Wintam.',
         heroEyebrow: 'Business lunch to take away · Wintam',
         heroTitle: 'Italian lunch <em>at the office.</em>',
@@ -614,7 +615,7 @@ const TRAD = {
         igDays: 'Days', igDays1: 'Mon · Tue · Thu', igDays2: 'Fri · Sat',
         igDelivery: 'Pickup',
         igMin: 'Minimum order', igMin1: '10 people', igMin2: 'menus can be combined',
-        igBook: 'Booking', igBook1: '24–48 hours ahead', igBook2: 'e-mail or phone',
+        igBook: 'Booking', igBook1: 'At least 24 hours ahead', igBook2: 'e-mail or phone',
         incTitle: 'The service includes',
         inc1: '<b>Thermal packaging</b>, recyclable, keeps food at temperature',
         inc2: '<b>Eco-friendly set</b> — plates, cutlery and napkins for everyone',
@@ -667,7 +668,8 @@ const TRAD = {
         customText: '✨ <b>Custom menus:</b> other dishes, vegetarian or gluten-free options, buffets or events? Message us on WhatsApp and we will prepare a tailor-made proposal.',
         customCta: '💬 Request a custom menu', customWaMsg: 'Hello, I would like a custom menu for the Business Lunch in Wintam.',
         errRequired: 'Please fill in all required fields.',
-        errDate: 'Please choose a pickup date from tomorrow onwards.',
+        errDate: 'The earliest possible pickup is {d}: please choose this date or a later one.',
+        errLead: 'Requests must be sent at least 24 hours before the pickup time: please choose another date or time slot.',
         errMin: 'The minimum order is 10 people.',
         errMains: 'You chose {a} mains for {n} people: it must be one per person.',
         errDesserts: 'You chose {a} desserts for {n} people: it must be one per person.',
@@ -679,7 +681,7 @@ const TRAD = {
         pageTitle: 'Business Lunch — Déjeuner italien au bureau | Arte Bianca Wintam',
         backSite: 'Retour au site',
         soonBadge: 'Ouverture le 8 octobre',
-        soonText: 'Le restaurant de Wintam ouvre le 8 octobre : le service Business Lunch démarrera ce jour-là. Vous pouvez déjà consulter les menus et les prix. Pour toute information ou pour convenir d\'une date, écrivez-nous sur <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a> au +32 494 06 95 71.',
+        soonText: 'Le restaurant de Wintam ouvre le 8 octobre : vous pouvez déjà demander votre Business Lunch pour un retrait à partir du 9 octobre. Pour toute information, écrivez-nous sur <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a> au +32 494 06 95 71.',
         waInfoMsg: 'Bonjour, je souhaiterais des informations sur le service Business Lunch de Wintam.',
         heroEyebrow: 'Déjeuner d\'entreprise à emporter · Wintam',
         heroTitle: 'Déjeuner italien <em>au bureau.</em>',
@@ -697,7 +699,7 @@ const TRAD = {
         igDays: 'Jours', igDays1: 'Lun · Mar · Jeu', igDays2: 'Ven · Sam',
         igDelivery: 'Retrait',
         igMin: 'Commande minimum', igMin1: '10 personnes', igMin2: 'menus combinables',
-        igBook: 'Réservation', igBook1: '24 à 48 h à l\'avance', igBook2: 'e-mail ou téléphone',
+        igBook: 'Réservation', igBook1: 'Au moins 24 h à l\'avance', igBook2: 'e-mail ou téléphone',
         incTitle: 'Le service comprend',
         inc1: '<b>Emballage isotherme</b> recyclable, température maintenue',
         inc2: '<b>Kit écologique</b> — assiettes, couverts et serviettes pour tous',
@@ -750,7 +752,8 @@ const TRAD = {
         customText: '✨ <b>Menus personnalisés :</b> d\'autres plats, des options végétariennes ou sans gluten, un buffet ou un événement ? Écrivez-nous sur WhatsApp et nous préparerons une proposition sur mesure.',
         customCta: '💬 Demander un menu personnalisé', customWaMsg: 'Bonjour, je souhaiterais un menu personnalisé pour le Business Lunch de Wintam.',
         errRequired: 'Veuillez remplir tous les champs obligatoires.',
-        errDate: 'Choisissez une date de retrait à partir de demain.',
+        errDate: 'Le premier retrait possible est le {d} : choisissez cette date ou une date ultérieure.',
+        errLead: 'Les demandes doivent être envoyées au moins 24 h avant l\'heure de retrait : choisissez une autre date ou un autre créneau.',
         errMin: 'La commande minimum est de 10 personnes.',
         errMains: 'Vous avez choisi {a} plats pour {n} personnes : il en faut un par personne.',
         errDesserts: 'Vous avez choisi {a} desserts pour {n} personnes : il en faut un par personne.',
@@ -762,7 +765,7 @@ const TRAD = {
         pageTitle: 'Business Lunch — Italiaanse lunch op kantoor | Arte Bianca Wintam',
         backSite: 'Terug naar de site',
         soonBadge: 'Open vanaf 8 oktober',
-        soonText: 'Het restaurant in Wintam opent op 8 oktober: de Business Lunch-service start die dag. U kunt de menu\'s en prijzen al bekijken. Voor informatie of om vooraf iets af te spreken, stuur ons een bericht op <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a>: +32 494 06 95 71.',
+        soonText: 'Het restaurant in Wintam opent op 8 oktober: u kunt uw Business Lunch nu al aanvragen voor afhaling vanaf 9 oktober. Voor informatie kunt u ons een bericht sturen via <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a>: +32 494 06 95 71.',
         waInfoMsg: 'Goedendag, ik zou graag informatie krijgen over de Business Lunch-service in Wintam.',
         heroEyebrow: 'Bedrijfslunch om af te halen · Wintam',
         heroTitle: 'Italiaanse lunch <em>op kantoor.</em>',
@@ -780,7 +783,7 @@ const TRAD = {
         igDays: 'Dagen', igDays1: 'Ma · Di · Do', igDays2: 'Vr · Za',
         igDelivery: 'Afhalen',
         igMin: 'Minimale bestelling', igMin1: '10 personen', igMin2: 'menu\'s combineerbaar',
-        igBook: 'Reservatie', igBook1: '24–48 uur vooraf', igBook2: 'e-mail of telefoon',
+        igBook: 'Reservatie', igBook1: 'Minstens 24 uur vooraf', igBook2: 'e-mail of telefoon',
         incTitle: 'De service omvat',
         inc1: '<b>Isolerende verpakking</b>, recycleerbaar, houdt het eten warm',
         inc2: '<b>Ecologische set</b> — borden, bestek en servetten voor iedereen',
@@ -833,7 +836,8 @@ const TRAD = {
         customText: '✨ <b>Menu op maat:</b> andere gerechten, vegetarische of glutenvrije opties, een buffet of een evenement? Stuur ons een bericht op WhatsApp en wij maken een voorstel op maat.',
         customCta: '💬 Vraag een menu op maat aan', customWaMsg: 'Goedendag, ik had graag een menu op maat voor de Business Lunch in Wintam.',
         errRequired: 'Vul alle verplichte velden in.',
-        errDate: 'Kies een afhaaldatum vanaf morgen.',
+        errDate: 'De eerste mogelijke afhaaldag is {d}: kies deze datum of een latere.',
+        errLead: 'Aanvragen moeten minstens 24 uur vóór het afhaaluur worden verstuurd: kies een andere datum of een ander tijdslot.',
         errMin: 'De minimale bestelling is 10 personen.',
         errMains: 'U koos {a} hoofdgerechten voor {n} personen: het moet er één per persoon zijn.',
         errDesserts: 'U koos {a} desserts voor {n} personen: het moet er één per persoon zijn.',
@@ -902,15 +906,59 @@ function logToSheet(dati) {
 const GIORNI_OK = [1, 2, 4, 5, 6];
 const NOMI_GIORNI_IT = TRAD.it.days;
 
+const BL_PRIMO_RITIRO = '2026-10-09';   // primo giorno di ritiro (Wintam apre l'8 ottobre)
+const BL_ANTICIPO_ORE = 24;             // richieste almeno 24 ore prima dell'inizio della fascia
+
+function isoData(d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+
+function inizioRitiro(dataIso, fascia) {
+    const p = dataIso.split('-'), h = fascia.split('-')[0].split(':');
+    return new Date(+p[0], +p[1] - 1, +p[2], +h[0], +h[1]);
+}
+
+function fasciaPossibile(dataIso, fascia) {
+    return inizioRitiro(dataIso, fascia).getTime() - Date.now() >= BL_ANTICIPO_ORE * 3600000;
+}
+
+function fasceRitiro() {
+    return Array.prototype.map.call(document.getElementById('blFascia').options, function (o) { return o.value; })
+        .filter(Boolean);
+}
+
+function dataLeggibile(iso) {
+    const p = iso.split('-');
+    const loc = { it: 'it-IT', en: 'en-GB', fr: 'fr-BE', nl: 'nl-BE' }[currentLanguage] || 'it-IT';
+    try {
+        return new Date(+p[0], +p[1] - 1, +p[2]).toLocaleDateString(loc, { weekday: 'long', day: 'numeric', month: 'long' });
+    } catch (e) { return iso; }
+}
+
+// primo giorno utile: dal 9 ottobre, giorno di ritiro e con almeno una fascia a 24 ore di distanza
 function setMinDate() {
-    const d = document.getElementById('blData');
-    const domani = new Date();
-    domani.setDate(domani.getDate() + 1);
-    const iso = domani.getFullYear() + '-' + String(domani.getMonth()+1).padStart(2,'0') + '-' + String(domani.getDate()).padStart(2,'0');
-    d.min = iso;
+    const fasce = fasceRitiro();
+    const ultima = fasce[fasce.length - 1];
+    const g = new Date();
+    g.setDate(g.getDate() + 1);
+    while (isoData(g) < BL_PRIMO_RITIRO || GIORNI_OK.indexOf(g.getDay()) === -1 || !fasciaPossibile(isoData(g), ultima)) {
+        g.setDate(g.getDate() + 1);
+    }
+    document.getElementById('blData').min = isoData(g);
+}
+
+// fasce troppo vicine (meno di 24 ore) non selezionabili
+function aggiornaFasce() {
+    const data = document.getElementById('blData').value;
+    const sel = document.getElementById('blFascia');
+    Array.prototype.forEach.call(sel.options, function (o) {
+        if (o.value) o.disabled = !!data && !fasciaPossibile(data, o.value);
+    });
+    if (sel.selectedOptions[0] && sel.selectedOptions[0].disabled) sel.value = '';
 }
 
 function controllaGiorno() {
+    aggiornaFasce();
     const val = document.getElementById('blData').value;
     const warn = document.getElementById('blGiornoWarn');
     if (!val) { warn.classList.remove('show'); return; }
@@ -1122,11 +1170,6 @@ Object.keys(VALIDATORI).forEach(function (id) {
 function handleCatering(event) {
     if (event) event.preventDefault();
 
-    if (WINTAM_NON_APERTO) {
-        document.getElementById('notOpenModal').classList.add('show');
-        return false;
-    }
-
     const trappola = document.getElementById('blWebsite');
     if (trappola && trappola.value) return false;
 
@@ -1153,14 +1196,21 @@ function handleCatering(event) {
         alert(t('errRequired'));
         return false;
     }
-    // data scritta a mano prima del minimo consentito (dal giorno dopo)
-    if (data < document.getElementById('blData').min) {
-        alert(t('errDate'));
+    // data scritta a mano prima del primo giorno utile (ricalcolato: la pagina può restare aperta a lungo)
+    setMinDate();
+    const minData = document.getElementById('blData').min;
+    if (data < minData) {
+        alert(t('errDate', { d: dataLeggibile(minData) }));
         return false;
     }
     const giorno = new Date(data + 'T12:00:00').getDay();
     if (GIORNI_OK.indexOf(giorno) === -1) {
         alert(t('noDelivery', { g: t('days')[giorno] }));
+        return false;
+    }
+    if (!fasciaPossibile(data, fascia)) {
+        alert(t('errLead'));
+        aggiornaFasce();
         return false;
     }
     if (s.persone < 10) { alert(t('errMin')); return false; }
