@@ -1,0 +1,193 @@
+/* =====================================================================
+ * ARTE BIANCA — tema "avorio caldo"
+ * Caricato dopo lo stile interno di ogni pagina: sovrascrive solo
+ * font e colori, la struttura resta quella della pagina.
+ * ===================================================================== */
+
+@font-face { font-family: 'Cormorant Garamond'; src: url('/fonts/cormorant-garamond-latin-500-normal.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Cormorant Garamond'; src: url('/fonts/cormorant-garamond-latin-600-normal.woff2') format('woff2'); font-weight: 600 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Cormorant Garamond'; src: url('/fonts/cormorant-garamond-latin-500-italic.woff2') format('woff2'); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Cormorant Garamond'; src: url('/fonts/cormorant-garamond-latin-600-italic.woff2') format('woff2'); font-weight: 600 700; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Lato'; src: url('/fonts/lato-latin-400-normal.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Lato'; src: url('/fonts/lato-latin-700-normal.woff2') format('woff2'); font-weight: 600 900; font-style: normal; font-display: swap; }
+
+:root {
+    --av-bg: #EFE4CF;      /* sfondo pagina */
+    --av-hdr: #E8DCC3;     /* header e fasce */
+    --av-card: #F6EEDF;    /* riquadri e schede */
+    --av-line: #d9cab0;    /* bordi */
+    --av-dots: #b49a7a;    /* puntini del menu */
+    --av-ink: #1C1815;     /* titoli e testo forte */
+    --av-text: #4A433E;    /* descrizioni */
+    --av-acc: #8C5A2B;     /* prezzi, etichette, link */
+    --av-acc-dk: #6E4520;
+    --av-gold: #E2B86A;    /* oro su fondo scuro */
+    --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --sans: 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+/* ---------- Base ---------- */
+body { font-family: var(--sans); background: var(--av-bg); color: var(--av-ink); }
+h1, h2, h3, .section-title, .split-title, .hero-caption h1, .footer-title,
+.bl-card h3, .cust-box h3, .modal-box h3, .contact-card h3, .loc-pick h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    letter-spacing: .5px;
+}
+.section-title {
+    font-weight: 500;
+    font-size: 40px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--av-ink);
+    line-height: 1.15;
+}
+.section-title::after {
+    content: ''; display: block; width: 60px; height: 2px;
+    background: var(--av-acc); margin: 12px auto 0; opacity: .8;
+}
+@media (max-width: 600px) { .section-title { font-size: 32px; letter-spacing: 4px; } }
+
+/* ---------- Header ---------- */
+header { background: var(--av-hdr); border-bottom: 1px solid var(--av-line); }
+nav a, #mobileNav a { color: var(--av-ink); font-family: var(--sans); letter-spacing: 1.2px; }
+nav a:hover, nav a.active { color: var(--av-acc); }
+#mobileNav { background: var(--av-hdr); }
+#mobileNav a:hover { background: var(--av-card); color: var(--av-acc); }
+.hamburger span { background: var(--av-ink); }
+.logo span { color: var(--av-acc); }
+
+/* ---------- Pulsanti ---------- */
+.btn, .map-open, .add-btn, .qty-btn, .to-top, .btn-shop-primary, .hero-cta button:not(.ghost) {
+    background: var(--av-ink);
+    color: var(--av-bg);
+    font-family: var(--sans);
+    border-color: var(--av-ink);
+}
+.btn { font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; border-radius: 3px; }
+.btn:hover, .map-open:hover, .add-btn:hover, .qty-btn:hover, .btn-shop-primary:hover { background: var(--av-acc); color: #fff; }
+.btn-ghost { background: transparent; color: var(--av-ink); border: 1px solid var(--av-ink); }
+.btn-shop-secondary { color: var(--av-ink); border-color: var(--av-ink); }
+.cust-btn { color: var(--av-acc); border-color: var(--av-acc); }
+.cust-btn:hover { background: var(--av-acc); color: #fff; }
+
+/* ---------- Home: due sedi ---------- */
+.split-screen { background: var(--av-bg); }
+.split-section { border: 1px solid var(--av-dots) !important; border-radius: 6px; box-shadow: 0 14px 30px rgba(60,40,20,.22); }
+.split-section::before { background: linear-gradient(180deg, rgba(0,0,0,.42), rgba(0,0,0,.6)); }
+.split-content { text-shadow: 0 1px 2px rgba(0,0,0,.55), 0 2px 12px rgba(0,0,0,.35); }
+.split-title { font-weight: 600; letter-spacing: 6px; text-transform: uppercase; color: #FBF3E4; }
+.split-subtitle { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.25em; color: #FBF3E4; }
+.split-addr, .split-hours, .soon-badge { color: var(--av-gold); font-family: var(--sans); }
+.split-section .btn { background: var(--av-ink); color: var(--av-bg); text-shadow: none; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+.split-section .btn:hover { background: var(--av-acc); color: #fff; }
+#homeAbout { background: var(--av-bg); }
+
+/* ---------- Barra sede e hero ---------- */
+.loc-banner { background: var(--av-ink); }
+.loc-banner-sub { color: var(--av-gold); }
+.loc-banner button { color: var(--av-gold); border-color: var(--av-gold); }
+.hero-caption { text-shadow: 0 1px 2px rgba(0,0,0,.55), 0 2px 12px rgba(0,0,0,.35); }
+.hero-caption h1 { font-weight: 600; letter-spacing: 5px; text-transform: uppercase; color: #FBF3E4; }
+.hero-caption p { font-family: var(--serif); font-style: italic; font-weight: 500; color: #FBF3E4; }
+.hero-cta button { font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; border-radius: 3px; }
+.hero-cta button:not(.ghost) { box-shadow: 0 6px 18px rgba(0,0,0,.35); text-shadow: none; }
+.hero-dots span.active { background: var(--av-gold); }
+.sec-divider { background: linear-gradient(90deg, transparent, var(--av-dots), transparent); }
+
+/* ---------- Menu ---------- */
+.menu-category {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 28px;
+    color: var(--av-acc);
+    text-align: center;
+    letter-spacing: .5px;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 8px;
+}
+.menu-item { border-bottom: none; }
+.menu-item-name { font-family: var(--serif); font-weight: 600; font-size: 20px; color: var(--av-ink); }
+.menu-item-header::after { border-bottom-color: var(--av-dots); }
+.menu-item-price { font-family: var(--sans); font-weight: 700; color: var(--av-acc); }
+.menu-item-desc { font-family: var(--sans); font-size: 14px; color: var(--av-text); }
+@media (max-width: 900px) { .menu-category { font-size: 25px; } }
+
+/* ---------- Asporto e carrello ---------- */
+.shop-cat { font-family: var(--serif); font-weight: 600; color: var(--av-acc); }
+.shop-item { border-color: var(--av-line); }
+.shop-item-name { font-family: var(--serif); font-weight: 600; font-size: 18px; color: var(--av-ink); }
+.shop-item-desc { color: var(--av-text); }
+.shop-item-price, .cust-row .cprice, .prod-brand, .lp-tel, .loc-pick .lp-tel,
+.bl-card-lbl, .bl-price, .bl-facts b, .info-tile h3, .cc-row a, .footer-title + a { color: var(--av-acc); }
+.cart-box { background: var(--av-card); border-color: var(--av-line); }
+@media (max-width: 768px) { .cart-box { background: rgba(246,238,223,.95); } }
+.cart-tag { background: var(--av-hdr); color: var(--av-acc-dk); }
+.cart-mods { color: var(--av-acc-dk); }
+.cust-box, .modal-box { background: var(--av-card); }
+.modal-hours, .shop-note { background: var(--av-hdr); color: var(--av-ink); }
+.cust-row:hover { background: var(--av-hdr); }
+.cust-row input { accent-color: var(--av-acc); }
+.spinner { border-top-color: var(--av-acc); }
+
+/* ---------- Schede e riquadri ---------- */
+.prod-card, .bl-card:not(.dark), .contact-card, .loc-pick, .info-tile, .brand-strip, .err-box {
+    background: var(--av-card);
+    border-color: var(--av-line);
+}
+.bl-card.dark { background: var(--av-ink); border-color: var(--av-ink); }
+.bl-card.dark .bl-card-lbl, .bl-card.dark .bl-price { color: var(--av-gold); }
+.bl-facts li { background: var(--av-card); }
+.prod-name { font-family: var(--serif); font-weight: 600; font-size: 1.2em; color: var(--av-ink); }
+.prod-desc, .bl-sub, .cust-sub, .loc-pick .lp-addr, .loc-pick .lp-hours, .info-tile p, .brand-strip .bs-text { color: var(--av-text); }
+.gal-item { background: var(--av-hdr); }
+
+/* moduli */
+input, select, textarea { font-family: var(--sans); }
+input:not([type=checkbox]):not([type=radio]), select, textarea { background-color: #FBF6EC; border-color: var(--av-line); }
+
+/* ---------- Footer ---------- */
+footer { background: var(--av-ink); }
+.footer-title { color: var(--av-gold); }
+.footer-text { color: #BDB2A6; }
+
+/* prezzo in fondo alla riga, puntini tra nome e prezzo */
+.menu-item-name { order: 0; }
+.menu-item-header::after { order: 1; }
+.menu-item-price { order: 2; }
+
+/* note e avvisi */
+.loc-pick .lp-note { background: var(--av-hdr); color: var(--av-ink); border-left: 3px solid var(--av-acc); }
+.loc-pick .lp-note strong { color: var(--av-acc); }
+[data-i18n="extraNote"] { background: var(--av-card) !important; border-left-color: var(--av-acc) !important; color: var(--av-text) !important; }
+
+/* sottotitoli in corsivo, non maiuscolo */
+.split-subtitle, .hero-caption p { text-transform: none !important; letter-spacing: .2px !important; }
+.split-subtitle { font-size: 21px !important; line-height: 1.25; }
+.hero-caption p { font-size: 22px !important; line-height: 1.3; }
+@media (max-width: 768px) { .split-subtitle { font-size: 19px !important; } .hero-caption p { font-size: 19px !important; } }
+
+/* Chi siamo */
+#about p[data-i18n^="aboutP"] { color: var(--av-text) !important; }
+#about [data-i18n="aboutMotto"] { color: var(--av-acc) !important; font-family: var(--sans); letter-spacing: .3px; }
+#about [data-i18n="aboutLove"] { color: var(--av-acc) !important; font-family: var(--serif) !important; font-weight: 500; font-size: 32px !important; }
+
+/* ---------- Pagine secondarie (Shop, Galleria, Prenota, Business Lunch) ---------- */
+html { background: var(--av-bg); }
+.shop-hero { background: var(--av-hdr); border-bottom-color: var(--av-line); }
+.lang-row-top { background: transparent !important; border-color: var(--av-line) !important; }
+.lang-row-top a, .lang-row-top button { background: var(--av-card); border-color: var(--av-line); color: var(--av-ink); }
+.lang-row-top a.on, .lang-row-top .on { background: var(--av-ink) !important; color: var(--av-bg) !important; border-color: var(--av-ink) !important; }
+.gal-tab { background: var(--av-card); border-color: var(--av-ink); color: var(--av-ink); }
+.gal-tab:hover { background: var(--av-hdr); }
+.gal-tab.active { background: var(--av-ink); color: var(--av-bg); box-shadow: 0 4px 12px rgba(28,24,21,.25); }
+.eb-hours, .err-box .eb-hours { background: var(--av-hdr); color: var(--av-ink); }
+.mcard.pizza, .pick-section, .custom-box, .foot-home a { background: var(--av-card); }
+.stepper button { background: var(--av-card); }
+.info-grid, .include-box, .example-box { background: var(--av-card); }
+/* etichette piccole: restano in sans */
+.info-grid h3, .info-tile h3, .bl-facts b, .mcard .lbl { font-family: var(--sans); letter-spacing: 1px; }
+.breadcrumb a, a.back-link, .shop-back a { color: var(--av-acc); }
+#backLink { color: var(--av-acc) !important; }
