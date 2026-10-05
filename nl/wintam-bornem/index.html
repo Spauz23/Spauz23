@@ -871,7 +871,7 @@
             background-position: center;
             opacity: 0;
             transform: scale(1.12);
-            transition: opacity 1.4s ease, transform 5.9s linear;
+            transition: opacity .9s ease, transform 4.4s linear;
         }
 
         .hero-slide.active {
@@ -3588,13 +3588,11 @@ Zo: 12:00-21:00</p>
                 { img: '/img/lasagna.jpg', key: 'capPizza' },
                 { img: PHOTOS.sala,     key: 'capSala' },
                 { img: PHOTOS.oblo,     key: 'capOblo' },
-                { img: PHOTOS.finestre, key: 'capFinestre' },
-                { img: PHOTOS.pizza,    key: 'capPizza' }
+                { img: PHOTOS.finestre, key: 'capFinestre' }
             ],
             wintam: [
                 { img: '/img/lasagna.jpg', key: 'capPizza' },
-                { img: '/img/businessLunch.jpg', key: 'capPizza' },
-                { img: PHOTOS.pizza,     key: 'capPizza' }
+                { img: '/img/businessLunch.jpg', key: 'capPizza' }
             ]
         };
 
@@ -3623,7 +3621,7 @@ Zo: 12:00-21:00</p>
             heroIndex = 0;
 
             clearInterval(heroTimer);
-            heroTimer = setInterval(nextSlide, 4500);
+            heroTimer = setInterval(nextSlide, 3500);
         }
 
         function goToSlide(i) {
@@ -3637,7 +3635,7 @@ Zo: 12:00-21:00</p>
             slides[heroIndex].classList.add('active');
             if (dots[heroIndex]) dots[heroIndex].classList.add('active');
             clearInterval(heroTimer);
-            heroTimer = setInterval(nextSlide, 4500);
+            heroTimer = setInterval(nextSlide, 3500);
         }
 
         function nextSlide() { goToSlide(heroIndex + 1); }
