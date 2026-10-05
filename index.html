@@ -3578,16 +3578,16 @@
         // ===== CAROSELLO FOTO PIATTI =====
         const heroPhotos = {
             tisselt: [
-                { img: '/img/businessLunch.jpg', key: 'capPizza' },
                 { img: PHOTOS.pizza,    key: 'capPizza' },
                 { img: PHOTOS.oblo,     key: 'capOblo' },
                 { img: PHOTOS.sala,     key: 'capSala' },
-                { img: PHOTOS.finestre, key: 'capFinestre' }
+                { img: PHOTOS.finestre, key: 'capFinestre' },
+                { img: '/img/businessLunch.jpg', key: 'capPizza' }
             ],
             wintam: [
-                { img: '/img/lasagna.jpg', key: 'capPizza' },
                 { img: '/img/businessLunch.jpg', key: 'capPizza' },
-                { img: PHOTOS.pizza,     key: 'capPizza' }
+                { img: PHOTOS.pizza,     key: 'capPizza' },
+                { img: '/img/lasagna.jpg', key: 'capPizza' }
             ]
         };
 
@@ -3600,11 +3600,13 @@
             slider.querySelectorAll('.hero-slide').forEach(s => s.remove());
 
             const photos = heroPhotos[loc];
+            // stesso ordine delle foto e dei pallini (prima venivano inserite al contrario)
+            const ref = slider.firstChild;
             photos.forEach((p, i) => {
                 const d = document.createElement('div');
                 d.className = 'hero-slide' + (i === 0 ? ' active' : '');
                 d.style.backgroundImage = "url('" + p.img + "')";
-                slider.insertBefore(d, slider.firstChild);
+                slider.insertBefore(d, ref);
             });
 
             dots.innerHTML = photos.map((_, i) =>
