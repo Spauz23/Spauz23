@@ -191,3 +191,8 @@ html { background: var(--av-bg); }
 .info-grid h3, .info-tile h3, .bl-facts b, .mcard .lbl { font-family: var(--sans); letter-spacing: 1px; }
 .breadcrumb a, a.back-link, .shop-back a { color: var(--av-acc); }
 #backLink { color: var(--av-acc) !important; }
+
+/* Home: SCOPRI dorato, sopra i mini-collegamenti */
+.split-section .btn { background: #C89B3C; color: #1C1815; margin: 6px 0 4px; }
+.split-section .btn:hover { background: #E2B86A; color: #1C1815; }
+.split-section .split-social { margin-top: 14px !important; }
