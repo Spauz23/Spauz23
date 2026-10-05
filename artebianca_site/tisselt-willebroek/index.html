@@ -3636,8 +3636,10 @@
         function initReveal() {
             const obs = new IntersectionObserver(entries => {
                 entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-            }, { threshold: 0.08 });
+            }, { threshold: 0, rootMargin: '0px 0px -30px 0px' });
             document.querySelectorAll('#scrollSite .section-content').forEach(el => {
+                // il menu appare subito sotto la foto: niente dissolvenza
+                if (el.closest('#menu')) return;
                 el.classList.add('reveal');
                 obs.observe(el);
             });
