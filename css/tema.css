@@ -193,6 +193,6 @@ html { background: var(--av-bg); }
 #backLink { color: var(--av-acc) !important; }
 
 /* Home: SCOPRI crema burro al 50%, sopra i mini-collegamenti */
-.split-section .btn { background: rgba(242,230,204,.5); color: var(--av-ink); margin: 6px 0 4px; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
-.split-section .btn:hover { background: rgba(242,230,204,.8); color: var(--av-ink); }
+.split-section .btn { background: rgba(242,230,204,.5); color: #FBF3E4; border: 1.5px solid #F2E6CC; text-shadow: 0 1px 3px rgba(0,0,0,.7); margin: 6px 0 4px; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.split-section .btn:hover { background: #F2E6CC; color: var(--av-ink); text-shadow: none; }
 .split-section .split-social { margin-top: 14px !important; }
