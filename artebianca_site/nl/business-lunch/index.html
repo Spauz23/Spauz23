@@ -305,7 +305,7 @@ main { padding: 18px 14px 10px; }
     <div class="include-box">
         <h3 data-i18n="incTitle">De service omvat</h3>
         <ul>
-            <li data-i18n-html="inc1"><b>Isolerende verpakking</b>, recycleerbaar, houdt de temperatuur</li>
+            <li data-i18n-html="inc1"><b>Isolerende verpakking</b>, recycleerbaar, houdt het eten warm</li>
             <li data-i18n-html="inc2"><b>Ecologische set</b> — borden, bestek en servetten voor iedereen</li>
             <li data-i18n-html="inc3"><b>Etiketten</b> met ingrediënten en allergenen op elke verpakking</li>
         </ul>
@@ -313,7 +313,7 @@ main { padding: 18px 14px 10px; }
 
     <div class="example-box">
         <h3 data-i18n="exTitle">Voorbeeld</h3>
-        <p data-i18n-html="ex1">10 Menu's Pizza + 5 Menu's Restaurant = <span class="ex-total">€290 btw inbegrepen</span>, één factuur, overschrijving of kaart.</p>
+        <p data-i18n-html="ex1">10 × Menu Pizza + 5 × Menu Restaurant = <span class="ex-total">€290 btw inbegrepen</span>, één factuur, overschrijving of kaart.</p>
         <p data-i18n-html="ex2"><b>Evenementen:</b> vanaf 25 personen, opleidingen, buffetten, openingen. Menu op maat na offerte.</p>
     </div>
 
@@ -492,7 +492,7 @@ const RECAPTCHA_SITE_KEY = '6Lf368UtAAAAAE29y7MD35wVbnn3ygFHNzM2WyMh';
 let recaptchaWidgetId = null;
 
 function onRecaptchaLoad() {
-    if (!RECAPTCHA_SITE_KEY) return;
+    if (!RECAPTCHA_SITE_KEY || recaptchaWidgetId !== null) return;
     const box = document.getElementById('blCaptchaBox');
     if (!box || typeof grecaptcha === 'undefined') return;
     recaptchaWidgetId = grecaptcha.render(box, { sitekey: RECAPTCHA_SITE_KEY });
@@ -584,6 +584,7 @@ const TRAD = {
         customText: '✨ <b>Menu personalizzati:</b> altri piatti, opzioni vegetariane o senza glutine, buffet o eventi? Scrivici su WhatsApp e prepariamo una proposta su misura.',
         customCta: '💬 Richiedi un menu personalizzato', customWaMsg: 'Buongiorno, vorrei un menu personalizzato per il Business Lunch di Wintam.',
         errRequired: 'Compila tutti i campi obbligatori.',
+        errDate: 'Scegli una data di ritiro a partire da domani.',
         errMin: 'L\'ordine minimo è di 10 persone.',
         errMains: 'Hai scelto {a} piatti principali per {n} persone: deve essere uno a persona.',
         errDesserts: 'Hai scelto {a} dolci per {n} persone: deve essere uno a persona.',
@@ -666,6 +667,7 @@ const TRAD = {
         customText: '✨ <b>Custom menus:</b> other dishes, vegetarian or gluten-free options, buffets or events? Message us on WhatsApp and we will prepare a tailor-made proposal.',
         customCta: '💬 Request a custom menu', customWaMsg: 'Hello, I would like a custom menu for the Business Lunch in Wintam.',
         errRequired: 'Please fill in all required fields.',
+        errDate: 'Please choose a pickup date from tomorrow onwards.',
         errMin: 'The minimum order is 10 people.',
         errMains: 'You chose {a} mains for {n} people: it must be one per person.',
         errDesserts: 'You chose {a} desserts for {n} people: it must be one per person.',
@@ -748,6 +750,7 @@ const TRAD = {
         customText: '✨ <b>Menus personnalisés :</b> d\'autres plats, des options végétariennes ou sans gluten, un buffet ou un événement ? Écrivez-nous sur WhatsApp et nous préparerons une proposition sur mesure.',
         customCta: '💬 Demander un menu personnalisé', customWaMsg: 'Bonjour, je souhaiterais un menu personnalisé pour le Business Lunch de Wintam.',
         errRequired: 'Veuillez remplir tous les champs obligatoires.',
+        errDate: 'Choisissez une date de retrait à partir de demain.',
         errMin: 'La commande minimum est de 10 personnes.',
         errMains: 'Vous avez choisi {a} plats pour {n} personnes : il en faut un par personne.',
         errDesserts: 'Vous avez choisi {a} desserts pour {n} personnes : il en faut un par personne.',
@@ -779,11 +782,11 @@ const TRAD = {
         igMin: 'Minimale bestelling', igMin1: '10 personen', igMin2: 'menu\'s combineerbaar',
         igBook: 'Reservatie', igBook1: '24–48 uur vooraf', igBook2: 'e-mail of telefoon',
         incTitle: 'De service omvat',
-        inc1: '<b>Isolerende verpakking</b>, recycleerbaar, houdt de temperatuur',
+        inc1: '<b>Isolerende verpakking</b>, recycleerbaar, houdt het eten warm',
         inc2: '<b>Ecologische set</b> — borden, bestek en servetten voor iedereen',
         inc3: '<b>Etiketten</b> met ingrediënten en allergenen op elke verpakking',
         exTitle: 'Voorbeeld',
-        ex1: '10 Menu\'s Pizza + 5 Menu\'s Restaurant = <span class="ex-total">€290 btw inbegrepen</span>, één factuur, overschrijving of kaart.',
+        ex1: '10 × Menu Pizza + 5 × Menu Restaurant = <span class="ex-total">€290 btw inbegrepen</span>, één factuur, overschrijving of kaart.',
         ex2: '<b>Evenementen:</b> vanaf 25 personen, opleidingen, buffetten, openingen. Menu op maat na offerte.',
         whereTitle: 'Waar vindt u ons',
         whereAddr: 'Egied de Jonghestraat 165, Bornem (Wintam) · tussen de N16 en de A12',
@@ -828,8 +831,9 @@ const TRAD = {
         vVat: 'Ongeldig Belgisch btw-nummer (bv. BE0123.456.749).',
         vFix: 'Controleer de rood gemarkeerde velden.',
         customText: '✨ <b>Menu op maat:</b> andere gerechten, vegetarische of glutenvrije opties, een buffet of een evenement? Stuur ons een bericht op WhatsApp en wij maken een voorstel op maat.',
-        customCta: '💬 Vraag een menu op maat aan', customWaMsg: 'Goedendag, ik zou graag een menu op maat voor de Business Lunch in Wintam.',
+        customCta: '💬 Vraag een menu op maat aan', customWaMsg: 'Goedendag, ik had graag een menu op maat voor de Business Lunch in Wintam.',
         errRequired: 'Vul alle verplichte velden in.',
+        errDate: 'Kies een afhaaldatum vanaf morgen.',
         errMin: 'De minimale bestelling is 10 personen.',
         errMains: 'U koos {a} hoofdgerechten voor {n} personen: het moet er één per persoon zijn.',
         errDesserts: 'U koos {a} desserts voor {n} personen: het moet er één per persoon zijn.',
@@ -1126,10 +1130,10 @@ function handleCatering(event) {
     const trappola = document.getElementById('blWebsite');
     if (trappola && trappola.value) return false;
 
-    if (RECAPTCHA_SITE_KEY) {
-        const rispostaCaptcha = (typeof grecaptcha !== 'undefined' && recaptchaWidgetId !== null)
-            ? grecaptcha.getResponse(recaptchaWidgetId) : '';
-        if (!rispostaCaptcha) { alert(t('errCaptcha')); return false; }
+    // se reCAPTCHA non si è caricato (rete lenta, blocco pubblicità) la richiesta
+    // parte comunque: contro i robot resta il campo trappola
+    if (RECAPTCHA_SITE_KEY && typeof grecaptcha !== 'undefined' && recaptchaWidgetId !== null) {
+        if (!grecaptcha.getResponse(recaptchaWidgetId)) { alert(t('errCaptcha')); return false; }
     }
 
     const azienda   = document.getElementById('blAzienda').value.trim();
@@ -1147,6 +1151,11 @@ function handleCatering(event) {
 
     if (!data || !fascia || !s.persone) {
         alert(t('errRequired'));
+        return false;
+    }
+    // data scritta a mano prima del minimo consentito (dal giorno dopo)
+    if (data < document.getElementById('blData').min) {
+        alert(t('errDate'));
         return false;
     }
     const giorno = new Date(data + 'T12:00:00').getDay();
@@ -1222,6 +1231,13 @@ setMinDate();
 renderPicker();
 aggiornaTotale();
 applicaStatoApertura();
+// se reCAPTCHA si è caricato prima di questo script, lo mostro adesso
+if (typeof grecaptcha !== 'undefined' && recaptchaWidgetId === null) {
+    try {
+        if (typeof grecaptcha.ready === 'function') grecaptcha.ready(onRecaptchaLoad);
+        else if (typeof grecaptcha.render === 'function') onRecaptchaLoad();
+    } catch (e) {}
+}
 </script>
 <!-- COOKIE BANNER -->
 <div id="cookieBanner" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#1a1a1a;color:#fff;padding:16px 20px;box-shadow:0 -3px 14px rgba(0,0,0,.25);font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">
