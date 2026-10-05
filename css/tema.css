@@ -221,3 +221,9 @@ input[type=date]::-webkit-date-and-time-value { text-align: left; }
 
 /* niente freccia sul carosello */
 .scroll-hint { display: none !important; }
+
+/* Hero sedi: titolo e descrizione in alto, pulsanti in basso, senza pallini */
+.hero-caption { justify-content: flex-start; padding: 34px 20px 30px; }
+.hero-caption h1 { margin-top: 4px; }
+.hero-cta { margin-top: auto !important; margin-bottom: 0 !important; }
+.hero-dots { display: none !important; }
