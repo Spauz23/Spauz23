@@ -3137,6 +3137,23 @@
             }
         }
 
+        // Voci del menu: Home torna alla scelta della sede, Shop e Galleria
+        // aprono direttamente le loro pagine, le altre scorrono alla sezione.
+        function navVai(id) {
+            const lang = currentLanguage || PAGE_LANG;
+            if (id === 'home') {
+                if (SEDE_FISSA) location.href = (PAGE_LANG === 'nl' ? '/nl/' : '/') + '?lang=' + lang;
+                else backToChoice();
+                return;
+            }
+            if (id === 'shop') { location.href = '/shop/?lang=' + lang; return; }
+            if (id === 'gallery') {
+                location.href = '/gallery/?lang=' + lang + (activeLocation ? '&venue=' + activeLocation : '');
+                return;
+            }
+            scrollToSection(id);
+        }
+
         function renderNavigation() {
             const navItems = [
                 { id: 'home', label: t('home') },
@@ -3149,7 +3166,7 @@
             ];
 
             const links = navItems.map(item =>
-                '<a onclick="scrollToSection(\'' + item.id + '\'); closeMobileMenu();">' + item.label + '</a>'
+                '<a onclick="navVai(\'' + item.id + '\'); closeMobileMenu();">' + item.label + '</a>'
             ).join('');
 
             document.getElementById('navigation').innerHTML = links;
